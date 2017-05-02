@@ -30,3 +30,7 @@ colorscheme solarized
 
 set incsearch
 set hlsearch
+
+if has('gui_running')
+    set guifont=Hack:h11
+endif
