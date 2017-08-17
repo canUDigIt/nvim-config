@@ -10,7 +10,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'valloric/youcompleteme'
 Plug 'rdnetto/ycm-generator', { 'branch': 'stable'}
 Plug 'tpope/vim-surround'
-Plug 'townk/vim-autoclose'
+Plug 'jiangmiao/auto-pairs'
 
 " Visual plugins
 Plug 'bling/vim-airline'
@@ -51,3 +51,11 @@ set incsearch
 set hlsearch
 
 let g:cpp_class_scope_highlight = 1
+
+if executable('rg')
+  set grepprg=rg\ --color=never
+  let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
+  let g:ctrlp_use_caching = 0
+endif
+
+set wildignore+=*/.git/*,*/tmp/*,*.swp
