@@ -10,7 +10,8 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'valloric/youcompleteme'
 Plug 'rdnetto/ycm-generator', { 'branch': 'stable'}
 Plug 'tpope/vim-surround'
-Plug 'townk/vim-autoclose'
+Plug 'jiangmiao/auto-pairs'
+Plug 'junegunn/vim-easy-align'
 
 " Visual plugins
 Plug 'bling/vim-airline'
@@ -45,7 +46,7 @@ set relativenumber
 syntax enable
 set termguicolors
 set background=dark
-colorscheme neodark
+colorscheme onedark
 
 set incsearch
 set hlsearch
