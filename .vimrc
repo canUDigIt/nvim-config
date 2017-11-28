@@ -60,7 +60,7 @@ set relativenumber
 syntax enable
 set termguicolors
 set background=dark
-colorscheme neodark
+colorscheme onedark
 
 set incsearch
 set hlsearch
