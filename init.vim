@@ -1,8 +1,5 @@
 filetype plugin on
 
-let g:python3_host_prog='C:/Users/tracy.brown/environments/neovim3/Scripts/python.exe'
-let g:python_host_prog='C:/Users/tracy.brown/environments/neovim/Scripts/python.exe'
-
 call plug#begin('~/.vim/plugged')
 
 " Navigational plugins
@@ -12,11 +9,22 @@ Plug 'junegunn/fzf.vim'
 Plug 'mhinz/vim-grepper'
 
 " Code plugins
-Plug 'roxma/nvim-completion-manager'
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-unimpaired'
 Plug 'townk/vim-autoclose'
 Plug 'ntpeters/vim-better-whitespace'
-Plug 'tpope/vim-commentary'
 Plug 'junegunn/vim-easy-align'
 Plug 'sirver/ultisnips'
 Plug 'honza/vim-snippets'
@@ -33,9 +41,7 @@ Plug 'romainl/Apprentice'
 Plug 'icymind/NeoSolarized'
 
 " C++ plugins
-Plug 'arakashic/chromatica.nvim'
 Plug 'vim-scripts/a.vim'
-Plug 'roxma/ncm-clang'
 
 " SVN Plugins
 Plug 'tpope/vim-fugitive'
@@ -63,5 +69,23 @@ set hlsearch
 nmap ga <Plug>(EasyAlign)
 xmap ga <Plug>(EasyAlign)
 
-let g:chromatica#libclang_path='C:/Program Files/LLVM/bin/libclang.dll'
-let g:chromatica#enable_at_startup=1
+nmap <leader>t :Files<CR>
+nmap <leader>b :Buffers<CR>
+nmap <leader>h :History<CR>
+
+let g:deoplete#enable_at_startup = 1
+
+" Required for operations modifying multiple buffers like rename.
+set hidden
+
+let g:LanguageClient_serverCommands = {
+    \ 'cpp': ['clangd'],
+    \ 'javascript': ['/usr/local/bin/javascript-typescript-stdio'],
+    \ 'python': ['/usr/local/bin/pyls'],
+    \ }
+
+nnoremap <F5> :call LanguageClient_contextMenu()<CR>
+" Or map each action separately
+nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
