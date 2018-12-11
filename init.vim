@@ -21,8 +21,8 @@ else
   Plug 'roxma/vim-hug-neovim-rpc'
 endif
 Plug 'tpope/vim-surround'
-Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-unimpaired'
+Plug 'scrooloose/nerdcommenter'
 Plug 'jiangmiao/auto-pairs'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'junegunn/vim-easy-align'
@@ -43,6 +43,7 @@ Plug 'icymind/NeoSolarized'
 
 " C++ plugins
 Plug 'vim-scripts/a.vim'
+Plug 'bbchung/Clamp'
 
 " SVN Plugins
 Plug 'tpope/vim-fugitive'
@@ -76,6 +77,8 @@ nmap <leader>h :History<CR>
 
 let g:deoplete#enable_at_startup = 1
 
+let g:clamp_libclang_file = '/usr/lib/libclang.so'
+
 set cmdheight=2
 let g:echodoc#enable_at_startup = 1
 let g:echodoc#type = 'signature'
@@ -99,7 +102,7 @@ let g:LanguageClient_serverCommands = {
     \ 'python': ['/usr/local/bin/pyls'],
     \ }
 
-function SetLSPShortcuts()
+function! SetLSPShortcuts()
   nnoremap <leader>ld :call LanguageClient#textDocument_definition()<CR>
   nnoremap <leader>lr :call LanguageClient#textDocument_rename()<CR>
   nnoremap <leader>lf :call LanguageClient#textDocument_formatting()<CR>
