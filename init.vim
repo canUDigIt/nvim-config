@@ -9,17 +9,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'mhinz/vim-grepper'
 
 " Code plugins
-Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-  Plug 'Shougo/deoplete.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
-endif
+Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'scrooloose/nerdcommenter'
@@ -96,23 +86,18 @@ xmap gs <plug>(GrepperOperator)
 " Required for operations modifying multiple buffers like rename.
 set hidden
 
-let g:LanguageClient_serverCommands = {
-    \ 'cpp': ['clangd'],
-    \ 'javascript': ['/usr/local/bin/javascript-typescript-stdio'],
-    \ 'python': ['/usr/local/bin/pyls'],
-    \ }
-
 function! SetLSPShortcuts()
-  nnoremap <leader>ld :call LanguageClient#textDocument_definition()<CR>
-  nnoremap <leader>lr :call LanguageClient#textDocument_rename()<CR>
-  nnoremap <leader>lf :call LanguageClient#textDocument_formatting()<CR>
-  nnoremap <leader>lt :call LanguageClient#textDocument_typeDefinition()<CR>
-  nnoremap <leader>lx :call LanguageClient#textDocument_references()<CR>
-  nnoremap <leader>la :call LanguageClient_workspace_applyEdit()<CR>
-  nnoremap <leader>lc :call LanguageClient#textDocument_completion()<CR>
-  nnoremap <leader>lh :call LanguageClient#textDocument_hover()<CR>
-  nnoremap <leader>ls :call LanguageClient_textDocument_documentSymbol()<CR>
-  nnoremap <leader>lm :call LanguageClient_contextMenu()<CR>
+  nmap <silent> <leader>ld <Plug>(coc-definition)
+  nmap <silent> <leader>lr <Plug>(coc-rename)
+  nmap <silent> <leader>lf <Plug>(coc-format-selected)
+  vmap <silent> <leader>lf <Plug>(coc-format-selected)
+  nmap <silent> <leader>lt <Plug>(coc-type-definition)
+  nmap <silent> <leader>lx <Plug>(coc-references)
+  nmap <silent> <leader>la <Plug>(coc-codeaction-selected)
+  vmap <silent> <leader>la <Plug>(coc-codeaction-selected)
+  nmap <silent> <leader>lh :call CocAction('doHover')<CR>
+  nmap <silent> <leader>ls :<C-u>CocList outline<CR>
+  nmap <silent> <leader>lm :<C-u>CocList commands<CR>
 endfunction()
 
 augroup LSP
