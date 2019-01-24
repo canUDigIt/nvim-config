@@ -7,6 +7,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'mhinz/vim-grepper'
+Plug 'mhinz/vim-startify'
 
 " Code plugins
 Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
@@ -19,9 +20,12 @@ Plug 'junegunn/vim-easy-align'
 Plug 'sirver/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'Shougo/echodoc.vim'
+Plug 'sheerun/vim-polyglot'
+Plug 'pboettch/vim-cmake-syntax'
+Plug 'NLKNguyen/c-syntax.vim'
 
 " Visual plugins
-Plug 'bling/vim-airline'
+Plug 'itchyny/lightline.vim'
 Plug 'altercation/vim-colors-solarized'
 Plug 'joshdick/onedark.vim'
 Plug 'tomasr/molokai'
@@ -30,10 +34,12 @@ Plug 'morhetz/gruvbox'
 Plug 'KeitaNakamura/neodark.vim'
 Plug 'romainl/Apprentice'
 Plug 'icymind/NeoSolarized'
+Plug 'lifepillar/vim-solarized8'
+Plug 'NLKNguyen/papercolor-theme'
+Plug 'mhartington/oceanic-next'
 
 " C++ plugins
 Plug 'vim-scripts/a.vim'
-Plug 'bbchung/Clamp'
 
 " SVN Plugins
 Plug 'tpope/vim-fugitive'
@@ -53,7 +59,23 @@ set relativenumber
 syntax enable
 set termguicolors
 set background=dark
-colorscheme neodark
+colorscheme PaperColor
+
+let g:PaperColor_Theme_Options = {
+  \   'language': {
+  \     'python': {
+  \       'highlight_builtins' : 1
+  \     },
+  \     'cpp': {
+  \       'highlight_standard_library': 1
+  \     },
+  \     'c': {
+  \       'highlight_builtins' : 1
+  \     }
+  \   }
+  \ }
+
+let g:lightline = { 'colorscheme': 'PaperColor' }
 
 set incsearch
 set hlsearch
@@ -64,10 +86,6 @@ xmap ga <Plug>(EasyAlign)
 nmap <leader>t :Files<CR>
 nmap <leader>b :Buffers<CR>
 nmap <leader>h :History<CR>
-
-let g:deoplete#enable_at_startup = 1
-
-let g:clamp_libclang_file = '/usr/lib/libclang.so'
 
 set cmdheight=2
 let g:echodoc#enable_at_startup = 1
@@ -98,6 +116,31 @@ function! SetLSPShortcuts()
   nmap <silent> <leader>lh :call CocAction('doHover')<CR>
   nmap <silent> <leader>ls :<C-u>CocList outline<CR>
   nmap <silent> <leader>lm :<C-u>CocList commands<CR>
+
+  " bases
+  nn <silent> xb :call CocLocations('ccls','$ccls/inheritance')<cr>
+  " bases of up to 3 levels
+  nn <silent> xb :call CocLocations('ccls','$ccls/inheritance',{'levels':3})<cr>
+  " derived
+  nn <silent> xd :call CocLocations('ccls','$ccls/inheritance',{'derived':v:true})<cr>
+  " derived of up to 3 levels
+  nn <silent> xD :call CocLocations('ccls','$ccls/inheritance',{'derived':v:true,'levels':3})<cr>
+
+  " caller
+  nn <silent> xc :call CocLocations('ccls','$ccls/call')<cr>
+  " callee
+  nn <silent> xC :call CocLocations('ccls','$ccls/call',{'callee':v:true})<cr>
+
+  " $ccls/member
+  " member variables / variables in a namespace
+  nn <silent> xm :call CocLocations('ccls','$ccls/member')<cr>
+  " member functions / functions in a namespace
+  nn <silent> xf :call CocLocations('ccls','$ccls/member',{'kind':3})<cr>
+  " nested classes / types in a namespace
+  nn <silent> xs :call CocLocations('ccls','$ccls/member',{'kind':2})<cr>
+
+  nn <silent> xv :call CocLocations('ccls','$ccls/vars')<cr>
+  nn <silent> xV :call CocLocations('ccls','$ccls/vars',{'kind':1})<cr>
 endfunction()
 
 augroup LSP
