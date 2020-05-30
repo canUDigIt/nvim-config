@@ -1,41 +1,45 @@
 filetype plugin on
 
-call plug#begin('~/.vim/plugged')
+packadd minpac
+
+call minpac#init()
+call minpac#add('k-takata/minpac', {'type': 'opt'})
 
 " Code plugins
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'dart-lang/dart-vim-plugin'
-Plug 'jackguo380/vim-lsp-cxx-highlight'
+call minpac#add('neoclide/coc.nvim', {'branch': 'release'})
+call minpac#add('dart-lang/dart-vim-plugin')
+call minpac#add('jackguo380/vim-lsp-cxx-highlight')
 
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-unimpaired'
-Plug 'scrooloose/nerdcommenter'
-Plug 'jiangmiao/auto-pairs'
-Plug 'ntpeters/vim-better-whitespace'
-Plug 'junegunn/vim-easy-align'
+call minpac#add('tpope/vim-surround')
+call minpac#add('tpope/vim-unimpaired')
+call minpac#add('scrooloose/nerdcommenter')
+call minpac#add('jiangmiao/auto-pairs')
+call minpac#add('ntpeters/vim-better-whitespace')
+call minpac#add('junegunn/vim-easy-align')
 
 " Navigational plugins
-Plug 'mhinz/vim-startify'
-Plug 'vimlab/split-term.vim'
+call minpac#add('mhinz/vim-startify')
+call minpac#add('vimlab/split-term.vim')
 
 " Visual plugins
-Plug 'itchyny/lightline.vim'
+call minpac#add('itchyny/lightline.vim')
 
-Plug 'ryanoasis/vim-devicons'
+call minpac#add('ryanoasis/vim-devicons')
 
-Plug 'lifepillar/vim-solarized8'
-Plug 'NLKNguyen/papercolor-theme'
-Plug 'mhartington/oceanic-next'
-Plug 'morhetz/gruvbox'
-Plug 'fenetikm/falcon'
-Plug 'arcticicestudio/nord-vim'
+call minpac#add('lifepillar/vim-solarized8')
+call minpac#add('NLKNguyen/papercolor-theme')
+call minpac#add('mhartington/oceanic-next')
+call minpac#add('morhetz/gruvbox')
+call minpac#add('fenetikm/falcon')
+call minpac#add('arcticicestudio/nord-vim')
 
 " SVN Plugins
-Plug 'tpope/vim-fugitive'
-Plug 'mhinz/vim-signify'
+call minpac#add('tpope/vim-fugitive')
+call minpac#add('mhinz/vim-signify')
 
-" Add plugins to &runtimepath
-call plug#end()
+command! PackUpdate call minpac#update('', {'do': 'call minpac#status()'})
+command! PackClean  call minpac#clean()
+command! PackStatus call minpac#status()
 
 set pyxversion=3
 
