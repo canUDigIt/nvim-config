@@ -16,8 +16,13 @@ if !exists('g:vscode')
     call minpac#add('tpope/vim-surround')
     call minpac#add('tpope/vim-unimpaired')
 
+    " Writing plugins
+    call minpac#add('vimwiki/vimwiki')
+    call minpac#add('junegunn/limelight.vim')
+    call minpac#add('junegunn/goyo.vim')
+
     " Navigational plugins
-    call minpac#add('liuchengxu/vim-clap', {'do': ':Clap install-binary!'})
+    call minpac#add('liuchengxu/vim-clap')
     call minpac#add('vn-ki/coc-clap')
     call minpac#add('mhinz/vim-startify')
     call minpac#add('voldikss/vim-floaterm')
@@ -31,6 +36,7 @@ if !exists('g:vscode')
     call minpac#add('morhetz/gruvbox')
     call minpac#add('fenetikm/falcon')
     call minpac#add('arcticicestudio/nord-vim')
+    call minpac#add('nvim-treesitter/nvim-treesitter')
 
     " SVN Plugins
     call minpac#add('tpope/vim-fugitive')
@@ -174,10 +180,14 @@ if !exists('g:vscode')
     " Do default action for next item.
     nnoremap <silent> <space>j  <cmd>CocNext<CR>
     " Do default action for previous item.
-    nnoremap <silent> <space>k  <cmd>CocPrev<CR>
+    nnoremap <silent> <space>k  <cmd>CocPrev<cr>
 
     " Opens directory explorer
     nnoremap <silent> <space>x <cmd>CocCommand explorer<cr>
+
+    "
+    nnoremap <silent> <leader>ftn <cmd>FloatermNew<cr>
+    nnoremap <silent> <leader>ftt <cmd>FloatermToggle<cr>
 
     nn xx x
 else
