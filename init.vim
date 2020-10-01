@@ -2,11 +2,6 @@ filetype plugin on
 
 if !exists('g:vscode')
     packadd minpac
-    packadd nvim-lspconfig
-    packadd completion-nvim
-    packadd lsp-status.nvim
-    packadd diagnostic-nvim
-    packadd nvim-treesitter
 
     call minpac#init()
     call minpac#add('k-takata/minpac', {'type': 'opt'})
@@ -25,6 +20,7 @@ if !exists('g:vscode')
     call minpac#add('scrooloose/nerdcommenter')
     call minpac#add('tpope/vim-surround')
     call minpac#add('tpope/vim-unimpaired')
+    call minpac#add('AndrewRadev/splitjoin.vim')
 
     " Writing plugins
     call minpac#add('vimwiki/vimwiki')
@@ -37,7 +33,8 @@ if !exists('g:vscode')
     call minpac#add('ryanoasis/vim-devicons')
     call minpac#add('junegunn/fzf', { 'do': { -> fzf#install() } })
     call minpac#add('junegunn/fzf.vim')
-    call minpac#add('voldikss/vim-floaterm')
+    call minpac#add('kassio/neoterm')
+    call minpac#add('bagrat/vim-buffet')
 
     " Visual plugins
     call minpac#add('itchyny/lightline.vim')
@@ -57,6 +54,12 @@ if !exists('g:vscode')
     command! PackUpdate call minpac#update('', {'do': 'call minpac#status()'})
     command! PackClean  call minpac#clean()
     command! PackStatus call minpac#status()
+
+    packadd nvim-lspconfig
+    packadd completion-nvim
+    packadd lsp-status.nvim
+    packadd diagnostic-nvim
+    packadd nvim-treesitter
 
     set pyxversion=3
 
@@ -83,8 +86,8 @@ function! LspStatus() abort
 endfunction
 
 function! LspReload()
-    call lua vim.lsp.stop_client(vim.lsp.get_active_clients())
-    call edit
+    lua vim.lsp.stop_client(vim.lsp.get_active_clients())
+    edit
 endfunction
 
     let g:completion_confirm_key = "\<C-y>"
@@ -260,8 +263,8 @@ EOF
     " Opens directory explorer
     nnoremap <silent> <space>x <cmd>NERDTreeToggle<cr>
 
-    nnoremap <silent> <leader>ftn <cmd>FloatermNew<cr>
-    nnoremap <silent> <leader>ftt <cmd>FloatermToggle<cr>
+    nnoremap <silent> <leader>ftn <cmd>Tnew<cr>
+    nnoremap <silent> <leader>ftt <cmd>Ttoggle<cr>
 
     tnoremap <Esc> <C-\><C-n>
     tnoremap <C-v><Esc> <Esc>
