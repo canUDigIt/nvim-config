@@ -2,12 +2,22 @@ filetype plugin on
 
 if !exists('g:vscode')
     packadd minpac
+    packadd nvim-lspconfig
+    packadd completion-nvim
+    packadd lsp-status.nvim
+    packadd diagnostic-nvim
+    packadd nvim-treesitter
 
     call minpac#init()
     call minpac#add('k-takata/minpac', {'type': 'opt'})
 
     " Code plugins
-    call minpac#add('neoclide/coc.nvim', {'branch': 'release'})
+    call minpac#add('neovim/nvim-lspconfig')
+    call minpac#add('nvim-lua/completion-nvim')
+    call minpac#add('nvim-lua/lsp-status.nvim')
+    call minpac#add('nvim-lua/diagnostic-nvim')
+
+    call minpac#add('elixir-editors/vim-elixir')
 
     call minpac#add('jiangmiao/auto-pairs')
     call minpac#add('junegunn/vim-easy-align')
@@ -22,9 +32,11 @@ if !exists('g:vscode')
     call minpac#add('junegunn/goyo.vim')
 
     " Navigational plugins
-    call minpac#add('liuchengxu/vim-clap')
-    call minpac#add('vn-ki/coc-clap')
     call minpac#add('mhinz/vim-startify')
+    call minpac#add('scrooloose/nerdtree')
+    call minpac#add('ryanoasis/vim-devicons')
+    call minpac#add('junegunn/fzf', { 'do': { -> fzf#install() } })
+    call minpac#add('junegunn/fzf.vim')
     call minpac#add('voldikss/vim-floaterm')
 
     " Visual plugins
@@ -59,26 +71,72 @@ if !exists('g:vscode')
     syntax enable
     set termguicolors
     set background=dark
+    colorscheme falcon
+
+" Statusline
+function! LspStatus() abort
+    if luaeval('#vim.lsp.buf_get_clients() > 0')
+        return luaeval("require('lsp-status').status()")
+    endif
+
+    return ''
+endfunction
+
+function! LspReload()
+    call lua vim.lsp.stop_client(vim.lsp.get_active_clients())
+    call edit
+endfunction
+
+    let g:completion_confirm_key = "\<C-y>"
+    let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy', 'all']
+
+    let g:NERDTreeShowHidden = 1
+    let g:NERDTreeMinimalUI = 1
+    let g:NERDTreeIgnore = []
+    let g:NERDTreeStatusline = ''
+    " Automaticaly close nvim if NERDTree is only thing left open
+    autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+    let g:fzf_action = {
+      \ 'ctrl-t': 'tab split',
+      \ 'ctrl-s': 'split',
+      \ 'ctrl-v': 'vsplit'
+      \}
+    " requires silversearcher-ag
+    " used to ignore gitignore files
+    let g:fzf_history_dir = '~/.local/share/fzf-history'
+    let g:fzf_buffers_jump = 1
+    let g:fzf_tags_command = 'ctags -R'
+
+    let $FZF_DEFAULT_OPTS = '--layout=reverse --inline-info'
+    let $FZF_DEFAULT_COMMAND="rg --files --hidden --glob '!.git/**'"
+
+    " open new split panes to right and below
+    set splitright
+    set splitbelow
+
     let g:gruvbox_italic=1
     let g:gruvbox_contrast_dark = 'hard'
     let g:gruvbox_invert_selection='0'
-    colorscheme gruvbox
 
     let g:lightline = {
-        \ 'colorscheme': 'gruvbox',
+        \ 'colorscheme': 'falcon',
         \ 'active': {
         \   'left': [ [ 'mode', 'paste' ],
-        \             [ 'cocstatus', 'readonly', 'filename', 'modified' ] ]
+        \             [ 'lspstatus', 'readonly', 'filename', 'modified' ] ]
         \ },
         \ 'component_function': {
-        \   'cocstatus': 'coc#status'
+        \   'lspstatus': 'LspStatus'
         \ },
         \ }
 
-    " Use auocmd to force lightline update.
-    autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
+    if exists('g:neovide')
+        let g:neovide_cursor_animation_length=0
+        let g:neovide_cursor_antialiasing=v:true
+        let g:neovide_refresh_rate=140
+    endif
 
-    let g:coc_global_extensions = [ "coc-html", "coc-css", "coc-cmake", "coc-clangd", "coc-explorer", "coc-flutter", "coc-git", "coc-json", "coc-lists", "coc-rust-analyzer", ]
+    set guifont=Iosevka:h16
 
     set incsearch
     set hlsearch
@@ -96,6 +154,8 @@ if !exists('g:vscode')
     " delays and poor user experience.
     set updatetime=300
 
+    " Set completeopt to have a better completion experience
+    set completeopt=menuone,noinsert,noselect
     " Don't pass messages to |ins-completion-menu|.
     set shortmess+=c
 
@@ -103,92 +163,107 @@ if !exists('g:vscode')
     " diagnostics appear/become resolved.
     set signcolumn=yes
 
+lua << EOF
+require'nvim-treesitter.configs'.setup {
+  highlight = {
+    enable = true,
+  },
+}
+
+local nvim_lsp = require'nvim_lsp'
+local diagnostic = require'diagnostic'
+local completion = require'completion'
+local lsp_status = require'lsp-status'
+
+lsp_status.register_progress()
+
+local on_attach_vim = function(client, bufnr)
+  completion.on_attach()
+  lsp_status.on_attach(client)
+  diagnostic.on_attach()
+end
+
+nvim_lsp.clangd.setup{
+  callbacks = lsp_status.extensions.clangd.setup();
+  init_options = {
+    clangdFileStatus = true
+  };
+  on_attach = on_attach_vim;
+  capabilities = lsp_status.capabilities
+}
+
+nvim_lsp.cmake.setup{
+  on_attach = on_attach_vim;
+  capabilities = lsp_status.capabilities
+}
+
+nvim_lsp.elixirls.setup{
+  cmd = { "/home/tracy/.elixir-ls/release/language_server.sh" };
+  root_dir = nvim_lsp.util.root_pattern("mix.exs");
+  on_attach = on_attach_vim;
+  capabilities = lsp_status.capabilities
+}
+
+nvim_lsp.rust_analyzer.setup{
+  on_attach = on_attach_vim;
+  capabilities = lsp_status.capabilities
+}
+
+nvim_lsp.vimls.setup{
+  on_attach = on_attach_vim;
+  capabilities = lsp_status.capabilities
+}
+EOF
+
     nmap ga <Plug>(EasyAlign)
     xmap ga <Plug>(EasyAlign)
 
-    nmap <silent> <leader>gs <cmd>Clap grep ++query=<cword><CR>
-    xmap <silent> <leader>gs <cmd>Clap grep ++query=@visual<CR>
-
     " Use <c-space> to trigger completion.
-    inoremap <silent><expr> <c-space> coc#refresh()
+    inoremap <silent><expr> <c-space> <cmd>lua vim.lsp.buf.completion()<CR>
+
+    nnoremap <silent> gD    <cmd>lua vim.lsp.buf.declaration()<CR>
+    nnoremap <silent> gd    <cmd>lua vim.lsp.buf.definition()<CR>
+    nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
+    nnoremap <silent> gi    <cmd>lua vim.lsp.buf.implementation()<CR>
+    nnoremap <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
+    nnoremap <silent> 1gd   <cmd>lua vim.lsp.buf.type_definition()<CR>
+    nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
 
     " Use `[g` and `]g` to navigate diagnostics
-    nmap <silent> [g <Plug>(coc-diagnostic-prev)
-    nmap <silent> ]g <Plug>(coc-diagnostic-next)
+    nmap <silent> [g <cmd>PrevDiagnostic<CR>
+    nmap <silent> ]g <cmd>NextDiagnostic<CR>
 
-    " GoTo code navigation.
-    nmap <silent> gd <Plug>(coc-definition)
-    nmap <silent> gy <Plug>(coc-type-definition)
-    nmap <silent> gi <Plug>(coc-implementation)
-    nmap <silent> gr <Plug>(coc-references)
+    nmap <silent> <leader>rn <cmd>lua vim.lsp.buf.rename()<CR>
 
-    " Use K to show documentation in preview window.
-    nnoremap <silent> K :call <SID>show_documentation()<CR>
+    xmap <silent> <leader>a <cmd>lua vim.lsp.buf.code_action()<CR>
+    nmap <silent> <leader>a <cmd>lua vim.lsp.buf.code_action()<CR>
 
-    function! s:show_documentation()
-        if (index(['vim','help'], &filetype) >= 0)
-            execute 'h '.expand('<cword>')
-        else
-            call CocAction('doHover')
-        endif
-    endfunction
-
-    nmap <silent> <leader>rn <Plug>(coc-rename)
-
-    xmap <silent> <leader>a <Plug>(coc-codeaction-selected)
-    nmap <silent> <leader>a <Plug>(coc-codeaction-selected)
-
-    " Remap keys for applying codeAction to the current line.
-    nmap <leader>ac  <Plug>(coc-codeaction)
-    " Apply AutoFix to problem on the current line.
-    nmap <leader>qf  <Plug>(coc-fix-current)
-
-    xmap <silent> <leader>f <Plug>(coc-format-selected)
-    nmap <silent> <leader>f <Plug>(coc-format-selected)
-
-    " Add `:Format` command to format current buffer.
-    command! -nargs=0 Format :call CocAction('format')
-
-    " Add `:Fold` command to fold current buffer.
-    command! -nargs=? Fold :call CocAction('fold', <f-args>)
-
-    " Add `:OR` command for organize imports of the current buffer.
-    command! -nargs=0 OR   :call CocAction('runCommand', 'editor.action.organizeImport')
+    xmap <silent> <leader>f <cmd>lua vim.lsp.buf.formatting()<CR>
+    nmap <silent> <leader>f <cmd>lua vim.lsp.buf.formatting()<CR>
 
     inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
     inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
-    " Mappings using CocList:
-    " Show all diagnostics.
-    nnoremap <silent> <space>a  <cmd>Clap coc_diagnostics<cr>
-    " Manage extensions.
-    nnoremap <silent> <space>e  <cmd>Clap coc_extensions<cr>
-    " Show commands.
-    nnoremap <silent> <space>c  <cmd>Clap coc_commands<cr>
     " Find symbol of current document.
-    nnoremap <silent> <space>o  <cmd>Clap coc_outline<cr>
+    nnoremap <silent> <space>o  <cmd>lua vim.lsp.buf.document_symbol()<CR>
     " Search workspace symbols.
-    nnoremap <silent> <space>s  <cmd>Clap coc_symbols<cr>
+    nnoremap <silent> <space>s  <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
     " List all files below cwd
-    nnoremap <silent> <space>t  <cmd>Clap files<cr>
+    nnoremap <silent> <space>t  <cmd>Files<cr>
     " List all open buffers
-    nnoremap <silent> <space>b  <cmd>Clap buffers<cr>
+    nnoremap <silent> <space>b  <cmd>Buffers<cr>
     " Search lines in file
-    nnoremap <silent> <space>l  <cmd>Clap lines<cr>
+    nnoremap <silent> <space>l  <cmd>Lines<cr>
     " Search for word in files in the current directory
-    nnoremap <silent> <space>g  <cmd>Clap grep<cr>
-    " Do default action for next item.
-    nnoremap <silent> <space>j  <cmd>CocNext<CR>
-    " Do default action for previous item.
-    nnoremap <silent> <space>k  <cmd>CocPrev<cr>
+    nnoremap <silent> <space>g  <cmd>Rg<cr>
 
     " Opens directory explorer
-    nnoremap <silent> <space>x <cmd>CocCommand explorer<cr>
+    nnoremap <silent> <space>x <cmd>NERDTreeToggle<cr>
 
-    "
     nnoremap <silent> <leader>ftn <cmd>FloatermNew<cr>
     nnoremap <silent> <leader>ftt <cmd>FloatermToggle<cr>
 
-    nn xx x
+    tnoremap <Esc> <C-\><C-n>
+    tnoremap <C-v><Esc> <Esc>
 else
 endif
