@@ -14,44 +14,23 @@ local function map(mode, lhs, rhs, opts)
     vim.api.nvim_set_keymap(mode, lhs, rhs, options)
 end
 
-local execute = vim.api.nvim_command
-local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+local install_path = fn.stdpath('data')..'/site/pack/packer/opt/packer.nvim'
 
 if fn.empty(fn.glob(install_path)) > 0 then
     fn.system({'git', 'clone', 'https://github.com/wbthomason/packer.nvim', install_path})
-    execute 'packadd packer.nvim'
 end
 
-local packer = require('packer')
-packer.startup(function()
-    use 'wbthomason/packer.nvim'
-
-    use 'neovim/nvim-lspconfig'
-    use 'nvim-lua/lsp-status.nvim'
-    use 'onsails/lspkind-nvim'
-    use 'hrsh7th/nvim-compe'
-    use 'hrsh7th/vim-vsnip'
-    use 'anott03/nvim-lspinstall'
-    use 'nvim-treesitter/nvim-treesitter'
-    use {
-        'nvim-telescope/telescope.nvim',
-        requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}
-    }
-
-    use 'bluz71/vim-nightfly-guicolors'
-    use 'bluz71/vim-moonfly-colors'
-    use 'fenetikm/falcon'
-
-    use {'ojroques/nvim-hardline'}
-
-    use { 'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim' }
-
-    use 'b3nj5m1n/kommentary'
-end)
+cmd 'packadd packer.nvim'
+cmd 'autocmd BufWritePost plugins.lua PackerCompile'
+require('plugins')
 
 -------------------- OPTIONS -------------------------------
-local indent = 4
+cmd 'syntax enable'
+cmd 'filetype plugin indent on'
+
 cmd 'colorscheme moonfly'                             -- Put your favorite colorscheme here
+
+local indent = 4
 opt('b', 'expandtab', true)                           -- Use spaces instead of tabs
 opt('b', 'shiftwidth', indent)                        -- Size of an indent
 opt('b', 'smartindent', true)                         -- Insert indents automatically
