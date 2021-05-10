@@ -4,9 +4,20 @@ return require('packer').startup(function()
     use 'neovim/nvim-lspconfig'
     use 'nvim-lua/lsp-status.nvim'
     use 'onsails/lspkind-nvim'
+    use {
+      'folke/lsp-trouble.nvim',
+      requires = 'kyazdani42/nvim-web-devicons',
+      config = function()
+        require('trouble').setup {
+          -- your configuration comes here
+          -- or leave it empty to use the default settings
+          -- refer to the configuration section below
+        }
+      end
+    }
     use 'hrsh7th/nvim-compe'
-    use 'hrsh7th/vim-vsnip'
     use 'anott03/nvim-lspinstall'
+    use 'hrsh7th/vim-vsnip'
     use 'nvim-treesitter/nvim-treesitter'
     use {
         'nvim-telescope/telescope.nvim',
