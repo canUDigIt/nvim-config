@@ -31,6 +31,7 @@ return require('packer').startup(function()
     use { 'ojroques/nvim-hardline' }
 
     use { 'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim' }
+    use { 'lewis6991/gitsigns.nvim', requires = 'nvim-lua/plenary.nvim' }
 
     use 'b3nj5m1n/kommentary'
 

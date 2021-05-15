@@ -58,6 +58,7 @@ map('n', '<leader>o', 'm`o<Esc>``')  -- Insert a newline in normal mode
 
 require('hardline').setup {}
 require('neogit').setup {}
+require('gitsigns').setup {}
 
 -------------------- TREE-SITTER ---------------------------
 local ts = require 'nvim-treesitter.configs'
@@ -80,6 +81,8 @@ map('n', '<space>h', '<cmd>lua vim.lsp.buf.hover()<CR>')
 map('n', '<space>m', '<cmd>lua vim.lsp.buf.rename()<CR>')
 map('n', '<space>r', '<cmd>lua vim.lsp.buf.references()<CR>')
 map('n', '<space>s', '<cmd>lua vim.lsp.buf.document_symbol()<CR>')
+
+require'lspkind'.init()
 
 -------------------- COMPLETION ------------------------------
 require 'compe'.setup {
