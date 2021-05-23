@@ -3,6 +3,7 @@ return require('packer').startup(function()
 
     use 'neovim/nvim-lspconfig'
     use 'nvim-lua/lsp-status.nvim'
+    use 'glepnir/lspsaga.nvim'
     use 'onsails/lspkind-nvim'
     use {
       'folke/lsp-trouble.nvim',
@@ -23,6 +24,9 @@ return require('packer').startup(function()
         'nvim-telescope/telescope.nvim',
         requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}
     }
+
+    use { 'liuchengxu/vim-which-key' }
+
     use 'tjdevries/nlua.nvim'
 
     use 'bluz71/vim-nightfly-guicolors'
