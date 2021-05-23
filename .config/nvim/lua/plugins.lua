@@ -16,13 +16,14 @@ return require('packer').startup(function()
       end
     }
     use 'hrsh7th/nvim-compe'
-    use 'anott03/nvim-lspinstall'
+    use 'kabouzeid/nvim-lspinstall'
     use 'hrsh7th/vim-vsnip'
     use 'nvim-treesitter/nvim-treesitter'
     use {
         'nvim-telescope/telescope.nvim',
         requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}
     }
+    use 'tjdevries/nlua.nvim'
 
     use 'bluz71/vim-nightfly-guicolors'
     use 'bluz71/vim-moonfly-colors'
@@ -51,6 +52,6 @@ return require('packer').startup(function()
 
     -- Navigational plugins
     use 'mhinz/vim-startify'
-    use 'ryanoasis/vim-devicons'
+    use { 'kyazdani42/nvim-tree.lua', requires = 'kyazdani42/nvim-web-devicons'}
 end)
 
