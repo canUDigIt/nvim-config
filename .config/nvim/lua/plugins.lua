@@ -33,7 +33,7 @@ return require('packer').startup(function()
     use 'bluz71/vim-moonfly-colors'
     use 'fenetikm/falcon'
 
-    use { 'ojroques/nvim-hardline' }
+    use { 'hoob3rt/lualine.nvim', requires = {'kyazdani42/nvim-web-devicons', opt = true} }
 
     use { 'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim' }
     use { 'lewis6991/gitsigns.nvim', requires = 'nvim-lua/plenary.nvim' }
