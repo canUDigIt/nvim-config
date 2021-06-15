@@ -33,66 +33,64 @@ local on_attach = function(client, bufnr)
         buf_set_keymap("n", "<leader>lf", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
     end
 
-    -- Set autocommands conditional on server_capabilities
-    -- if client.resolved_capabilities.document_highlight then
-    --    vim.api.nvim_exec([[
-    --    hi LspReferenceRead cterm=bold ctermbg=red guibg=LightYellow
-    --    hi LspReferenceText cterm=bold ctermbg=red guibg=LightYellow
-    --    hi LspReferenceWrite cterm=bold ctermbg=red guibg=LightYellow
-    --    augroup lsp_document_highlight
-    --    autocmd! * <buffer>
-    --    autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-    --    autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-    --    augroup END
-    --    ]], false)
-    -- end
+    require('lsp-status').on_attach(client)
 end
 
+-- LSP setup
+local lspconfig = require('lspconfig')
 
-local nvim_lsp = require('lspconfig')
+local lsp_status = require('lsp-status')
+lsp_status.register_progress()
+
+-- Setup capabilities
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-
--- require'snippets'.use_suggested_mappings(true) -- for snippets.vim
-
--- -- Code actions
--- capabilities.textDocument.codeAction = {
---   dynamicRegistration = false;
---       codeActionLiteralSupport = {
---           codeActionKind = {
---               valueSet = {
---                  "",
---                  "quickfix",
---                  "refactor",
---                  "refactor.extract",
---                  "refactor.inline",
---                  "refactor.rewrite",
---                  "source",
---                  "source.organizeImports",
---               };
---           };
---       };
--- }
-
+-- Set default client capabilities plus window/workDoneProgress
+capabilities = vim.tbl_extend('keep', capabilities or {}, lsp_status.capabilities)
 capabilities.textDocument.completion.completionItem.snippetSupport = true;
+capabilities.textDocument.codeAction = {
+  dynamicRegistration = false;
+      codeActionLiteralSupport = {
+          codeActionKind = {
+              valueSet = {
+                 "",
+                 "quickfix",
+                 "refactor",
+                 "refactor.extract",
+                 "refactor.inline",
+                 "refactor.rewrite",
+                 "source",
+                 "source.organizeImports",
+              };
+          };
+      };
+}
 
--- LSPs
-require'lspinstall'.setup()
+-- Some lsp servers
+lspconfig.clangd.setup({
+    handlers = lsp_status.extensions.clangd.setup(),
+    init_options = {
+        clangdFileStatus = true
+    },
+    on_attach = on_attach,
+    capabilities = capabilities
+})
 
-local servers = { "pyright", "rust_analyzer", "svelte", "cmake", "clangd" }
-for _, lsp in ipairs(servers) do
-    nvim_lsp[lsp].setup {
-        capabilities = capabilities;
-        on_attach = on_attach;
-        -- init_options = {
-        --     onlyAnalyzeProjectsWithOpenFiles = true,
-        --     suggestFromUnimportedLibraries = false,
-        --     closingLabels = true,
-        -- };
-    }
-end
+lspconfig.pyright.setup({
+    on_attach = on_attach,
+    capabilities = capabilities
+})
+
+lspconfig.cmake.setup({
+    on_attach = on_attach,
+    capabilities = capabilities
+})
+lspconfig.svelte.setup({
+    on_attach = on_attach,
+    capabilities = capabilities
+})
 
 -- Lua LSP. NOTE: This replaces the calls where you would have before done `require('nvim_lsp').sumneko_lua.setup()`
-require('nlua.lsp.nvim').setup(nvim_lsp, {
+require('nlua.lsp.nvim').setup(lspconfig, {
     capabilities = capabilities;
     on_attach = on_attach;
     init_options = {
@@ -102,4 +100,6 @@ require('nlua.lsp.nvim').setup(nvim_lsp, {
     };
 })
 
+-- require'snippets'.use_suggested_mappings(true) -- for snippets.vim
+require'lspinstall'.setup()
 require'lspkind'.init()

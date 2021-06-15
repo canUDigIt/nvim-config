@@ -3,7 +3,11 @@ require('config.completion')
 require('config.versioncontrol')
 require('config.compe')
 
-require('lualine').setup {}
+require('lualine').setup {
+    options = { theme = 'nightfly' },
+    sections = { lualine_b = {'branch', 'diff'}, lualine_c = {'filename', require('lsp-status').status} }
+}
+
 require('neogit').setup {}
 require('gitsigns').setup {}
 
