@@ -3,4 +3,4 @@ local utils = require('utils')
 utils.map('', '<leader>c', '"+y')       -- Copy to clipboard in normal, visual, select and operator modes
 utils.map('n', '<C-l>', '<cmd>noh<CR>')    -- Clear highlights
 utils.map('n', '<leader>o', 'm`o<Esc>``')  -- Insert a newline in normal mode
-utils.map('n', '<leader>tt', '<cmd>NvimTreeToggle<CR>')  -- Toggle NvimTree
+utils.map('n', '<C-n>', '<cmd>NvimTreeToggle<CR>')  -- Toggle NvimTree

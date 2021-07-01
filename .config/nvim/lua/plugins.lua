@@ -1,12 +1,14 @@
-return require('packer').startup(function()
+return require('packer').startup(function(use)
     use {'wbthomason/packer.nvim', opt = true}
 
     use 'neovim/nvim-lspconfig'
+    use 'glepnir/lspsaga.nvim'
     use 'nvim-lua/lsp-status.nvim'
     use 'onsails/lspkind-nvim'
     use 'hrsh7th/nvim-compe'
     use 'kabouzeid/nvim-lspinstall'
     use 'hrsh7th/vim-vsnip'
+    use 'hrsh7th/vim-vsnip-integ'
     use 'nvim-treesitter/nvim-treesitter'
     use {
         'nvim-telescope/telescope.nvim',
@@ -17,6 +19,7 @@ return require('packer').startup(function()
     use 'bluz71/vim-nightfly-guicolors'
     use 'bluz71/vim-moonfly-colors'
     use 'fenetikm/falcon'
+    use 'marko-cerovac/material.nvim'
 
     use { 'hoob3rt/lualine.nvim', requires = {'kyazdani42/nvim-web-devicons', opt = true} }
 
@@ -33,11 +36,6 @@ return require('packer').startup(function()
     use 'tpope/vim-surround'
     use 'tpope/vim-unimpaired'
     use 'AndrewRadev/splitjoin.vim'
-
-    -- Writing plugins
-    use 'vimwiki/vimwiki'
-    use 'junegunn/limelight.vim'
-    use 'junegunn/goyo.vim'
 
     -- Navigational plugins
     use 'mhinz/vim-startify'
