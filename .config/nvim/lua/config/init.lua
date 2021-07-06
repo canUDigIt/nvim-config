@@ -3,6 +3,7 @@ require('config.completion')
 require('config.versioncontrol')
 require('config.compe')
 require('config.saga')
+require('config.spectre')
 
 require('neogit').setup {}
 require('gitsigns').setup {}

@@ -9,8 +9,8 @@ if fn.empty(fn.glob(install_path)) > 0 then
     fn.system({'git', 'clone', 'https://github.com/wbthomason/packer.nvim', install_path})
 end
 
-cmd 'packadd packer.nvim'
-cmd 'autocmd BufWritePost plugins.lua PackerCompile'
+cmd [[packadd packer.nvim]]
+cmd [[autocmd BufWritePost plugins.lua PackerCompile]]
 
 require('plugins')
 
