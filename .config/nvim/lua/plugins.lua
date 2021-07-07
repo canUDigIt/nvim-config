@@ -45,5 +45,7 @@ return require('packer').startup(function(use)
     -- Navigational plugins
     use 'mhinz/vim-startify'
     use { 'kyazdani42/nvim-tree.lua', requires = 'kyazdani42/nvim-web-devicons'}
+    use {"akinsho/nvim-toggleterm.lua"}
+
 end)
 
