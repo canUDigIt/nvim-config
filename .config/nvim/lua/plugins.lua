@@ -6,8 +6,8 @@ return require('packer').startup(function(use)
     use 'glepnir/lspsaga.nvim'
     use 'nvim-lua/lsp-status.nvim'
     use 'onsails/lspkind-nvim'
+    use 'ray-x/lsp_signature.nvim'
     use 'hrsh7th/nvim-compe'
-    use 'kabouzeid/nvim-lspinstall'
     use 'hrsh7th/vim-vsnip'
     use 'hrsh7th/vim-vsnip-integ'
     use 'nvim-treesitter/nvim-treesitter'
@@ -23,7 +23,7 @@ return require('packer').startup(function(use)
     use 'fenetikm/falcon'
     use 'marko-cerovac/material.nvim'
 
-    use { 'hoob3rt/lualine.nvim', requires = {'kyazdani42/nvim-web-devicons', opt = true} }
+    use { 'glepnir/galaxyline.nvim', branch = 'main', requires = {'kyazdani42/nvim-web-devicons', opt = true} }
 
     -- Version Control
     use { 'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim' }

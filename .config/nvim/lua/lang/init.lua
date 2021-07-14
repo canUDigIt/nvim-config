@@ -22,6 +22,7 @@ local on_attach = function(client, bufnr)
     end
 
     require('lsp-status').on_attach(client)
+    require('lsp_signature').on_attach(client)
 end
 
 -- LSP setup
@@ -89,5 +90,4 @@ require('nlua.lsp.nvim').setup(lspconfig, {
 })
 
 -- require'snippets'.use_suggested_mappings(true) -- for snippets.vim
-require'lspinstall'.setup()
 require'lspkind'.init()
