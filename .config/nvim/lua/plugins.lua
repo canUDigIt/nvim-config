@@ -23,7 +23,7 @@ return require('packer').startup(function(use)
     use 'fenetikm/falcon'
     use 'marko-cerovac/material.nvim'
 
-    use { 'glepnir/galaxyline.nvim', branch = 'main', requires = {'kyazdani42/nvim-web-devicons', opt = true} }
+    use 'tjdevries/express_line.nvim'
 
     -- Version Control
     use { 'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim' }

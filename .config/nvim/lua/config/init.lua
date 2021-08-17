@@ -4,8 +4,8 @@ require('config.versioncontrol')
 require('config.compe')
 require('config.saga')
 require('config.spectre')
-require('config.galaxyline')
 
+require('el').setup {}
 require('neogit').setup {}
 require('gitsigns').setup {}
 require('toggleterm').setup {
