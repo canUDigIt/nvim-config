@@ -5,7 +5,6 @@ require('config.compe')
 require('config.saga')
 require('config.spectre')
 
-require('el').setup {}
 require('neogit').setup {}
 require('gitsigns').setup {}
 require('toggleterm').setup {
@@ -30,13 +29,10 @@ require('toggleterm').setup {
   shell = vim.o.shell, -- change the default shell
 }
 
+require('lualine').setup {
+    options = { theme = 'nightfox' }
+}
+
 -------------------- TREE-SITTER ---------------------------
 local ts = require('nvim-treesitter.configs')
 ts.setup {ensure_installed = 'maintained', highlight = {enable = true}}
-
-if (vim.fn.exists('g:neovide')) then
-    local g = vim.g
-    vim.cmd 'set guifont=Iosevka:h18'
-    g.neovide_cursor_animation_length=0
-    g.neovide_cursor_trail=0
-end

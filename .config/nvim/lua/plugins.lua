@@ -22,8 +22,9 @@ return require('packer').startup(function(use)
     use 'bluz71/vim-moonfly-colors'
     use 'fenetikm/falcon'
     use 'marko-cerovac/material.nvim'
+    use 'EdenEast/nightfox.nvim'
 
-    use 'tjdevries/express_line.nvim'
+    use 'hoob3rt/lualine.nvim'
 
     -- Version Control
     use { 'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim' }
@@ -41,6 +42,7 @@ return require('packer').startup(function(use)
         'windwp/nvim-spectre',
         requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}
     }
+    use 'LionC/nest.nvim'
 
     -- Navigational plugins
     use 'mhinz/vim-startify'
