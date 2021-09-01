@@ -1,10 +1,9 @@
 require('config.colorscheme')
 require('config.completion')
-require('config.versioncontrol')
 require('config.compe')
-require('config.saga')
-require('config.spectre')
 
+require('lspsaga').init_lsp_saga()
+require('spectre').setup()
 require('neogit').setup {}
 require('gitsigns').setup {}
 require('toggleterm').setup {
