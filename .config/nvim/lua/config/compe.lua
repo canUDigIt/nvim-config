@@ -52,3 +52,21 @@ _G.s_tab_complete = function()
     return t "<S-Tab>"
   end
 end
+
+local nest = require('nest')
+nest.applyKeymaps {
+    {mode = 'i', {
+        options = {expr = true}, {
+            {'<C-Space>', 'compe#complete()'},
+            {'<CR>', [[compe#confirm('<CR>')]]},
+            {'<C-e>', [[compe#close('<C-e>')]]},
+            {'<C-f>', [[compe#scroll({ 'delta': +4 })]]},
+            {'<C-d>', [[compe#scroll({ 'delta': -4 })]]},
+        },
+    }},
+}
+
+vim.api.nvim_set_keymap("i", "<Tab>", "v:lua.tab_complete()", {expr = true})
+vim.api.nvim_set_keymap("s", "<Tab>", "v:lua.tab_complete()", {expr = true})
+vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
+vim.api.nvim_set_keymap("s", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})

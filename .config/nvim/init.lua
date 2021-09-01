@@ -17,11 +17,11 @@ require('plugins')
 -- Sensible defaults
 require('settings')
 
--- Key mappings
-require('keymappings')
-
 -- Configuration
 require('config')
 
 -- LSP
 require('lang')
+
+-- Key mappings
+require('keymappings')

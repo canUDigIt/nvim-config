@@ -11,37 +11,22 @@ nest.applyKeymaps {
             {'h', '<cmd>Telescope help_tags<cr>'},
         }},
         {'g', {
-            {'h', [[<Cmd>lua require('lspsaga.provider').lsp_finder()<CR>]]},
-            {'r', [[<Cmd>lua require('lspsaga.rename').rename()<CR>]]},
-            {'d', [[<Cmd>lua require('lspsaga.provider').preview_definition()<CR>]]},
-            {'s', '<cmd>Neogit<CR>'},
+            {'h', [[<cmd>lua require('lspsaga.provider').lsp_finder()<cr>]]},
+            {'r', [[<cmd>lua require('lspsaga.rename').rename()<cr>]]},
+            {'d', [[<cmd>lua require('lspsaga.provider').preview_definition()<cr>]]},
+            {'s', '<cmd>Neogit<cr>'},
         }},
-        {'K', [[<Cmd>lua require('lspsaga.hover').render_hover_doc()<CR>]]},
+        {'K', [[<cmd>lua require('lspsaga.hover').render_hover_doc()<cr>]]},
         {'l', {
             {'a', [[<cmd>lua require('lspsaga.codeaction').code_action()<cr>]]},
-            {'d', [[<Cmd>lua require('lspsaga.diagnostic').show_line_diagnostics()<CR>]]},
-            {'c', [[<Cmd>lua require('lspsaga.diagnostic').show_cursor_diagnostics()<CR>]]}
+            {'d', [[<cmd>lua require('lspsaga.diagnostic').show_line_diagnostics()<cr>]]},
+            {'c', [[<cmd>lua require('lspsaga.diagnostic').show_cursor_diagnostics()<cr>]]}
         }},
         {'S', [[<cmd>lua require('spectre').open()<cr>]]},
         {'s', {
             {'w', [[<cmd>lua require('spectre').open_visual()<cr>]]},
             {'p', [[<cmd>lua require('spectre').open_file_search()<cr>]]}
         }}
-    }},
-
-    {mode = 'i', {
-        {'<Tab>', 'v:lua.tab_complete()'},
-        {'<S-Tab>', 'v:lua.s_tab_complete()'},
-        {'<C-Space>', 'compe#complete()'},
-        {'<CR>', [[compe#confirm('<CR>')]]},
-        {'<C-e>', [[compe#close('<C-e>')]]},
-        {'<C-f>', [[compe#scroll({ 'delta': +4 })]]},
-        {'<C-d>', [[compe#scroll({ 'delta': -4 })]]},
-    }},
-
-    {mode = 's', {
-        {'<Tab>', 'v:lua.tab_complete()'},
-        {'<S-Tab>', 'v:lua.s_tab_complete()'},
     }},
 
     {mode = 'v', {
