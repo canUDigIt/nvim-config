@@ -11,40 +11,29 @@ nest.applyKeymaps {
             {'h', '<cmd>Telescope help_tags<cr>'},
         }},
         {'g', {
-            {'h', [[<cmd>lua require('lspsaga.provider').lsp_finder()<cr>]]},
-            {'r', [[<cmd>lua require('lspsaga.rename').rename()<cr>]]},
-            {'d', [[<cmd>lua require('lspsaga.provider').preview_definition()<cr>]]},
-            {'s', '<cmd>Neogit<cr>'},
+            {'s', '<cmd>Git<cr>'},
         }},
-        {'K', [[<cmd>lua require('lspsaga.hover').render_hover_doc()<cr>]]},
+        {'K', [[<cmd>lua vim.lsp.buf.hover()<cr>]]},
         {'l', {
-            {'a', [[<cmd>lua require('lspsaga.codeaction').code_action()<cr>]]},
-            {'d', [[<cmd>lua require('lspsaga.diagnostic').show_line_diagnostics()<cr>]]},
-            {'c', [[<cmd>lua require('lspsaga.diagnostic').show_cursor_diagnostics()<cr>]]}
+            {'h', [[<cmd>lua vim.lsp.buf.signature_help()<cr>]]},
+            {'R', [[<cmd>lua vim.lsp.buf.rename()<cr>]]},
+            {'d', [[<cmd>Telescope lsp_definitions<cr>]]},
+            {'D', [[<cmd>Telescope lsp_type_definitions<cr>]]},
+            {'r', [[<cmd>Telescope lsp_references<cr>]]},
+            {'i', [[<cmd>Telescope lsp_implementations<cr>]]},
+            {'ca', [[<cmd>Telescope lsp_code_actions<cr>]]},
+            {'bd', [[<cmd>Telescope lsp_document_diagnostics<cr>]]},
+            {'wd', [[<cmd>Telescope lsp_workspace_diagnostics<cr>]]}
         }},
-        {'S', [[<cmd>lua require('spectre').open()<cr>]]},
-        {'s', {
-            {'w', [[<cmd>lua require('spectre').open_visual()<cr>]]},
-            {'p', [[<cmd>lua require('spectre').open_file_search()<cr>]]}
-        }}
     }},
 
     {mode = 'v', {
         {'<leader>', {
-            {'s', [[<cmd>lua require('spectre').open_visual()<cr>]]},
-            {'ca', [[<Cmd>lua require('lspsaga.codeaction').range_code_action()<CR>]]},
+            {'lca', [[<cmd>Telescope lsp_range_code_actions<cr>]]},
         }}
     }},
 
-    {'gD',  '<cmd>Telescope lsp_definitions<cr>'},
-    {'[d', [[<Cmd>lua require('lspsaga.diagnostic').lsp_jump_diagnostic_prev()<CR>]]},
-    {']d', [[<Cmd>lua require('lspsaga.diagnostic').lsp_jump_diagnostic_next()<CR>]]},
-
     {'<C-', {
-        {'f>', [[<Cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>]]},
-        {'b>', [[<Cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>]]},
-        {'k>', [[<Cmd>lua require('lspsaga.signaturehelp').signature_help()<CR>]]},
-
         {'l>', '<cmd>noh<cr>'},
         {'n>', '<cmd>NvimTreeToggle<cr>'},
     }},

@@ -3,7 +3,6 @@ return require('packer').startup(function(use)
 
     -- Lsp
     use 'neovim/nvim-lspconfig'
-    use 'glepnir/lspsaga.nvim'
     use 'nvim-lua/lsp-status.nvim'
     use 'onsails/lspkind-nvim'
     use 'ray-x/lsp_signature.nvim'
@@ -27,7 +26,7 @@ return require('packer').startup(function(use)
     use 'hoob3rt/lualine.nvim'
 
     -- Version Control
-    use { 'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim' }
+    use { 'tpope/vim-fugitive' }
     use { 'lewis6991/gitsigns.nvim', requires = 'nvim-lua/plenary.nvim' }
 
     -- Functionality
@@ -38,11 +37,16 @@ return require('packer').startup(function(use)
     use 'tpope/vim-surround'
     use 'tpope/vim-unimpaired'
     use 'AndrewRadev/splitjoin.vim'
-    use {
-        'windwp/nvim-spectre',
-        requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}
-    }
     use 'LionC/nest.nvim'
+    use {
+        'phaazon/hop.nvim',
+        as = 'hop',
+        config = function()
+            -- you can configure Hop the way you like here; see :h hop-config
+            require'hop'.setup { keys = 'etovxqpdygfblzhckisuran' }
+        end
+    }
+
 
     -- Navigational plugins
     use 'mhinz/vim-startify'

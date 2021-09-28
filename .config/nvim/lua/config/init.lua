@@ -2,9 +2,6 @@ require('config.colorscheme')
 require('config.completion')
 require('config.compe')
 
-require('lspsaga').init_lsp_saga()
-require('spectre').setup()
-require('neogit').setup {}
 require('gitsigns').setup {}
 require('toggleterm').setup {
     -- size can be a number or function which is passed the current terminal
@@ -32,6 +29,11 @@ require('lualine').setup {
     options = { theme = 'nightfox' }
 }
 
--------------------- TREE-SITTER ---------------------------
 local ts = require('nvim-treesitter.configs')
 ts.setup {ensure_installed = 'maintained', highlight = {enable = true}}
+
+require('telescope').setup {
+    defaults = {
+        file_ignore_patters = {'build', 'node_modules'}
+    }
+}
