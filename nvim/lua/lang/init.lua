@@ -73,12 +73,12 @@ lspconfig.cmake.setup({
     on_attach = on_attach,
     capabilities = capabilities
 })
+
 lspconfig.svelte.setup({
     on_attach = on_attach,
     capabilities = capabilities
 })
 
--- Lua LSP. NOTE: This replaces the calls where you would have before done `require('nvim_lsp').sumneko_lua.setup()`
 require('nlua.lsp.nvim').setup(lspconfig, {
     capabilities = capabilities;
     on_attach = on_attach;
