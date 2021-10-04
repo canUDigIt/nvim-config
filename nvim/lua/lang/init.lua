@@ -34,6 +34,7 @@ lsp_status.register_progress()
 -- Setup capabilities
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 -- Set default client capabilities plus window/workDoneProgress
+capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 capabilities = vim.tbl_extend('keep', capabilities or {}, lsp_status.capabilities)
 capabilities.textDocument.completion.completionItem.snippetSupport = true;
 capabilities.textDocument.codeAction = {

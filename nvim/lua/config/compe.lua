@@ -1,18 +1,44 @@
--- Configuration for nvim-compe
+-- Configuration for nvim-cmp
 
 local utils = require('utils')
 
 vim.cmd [[set shortmess+=c]]
 utils.opt('o', 'completeopt', 'menuone,noselect')
 
-require'compe'.setup {
-    enabled = true;
-    autocomplete = true;
-    source = {
-        path = true;
-        nvim_lsp = true;
-        nvim_lua = true;
-        vsnip = true;
+local cmp = require'cmp'
+
+cmp.setup {
+    snippet = {
+        expand = function(args)
+            vim.fn["vsnip#anonymous"](args.body)
+        end,
+    },
+    mappings = {
+        ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+        ['<C-f>'] = cmp.mapping.scroll_docs(4),
+        ['<C-Space>'] = cmp.mapping.complete(),
+        ['<C-e>'] = cmp.mapping.close(),
+        ['<CR>'] = cmp.mapping.confirm({
+            behavior = cmp.ConfirmBehavior.Replace,
+            select = true,
+        }),
+        ['<Tab>'] = cmp.mapping(cmp.mapping.select_next_item(), { 'i', 's' }),
+        ['<S-Tab>'] = cmp.mapping(cmp.mapping.select_prev_item(), { 'i', 's' }),
+    },
+    formatting = {
+        format = function(entry, vim_item)
+            vim_item.kind = require'lspkind'.presets.default[vim_item.kind]
+            return vim_item
+        end
+    },
+    sources = {
+        { name = 'nvim_lsp' },
+        { name = 'nvim_lua' },
+        { name = 'vsnip' },
+        { name = 'buffer' },
+        { name = 'path' },
+        { name = 'calc' },
+        { name = 'emoji' },
   };
 }
 
@@ -40,7 +66,10 @@ _G.tab_complete = function()
   elseif check_back_space() then
     return t "<Tab>"
   else
-    return vim.fn['compe#complete']()
+      return cmp.mapping.complete({
+        behavior = cmp.ConfirmBehavior.Replace,
+        select = true,
+      })
   end
 end
 _G.s_tab_complete = function()
@@ -52,19 +81,6 @@ _G.s_tab_complete = function()
     return t "<S-Tab>"
   end
 end
-
-local nest = require('nest')
-nest.applyKeymaps {
-    {mode = 'i', {
-        options = {expr = true}, {
-            {'<C-Space>', 'compe#complete()'},
-            {'<CR>', [[compe#confirm('<CR>')]]},
-            {'<C-e>', [[compe#close('<C-e>')]]},
-            {'<C-f>', [[compe#scroll({ 'delta': +4 })]]},
-            {'<C-d>', [[compe#scroll({ 'delta': -4 })]]},
-        },
-    }},
-}
 
 vim.api.nvim_set_keymap("i", "<Tab>", "v:lua.tab_complete()", {expr = true})
 vim.api.nvim_set_keymap("s", "<Tab>", "v:lua.tab_complete()", {expr = true})

@@ -6,14 +6,24 @@ return require('packer').startup(function(use)
     use 'nvim-lua/lsp-status.nvim'
     use 'onsails/lspkind-nvim'
     use 'ray-x/lsp_signature.nvim'
-    use 'hrsh7th/nvim-compe'
+
+    use 'hrsh7th/cmp-nvim-lsp'
+    use 'hrsh7th/cmp-buffer'
+    use 'hrsh7th/cmp-path'
+    use 'hrsh7th/cmp-nvim-lua'
+    use 'hrsh7th/cmp-vsnip'
+    use 'hrsh7th/cmp-calc'
+    use 'hrsh7th/cmp-emoji'
+    use 'hrsh7th/nvim-cmp'
     use 'hrsh7th/vim-vsnip'
     use 'hrsh7th/vim-vsnip-integ'
+
     use 'nvim-treesitter/nvim-treesitter'
     use {
         'nvim-telescope/telescope.nvim',
         requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}
     }
+
     use 'tjdevries/nlua.nvim'
 
     -- Colorschemes
