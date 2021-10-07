@@ -13,10 +13,15 @@ nest.applyKeymaps {
         {'g', {
             {'s', '<cmd>Git<cr>'},
         }},
-        {'K', [[<cmd>lua vim.lsp.buf.hover()<cr>]]},
+        {'h', {
+            {'w', require'hop'.hint_words},
+            {'l', require'hop'.hint_lines},
+            {'s', require'hop'.hint_patterns},
+        }},
+        {'K', vim.lsp.buf.hover},
         {'l', {
-            {'h', [[<cmd>lua vim.lsp.buf.signature_help()<cr>]]},
-            {'R', [[<cmd>lua vim.lsp.buf.rename()<cr>]]},
+            {'h', vim.lsp.buf.signature_help},
+            {'R', vim.lsp.buf.rename},
             {'d', [[<cmd>Telescope lsp_definitions<cr>]]},
             {'D', [[<cmd>Telescope lsp_type_definitions<cr>]]},
             {'r', [[<cmd>Telescope lsp_references<cr>]]},
@@ -30,7 +35,12 @@ nest.applyKeymaps {
     {mode = 'v', {
         {'<leader>', {
             {'lca', [[<cmd>Telescope lsp_range_code_actions<cr>]]},
-        }}
+        }},
+        {'h', {
+            {'w', require'hop'.hint_words},
+            {'l', require'hop'.hint_lines},
+            {'s', require'hop'.hint_patterns},
+        }},
     }},
 
     {'<C-', {
