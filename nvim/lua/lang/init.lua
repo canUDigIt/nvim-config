@@ -80,6 +80,16 @@ lspconfig.svelte.setup({
     capabilities = capabilities
 })
 
+lspconfig.tsserver.setup({
+    on_attach = on_attach,
+    capabilities = capabilities
+})
+
+lspconfig.volar.setup({
+    on_attach = on_attach,
+    capabilities = capabilities
+})
+
 require('nlua.lsp.nvim').setup(lspconfig, {
     capabilities = capabilities;
     on_attach = on_attach;
