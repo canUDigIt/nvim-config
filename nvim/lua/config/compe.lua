@@ -5,8 +5,9 @@ local utils = require('utils')
 vim.cmd [[set shortmess+=c]]
 utils.opt('o', 'completeopt', 'menuone,noselect')
 
-local feedkey = function(key)
-  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), "n", true)
+local has_words_before = function()
+  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
 end
 
 local luasnip = require'luasnip'
@@ -25,22 +26,21 @@ cmp.setup {
         ['<C-f>'] = cmp.mapping.scroll_docs(4),
         ['<C-Space>'] = cmp.mapping.complete(),
         ['<C-e>'] = cmp.mapping.close(),
-        ['<CR>'] = cmp.mapping.confirm {
-            behavior = cmp.ConfirmBehavior.Replace,
-            select = true,
-        },
-        ['<Tab>'] = cmp.mapping(function(fallback)
-            if vim.fn.pumvisible() == 1 then
-                feedkey("<C-n>")
+        ['<CR>'] = cmp.mapping.confirm { select = true, },
+        ["<Tab>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+                cmp.select_next_item()
             elseif luasnip.expand_or_jumpable() then
                 luasnip.expand_or_jump()
+            elseif has_words_before() then
+                cmp.complete()
             else
-                fallback() -- The fallback function sends a already mapped key. In this case, it's probably `<Tab>`.
+                fallback()
             end
         end, { "i", "s" }),
-        ['<S-Tab>'] = cmp.mapping(function(fallback)
-            if vim.fn.pumvisible() == 1 then
-                feedkey("<C-p>")
+        ["<S-Tab>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+                cmp.select_prev_item()
             elseif luasnip.jumpable(-1) then
                 luasnip.jump(-1)
             else
@@ -49,10 +49,15 @@ cmp.setup {
         end, { "i", "s" }),
     },
     formatting = {
-        format = function(entry, vim_item)
-            vim_item.kind = require'lspkind'.presets.default[vim_item.kind]
-            return vim_item
-        end
+        format = require'lspkind'.cmp_format({with_text = true, menu = ({
+            nvim_lsp = "[LSP]",
+            nvim_lua = "[Lua]",
+            luasnip = "[LuaSnip]",
+            buffer = "[Buffer]",
+            path = "[Path]",
+            calc = "[Calc]",
+            emoji = "[Emoji]",
+        })}),
     },
     sources = {
         { name = 'nvim_lsp' },
@@ -62,5 +67,9 @@ cmp.setup {
         { name = 'path' },
         { name = 'calc' },
         { name = 'emoji' },
+  },
+  experimental = {
+      native_menu = true,
+      ghost_text = true,
   };
 }
