@@ -1,6 +1,6 @@
 require('config.colorscheme')
 require('config.completion')
-require('config.compe')
+require('config.cmp')
 
 require('gitsigns').setup {}
 require('toggleterm').setup {
