@@ -36,7 +36,11 @@ return require('packer').startup(function(use)
     use 'marko-cerovac/material.nvim'
     use 'EdenEast/nightfox.nvim'
 
-    use 'hoob3rt/lualine.nvim'
+    use {
+        'nvim-lualine/lualine.nvim',
+        requires = {'kyazdani42/nvim-web-devicons', opt = true}
+    }
+
 
     -- Version Control
     use { 'tpope/vim-fugitive' }
