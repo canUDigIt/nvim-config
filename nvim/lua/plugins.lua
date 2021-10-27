@@ -47,7 +47,12 @@ return require('packer').startup(function(use)
     use { 'lewis6991/gitsigns.nvim', requires = 'nvim-lua/plenary.nvim' }
 
     -- Functionality
-    use 'b3nj5m1n/kommentary'
+    use {
+        'numToStr/Comment.nvim',
+        config = function()
+            require('Comment').setup()
+        end
+    }
     use 'jiangmiao/auto-pairs'
     use 'junegunn/vim-easy-align'
     use 'ntpeters/vim-better-whitespace'
