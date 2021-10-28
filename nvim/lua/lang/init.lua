@@ -55,40 +55,23 @@ capabilities.textDocument.codeAction = {
       };
 }
 
--- Some lsp servers
-lspconfig.clangd.setup({
-    handlers = lsp_status.extensions.clangd.setup(),
-    init_options = {
-        clangdFileStatus = true
-    },
-    on_attach = on_attach,
-    capabilities = capabilities
-})
+local lsp_installer = require("nvim-lsp-installer")
 
-lspconfig.pyright.setup({
-    on_attach = on_attach,
-    capabilities = capabilities
-})
+lsp_installer.on_server_ready(function(server)
+    local opts = {
+        on_attach = on_attach,
+        capabilities = capabilities
+    }
 
-lspconfig.cmake.setup({
-    on_attach = on_attach,
-    capabilities = capabilities
-})
+    -- (optional) Customize the options passed to the server
+    if server.name == "clangd" then
+        opts.handlers = lsp_status.extensions.clangd.setup()
+        opts.init_options = { clangdFileStatus = true }
+    end
 
-lspconfig.svelte.setup({
-    on_attach = on_attach,
-    capabilities = capabilities
-})
-
-lspconfig.tsserver.setup({
-    on_attach = on_attach,
-    capabilities = capabilities
-})
-
-lspconfig.volar.setup({
-    on_attach = on_attach,
-    capabilities = capabilities
-})
+    server:setup(opts)
+    vim.cmd [[ do User LspAttachBuffers ]]
+end)
 
 require('nlua.lsp.nvim').setup(lspconfig, {
     capabilities = capabilities;
@@ -100,5 +83,4 @@ require('nlua.lsp.nvim').setup(lspconfig, {
     };
 })
 
--- require'snippets'.use_suggested_mappings(true) -- for snippets.vim
 require'lspkind'.init()
