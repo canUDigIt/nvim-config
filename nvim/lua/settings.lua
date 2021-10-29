@@ -1,22 +1,22 @@
-local utils = require('utils')
-
-local cmd = vim.cmd
 local indent = 4
 
-cmd 'syntax enable'
-cmd 'filetype plugin indent on'
-utils.opt('b', 'expandtab', true)
-utils.opt('b', 'shiftwidth', indent)
-utils.opt('b', 'smartindent', true)
-utils.opt('b', 'tabstop', indent)
-utils.opt('o', 'hidden', true)
-utils.opt('o', 'ignorecase', true)
-utils.opt('o', 'shiftround', true)
-utils.opt('o', 'smartcase', true)
-utils.opt('o', 'splitbelow', true)
-utils.opt('o', 'splitright', true)
-utils.opt('w', 'number', true)
-utils.opt('w', 'relativenumber', true)
+vim.cmd [[syntax enable]]
+vim.cmd [[filetype plugin indent on]]
+
+vim.bo.expandtab = true
+vim.bo.shiftwidth = indent
+vim.bo.smartindent = true
+vim.bo.tabstop = indent
+
+vim.o.hidden = true
+vim.o.ignorecase = true
+vim.o.shiftround = true
+vim.o.smartcase = true
+vim.o.splitbelow = true
+vim.o.splitright = true
+
+vim.wo.number = true
+vim.wo.relativenumber = true
 
 -- Highlight on yank
 vim.cmd 'au TextYankPost * lua vim.highlight.on_yank {on_visual = false}'

@@ -1,9 +1,6 @@
 -- Configuration for nvim-cmp
-
-local utils = require('utils')
-
 vim.cmd [[set shortmess+=c]]
-utils.opt('o', 'completeopt', 'menuone,noselect')
+vim.o.completeopt = 'menuone,noselect'
 
 local has_words_before = function()
   local line, col = unpack(vim.api.nvim_win_get_cursor(0))

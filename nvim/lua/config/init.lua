@@ -1,5 +1,4 @@
 require('config.colorscheme')
-require('config.completion')
 require('config.cmp')
 
 require('gitsigns').setup {}
