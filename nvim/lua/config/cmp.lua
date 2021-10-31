@@ -65,8 +65,4 @@ cmp.setup {
         { name = 'calc' },
         { name = 'emoji' },
   },
-  experimental = {
-      native_menu = true,
-      ghost_text = true,
-  };
 }
