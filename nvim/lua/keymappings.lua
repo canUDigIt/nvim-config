@@ -19,20 +19,20 @@ wk.register({
     },
     K = {vim.lsp.buf.hover, 'LSP Hover'},
     l = {
-        h = {vim.lsp.buf.signature_help},
-        R = {vim.lsp.buf.rename},
-        d = {'<cmd>Telescope lsp_definitions theme=dropdown<cr>'},
-        D = {'<cmd>Telescope lsp_type_definitions theme=dropdown<cr>'},
-        r = {'<cmd>Telescope lsp_references theme=dropdown<cr>'},
-        i = {'<cmd>Telescope lsp_implementations theme=dropdown<cr>'},
+        h = {vim.lsp.buf.signature_help, 'Signature help'},
+        R = {vim.lsp.buf.rename, 'Rename'},
+        d = {'<cmd>Telescope lsp_definitions theme=dropdown<cr>', 'Definitions'},
+        D = {'<cmd>Telescope lsp_type_definitions theme=dropdown<cr>', 'Type definitions'},
+        r = {'<cmd>Telescope lsp_references theme=dropdown<cr>', 'References'},
+        i = {'<cmd>Telescope lsp_implementations theme=dropdown<cr>', 'Implementations'},
         c = {
-            a = {'<cmd>Telescope lsp_code_actions theme=dropdown<cr>'},
+            a = {'<cmd>Telescope lsp_code_actions theme=dropdown<cr>', 'Code actions'},
         },
         b = {
-            d = {'<cmd>Telescope lsp_document_diagnostics theme=dropdown<cr>'},
+            d = {'<cmd>Telescope lsp_document_diagnostics theme=dropdown<cr>', 'Document diagnostics'},
         },
         w = {
-            d = {'<cmd>Telescope lsp_workspace_diagnostics theme=dropdown<cr>'},
+            d = {'<cmd>Telescope lsp_workspace_diagnostics theme=dropdown<cr>', 'Workspace diagnostics'},
         }
     },
 }, { prefix = '<leader>'})
