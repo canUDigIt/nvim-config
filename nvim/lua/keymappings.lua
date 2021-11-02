@@ -1,50 +1,53 @@
-local nest = require('nest')
+local wk = require('which-key')
 
-nest.applyKeymaps {
-    {'<leader>', {
-        {'c', '"+y'},
-        {'o', 'm`o<esc>`'},
-        {'f', {
-            {'f', '<cmd>Telescope find_files<cr>'},
-            {'g', '<cmd>Telescope live_grep<cr>'},
-            {'b', '<cmd>Telescope buffers<cr>'},
-            {'h', '<cmd>Telescope help_tags<cr>'},
-        }},
-        {'g', {
-            {'s', '<cmd>Git<cr>'},
-        }},
-        {'h', {
-            {'w', require'hop'.hint_words},
-            {'l', require'hop'.hint_lines},
-            {'s', require'hop'.hint_patterns},
-        }},
-        {'K', vim.lsp.buf.hover},
-        {'l', {
-            {'h', vim.lsp.buf.signature_help},
-            {'R', vim.lsp.buf.rename},
-            {'d', [[<cmd>Telescope lsp_definitions<cr>]]},
-            {'D', [[<cmd>Telescope lsp_type_definitions<cr>]]},
-            {'r', [[<cmd>Telescope lsp_references<cr>]]},
-            {'i', [[<cmd>Telescope lsp_implementations<cr>]]},
-            {'ca', [[<cmd>Telescope lsp_code_actions<cr>]]},
-            {'bd', [[<cmd>Telescope lsp_document_diagnostics<cr>]]},
-            {'wd', [[<cmd>Telescope lsp_workspace_diagnostics<cr>]]}
-        }},
-    }},
+wk.register({
+    f = {
+        name = 'File',
+            f = {'<cmd>Telescope find_files theme=dropdown<cr>', 'Find files'},
+            g = {'<cmd>Telescope live_grep theme=dropdown<cr>', 'Live grep'},
+            b = {'<cmd>Telescope buffers theme=dropdown<cr>', 'Buffers'},
+            h = {'<cmd>Telescope help_tags theme=dropdown<cr>', 'Help'},
+    },
+    g = {
+        s = { '<cmd>Git<cr>', 'Git'}
+    },
+    h = {
+        name = 'Hop',
+        w = {require'hop'.hint_words, 'words'},
+        l = {require'hop'.hint_lines, 'lines'},
+        s = {require'hop'.hint_patterns, 'patterns'},
+    },
+    K = {vim.lsp.buf.hover, 'LSP Hover'},
+    l = {
+        h = {vim.lsp.buf.signature_help},
+        R = {vim.lsp.buf.rename},
+        d = {'<cmd>Telescope lsp_definitions theme=dropdown<cr>'},
+        D = {'<cmd>Telescope lsp_type_definitions theme=dropdown<cr>'},
+        r = {'<cmd>Telescope lsp_references theme=dropdown<cr>'},
+        i = {'<cmd>Telescope lsp_implementations theme=dropdown<cr>'},
+        c = {
+            a = {'<cmd>Telescope lsp_code_actions theme=dropdown<cr>'},
+        },
+        b = {
+            d = {'<cmd>Telescope lsp_document_diagnostics theme=dropdown<cr>'},
+        },
+        w = {
+            d = {'<cmd>Telescope lsp_workspace_diagnostics theme=dropdown<cr>'},
+        }
+    },
+}, { prefix = '<leader>'})
 
-    {mode = 'v', {
-        {'<leader>', {
-            {'lca', [[<cmd>Telescope lsp_range_code_actions<cr>]]},
-        }},
-        {'h', {
-            {'w', require'hop'.hint_words},
-            {'l', require'hop'.hint_lines},
-            {'s', require'hop'.hint_patterns},
-        }},
-    }},
+wk.register({
+    l = { c = { a = {'<cmd>Telescope lsp_range_code_actions theme=dropdown<cr>', 'Code actions'}}},
+}, { prefix = '<leader>', mode = 'v'})
 
-    {'<C-', {
-        {'l>', '<cmd>noh<cr>'},
-        {'n>', '<cmd>NvimTreeToggle<cr>'},
-    }},
-}
+wk.register({
+    w = {require'hop'.hint_words, 'words'},
+    l = {require'hop'.hint_lines, 'lines'},
+    s = {require'hop'.hint_patterns, 'patterns'},
+}, { prefix = 'h', mode = 'v'})
+
+wk.register({
+    ['<c-l>'] = {'<cmd>noh<cr>', 'No highlight'},
+    ['<c-n>'] = {'<cmd>NvimTreeToggle<cr>', 'Nvim tree toggle'},
+})

@@ -6,9 +6,7 @@ return require('packer').startup(function(use)
         'neovim/nvim-lspconfig',
         'williamboman/nvim-lsp-installer',
     }
-    use 'nvim-lua/lsp-status.nvim'
     use 'onsails/lspkind-nvim'
-    use 'ray-x/lsp_signature.nvim'
 
     use 'hrsh7th/cmp-nvim-lsp'
     use 'hrsh7th/cmp-buffer'
@@ -26,8 +24,7 @@ return require('packer').startup(function(use)
         'nvim-telescope/telescope.nvim',
         requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}
     }
-
-    use 'tjdevries/nlua.nvim'
+	use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
 
     -- Colorschemes
     use 'bluz71/vim-nightfly-guicolors'
@@ -53,13 +50,10 @@ return require('packer').startup(function(use)
             require('Comment').setup()
         end
     }
-    use 'jiangmiao/auto-pairs'
-    use 'junegunn/vim-easy-align'
-    use 'ntpeters/vim-better-whitespace'
+    use 'windwp/nvim-autopairs'
+    use 'windwp/nvim-ts-autotag'
     use 'tpope/vim-surround'
     use 'tpope/vim-unimpaired'
-    use 'AndrewRadev/splitjoin.vim'
-    use 'LionC/nest.nvim'
     use {
         'phaazon/hop.nvim',
         as = 'hop',
@@ -68,10 +62,15 @@ return require('packer').startup(function(use)
             require'hop'.setup { keys = 'etovxqpdygfblzhckisuran' }
         end
     }
-
+    use 'folke/which-key.nvim'
 
     -- Navigational plugins
-    use 'mhinz/vim-startify'
+    use {
+	    'goolord/alpha-nvim',
+		config = function()
+			require'alpha'.setup(require'alpha.themes.startify'.opts)
+		end
+    }
     use {
         'kyazdani42/nvim-tree.lua',
         requires = 'kyazdani42/nvim-web-devicons',

@@ -1,7 +1,4 @@
 local on_attach = function(client, bufnr)
-
-    -- require('completion').on_attach()
-
     local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
     local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
@@ -20,22 +17,15 @@ local on_attach = function(client, bufnr)
     elseif client.resolved_capabilities.document_range_formatting then
         buf_set_keymap("n", "<leader>lf", "<cmd>lua vim.lsp.buf.range_formatting()<cr>", opts)
     end
-
-    require('lsp-status').on_attach(client)
-    require('lsp_signature').on_attach(client)
 end
 
 -- LSP setup
 local lspconfig = require('lspconfig')
 
-local lsp_status = require('lsp-status')
-lsp_status.register_progress()
-
 -- Setup capabilities
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 -- Set default client capabilities plus window/workDoneProgress
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
-capabilities = vim.tbl_extend('keep', capabilities or {}, lsp_status.capabilities)
 capabilities.textDocument.completion.completionItem.snippetSupport = true;
 capabilities.textDocument.codeAction = {
   dynamicRegistration = false;
@@ -65,22 +55,40 @@ lsp_installer.on_server_ready(function(server)
 
     -- (optional) Customize the options passed to the server
     if server.name == "clangd" then
-        opts.handlers = lsp_status.extensions.clangd.setup()
         opts.init_options = { clangdFileStatus = true }
+    end
+
+    if server.name == "sumneko_lua" then
+        local runtime_path = vim.split(package.path, ';')
+        table.insert(runtime_path, "lua/?.lua")
+        table.insert(runtime_path, "lua/?/init.lua")
+
+        opts.settings = {
+            Lua = {
+                runtime = {
+                    -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+                    version = 'LuaJIT',
+                    -- Setup your lua path
+                    path = runtime_path,
+                },
+                diagnostics = {
+                    -- Get the language server to recognize the `vim` global
+                    globals = {'vim'},
+                },
+                workspace = {
+                    -- Make the server aware of Neovim runtime files
+                    library = vim.api.nvim_get_runtime_file("", true),
+                },
+                -- Do not send telemetry data containing a randomized but unique identifier
+                telemetry = {
+                    enable = false,
+                },
+            },
+        }
     end
 
     server:setup(opts)
     vim.cmd [[ do User LspAttachBuffers ]]
 end)
-
-require('nlua.lsp.nvim').setup(lspconfig, {
-    capabilities = capabilities;
-    on_attach = on_attach;
-    init_options = {
-        onlyAnalyzeProjectsWithOpenFiles = true,
-        suggestFromUnimportedLibraries = false,
-        closingLabels = true,
-    };
-})
 
 require'lspkind'.init()
