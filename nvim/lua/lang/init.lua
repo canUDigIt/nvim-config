@@ -59,24 +59,38 @@ capabilities.textDocument.codeAction = {
       };
 }
 
-local lsp_installer = require("nvim-lsp-installer")
-
-lsp_installer.on_server_ready(function(server)
+local servers = {'clangd', 'cmake', 'pyright', 'sumneko_lua'}
+for _, lsp in ipairs(servers) do
     local opts = {
         on_attach = on_attach,
         capabilities = capabilities
     }
 
     -- (optional) Customize the options passed to the server
-    if server.name == "clangd" then
+    if lsp == "clangd" then
         opts.init_options = { clangdFileStatus = true }
     end
 
-    if server.name == "sumneko_lua" then
+    if lsp == "sumneko_lua" then
+        local system_name
+        if vim.fn.has("mac") == 1 then
+            system_name = "macos"
+        elseif vim.fn.has("unix") == 1 then
+            system_name = "Linux"
+        elseif vim.fn.has("win32") == 1 then
+            system_name = "Windows"
+        else
+            print("Unsupported system for sumneko")
+        end
+
+        local sumneko_root_path = vim.fn.stdpath('data')..'/lsp_servers/sumneko_lua/lua-language-server'
+        local sumneko_binary = sumneko_root_path..'/bin/'..system_name.."/lua-language-server"
+
         local runtime_path = vim.split(package.path, ';')
         table.insert(runtime_path, "lua/?.lua")
         table.insert(runtime_path, "lua/?/init.lua")
 
+        opts.cmd = {sumneko_binary, '-E', sumneko_root_path .."/main.lua"};
         opts.settings = {
             Lua = {
                 runtime = {
@@ -100,10 +114,8 @@ lsp_installer.on_server_ready(function(server)
             },
         }
     end
-
-    server:setup(opts)
-    vim.cmd [[ do User LspAttachBuffers ]]
-end)
+    lspconfig[lsp].setup(opts)
+end
 
 require'lspkind'.init()
 
