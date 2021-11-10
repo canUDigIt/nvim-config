@@ -2,7 +2,7 @@ return require('packer').startup(function(use)
     use {'wbthomason/packer.nvim', opt = true}
 
     -- Lsp
-    use 'neovim/nvim-lspconfig' 
+    use 'neovim/nvim-lspconfig'
     use 'onsails/lspkind-nvim'
 
     use 'hrsh7th/cmp-nvim-lsp'
