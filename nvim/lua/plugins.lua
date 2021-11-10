@@ -17,6 +17,8 @@ return require('packer').startup(function(use)
     use 'L3MON4D3/LuaSnip'
 
     use 'nvim-treesitter/nvim-treesitter'
+    use 'nvim-treesitter/nvim-treesitter-textobjects'
+
     use {
         'nvim-telescope/telescope.nvim',
         requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}
@@ -60,6 +62,26 @@ return require('packer').startup(function(use)
         end
     }
     use 'folke/which-key.nvim'
+    use {
+        "folke/twilight.nvim",
+        config = function()
+            require("twilight").setup {}
+        end
+    }
+    use {
+        "folke/zen-mode.nvim",
+        config = function()
+            require("zen-mode").setup {}
+        end
+    }
+    use {
+        'norcalli/nvim-colorizer.lua',
+        config = function ()
+            require('colorizer').setup()
+        end
+    }
+    use 'gennaro-tedesco/nvim-peekup'
+    use 'p00f/nvim-ts-rainbow'
 
     -- Navigational plugins
     use {
