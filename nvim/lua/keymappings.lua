@@ -9,7 +9,7 @@ wk.register({
             h = {'<cmd>Telescope help_tags theme=dropdown<cr>', 'Help'},
     },
     g = {
-        s = { '<cmd>Git<cr>', 'Git'}
+        s = { '<cmd>Neogit<cr>', 'Neogit'}
     },
     h = {
         name = 'Hop',

@@ -39,7 +39,8 @@ return require('packer').startup(function(use)
 
 
     -- Version Control
-    use { 'tpope/vim-fugitive' }
+    use { 'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim' }
+    use { 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' }
     use { 'lewis6991/gitsigns.nvim', requires = 'nvim-lua/plenary.nvim' }
 
     -- Functionality
