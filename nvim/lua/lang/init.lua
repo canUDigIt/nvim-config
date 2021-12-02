@@ -59,7 +59,7 @@ capabilities.textDocument.codeAction = {
       };
 }
 
-local servers = {'clangd', 'cmake', 'pyright', 'sumneko_lua', 'volar', 'tsserver'}
+local servers = {'clangd', 'cmake', 'pylsp', 'sumneko_lua', 'volar', 'tsserver'}
 for _, lsp in ipairs(servers) do
     local opts = {
         on_attach = on_attach,
