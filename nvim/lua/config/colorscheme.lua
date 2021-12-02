@@ -1,3 +1,3 @@
 vim.o.termguicolors = true
 
-require('nightfox').load('nordfox')
+require('nightfox').load('nightfox')
