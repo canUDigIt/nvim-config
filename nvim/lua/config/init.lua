@@ -5,11 +5,6 @@ require('nvim-autopairs').setup{}
 require('nvim-ts-autotag').setup{}
 
 require('diffview').setup{}
-require('neogit').setup{
-    integrations = {
-        diffview = true
-    }
-}
 require('gitsigns').setup {}
 
 require('toggleterm').setup {

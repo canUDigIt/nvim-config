@@ -39,7 +39,7 @@ return require('packer').startup(function(use)
 
 
     -- Version Control
-    use { 'TimUntersberger/neogit', requires = 'nvim-lua/plenary.nvim' }
+    use { 'tpope/vim-fugitive' }
     use { 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' }
     use { 'lewis6991/gitsigns.nvim', requires = 'nvim-lua/plenary.nvim' }
 
@@ -85,12 +85,6 @@ return require('packer').startup(function(use)
     use 'p00f/nvim-ts-rainbow'
 
     -- Navigational plugins
-    use {
-	    'goolord/alpha-nvim',
-		config = function()
-			require'alpha'.setup(require'alpha.themes.startify'.opts)
-		end
-    }
     use {
         'kyazdani42/nvim-tree.lua',
         requires = 'kyazdani42/nvim-web-devicons',
