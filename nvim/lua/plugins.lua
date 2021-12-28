@@ -2,7 +2,10 @@ return require('packer').startup(function(use)
     use {'wbthomason/packer.nvim', opt = true}
 
     -- Lsp
-    use 'neovim/nvim-lspconfig'
+    use {
+        'neovim/nvim-lspconfig',
+        'williamboman/nvim-lsp-installer'
+    }
     use 'onsails/lspkind-nvim'
 
     use 'hrsh7th/cmp-nvim-lsp'
@@ -31,12 +34,14 @@ return require('packer').startup(function(use)
     use 'fenetikm/falcon'
     use 'marko-cerovac/material.nvim'
     use 'EdenEast/nightfox.nvim'
+    use 'kvrohit/substrata.nvim'
+    use "rebelot/kanagawa.nvim"
+    use "sainnhe/everforest"
 
     use {
         'nvim-lualine/lualine.nvim',
         requires = {'kyazdani42/nvim-web-devicons', opt = true}
     }
-
 
     -- Version Control
     use { 'tpope/vim-fugitive' }

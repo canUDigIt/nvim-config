@@ -1,3 +1,4 @@
 vim.o.termguicolors = true
 
-require('nightfox').load('nightfox')
+vim.g.substrata_italic_functions = true
+vim.cmd [[colorscheme substrata]]

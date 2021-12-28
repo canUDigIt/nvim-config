@@ -34,7 +34,6 @@ local on_attach = function(client, bufnr)
 end
 
 -- LSP setup
-local lspconfig = require('lspconfig')
 
 -- Setup capabilities
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -59,45 +58,35 @@ capabilities.textDocument.codeAction = {
       };
 }
 
-local servers = {'clangd', 'cmake', 'pylsp', 'sumneko_lua', 'volar', 'tsserver'}
-for _, lsp in ipairs(servers) do
+local lsp_installer = require("nvim-lsp-installer")
+
+lsp_installer.settings({
+    ui = {
+        icons = {
+            server_installed = "✓",
+            server_pending = "➜",
+            server_uninstalled = "✗"
+        }
+    }
+})
+
+lsp_installer.on_server_ready(function (server)
     local opts = {
         on_attach = on_attach,
         capabilities = capabilities
     }
 
     -- (optional) Customize the options passed to the server
-    if lsp == "clangd" then
+    if server.name == "clangd" then
         opts.init_options = { clangdFileStatus = true }
     end
 
-    if lsp == "sumneko_lua" then
-        local system_name
-        if vim.fn.has("mac") == 1 then
-            system_name = "macos"
-        elseif vim.fn.has("unix") == 1 then
-            system_name = "Linux"
-        elseif vim.fn.has("win32") == 1 then
-            system_name = "Windows"
-        else
-            print("Unsupported system for sumneko")
-        end
-
-        local sumneko_root_path = vim.fn.stdpath('data')..'/lsp_servers/sumneko_lua/lua-language-server'
-        local sumneko_binary = sumneko_root_path..'/bin/'..system_name.."/lua-language-server"
-
-        local runtime_path = vim.split(package.path, ';')
-        table.insert(runtime_path, "lua/?.lua")
-        table.insert(runtime_path, "lua/?/init.lua")
-
-        opts.cmd = {sumneko_binary, '-E', sumneko_root_path .."/main.lua"};
+    if server.name == "sumneko_lua" then
         opts.settings = {
             Lua = {
                 runtime = {
                     -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
                     version = 'LuaJIT',
-                    -- Setup your lua path
-                    path = runtime_path,
                 },
                 diagnostics = {
                     -- Get the language server to recognize the `vim` global
@@ -114,8 +103,9 @@ for _, lsp in ipairs(servers) do
             },
         }
     end
-    lspconfig[lsp].setup(opts)
-end
+
+    server:setup(opts)
+end)
 
 require'lspkind'.init()
 
