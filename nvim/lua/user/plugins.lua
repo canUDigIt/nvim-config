@@ -1,11 +1,46 @@
-return require('packer').startup(function(use)
-    use {'wbthomason/packer.nvim', opt = true}
+local fn = vim.fn
+
+local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+
+if fn.empty(fn.glob(install_path)) > 0 then
+    PACKER_BOOTSTRAP = fn.system {
+      'git',
+      'clone',
+      '--depth',
+      '1',
+      'https://github.com/wbthomason/packer.nvim',
+      install_path,
+    }
+    print "Installing packer...close and reopen Neovim"
+    vim.cmd [[packadd packer.nvim]]
+end
+
+vim.cmd [[
+  augroup packer_user_config
+    autocmd!
+    autocmd BufWritePost plugins.lua source <afile> | PackerSync
+  augroup end
+]]
+
+local status_ok, packer = pcall(require, "packer")
+if not status_ok then
+  return
+end
+
+packer.init {
+  display ={
+    open_fn = function ()
+      return require("packer.util").float { border = "rounded" }
+    end,
+  },
+}
+
+return packer.startup(function(use)
+    use 'wbthomason/packer.nvim'
 
     -- Lsp
-    use {
-        'neovim/nvim-lspconfig',
-        'williamboman/nvim-lsp-installer'
-    }
+    use 'neovim/nvim-lspconfig'
+    use 'williamboman/nvim-lsp-installer'
     use 'onsails/lspkind-nvim'
 
     use 'hrsh7th/cmp-nvim-lsp'
@@ -97,5 +132,8 @@ return require('packer').startup(function(use)
     }
     use {"akinsho/nvim-toggleterm.lua"}
 
+    if PACKER_BOOTSTRAP then
+      require("packer").sync()
+    end
 end)
 

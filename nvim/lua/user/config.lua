@@ -1,6 +1,3 @@
-require('config.colorscheme')
-require('config.cmp')
-
 require('nvim-autopairs').setup{}
 require('nvim-ts-autotag').setup{}
 

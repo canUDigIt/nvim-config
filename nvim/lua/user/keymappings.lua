@@ -1,6 +1,7 @@
 local wk = require('which-key')
 
 wk.register({
+    e = {'<cmd>NvimTreeToggle<cr>', 'explorer'},
     f = {
         name = 'File',
             f = {'<cmd>Telescope find_files theme=dropdown<cr>', 'Find files'},
@@ -49,5 +50,4 @@ wk.register({
 
 wk.register({
     ['<c-l>'] = {'<cmd>noh<cr>', 'No highlight'},
-    ['<c-n>'] = {'<cmd>NvimTreeToggle<cr>', 'Nvim tree toggle'},
 })
