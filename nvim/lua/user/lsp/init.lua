@@ -6,5 +6,3 @@ end
 
 require 'user.lsp.lsp-installer'
 require('user.lsp.handlers').setup()
-
-require'lspkind'.init()

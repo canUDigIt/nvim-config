@@ -26,10 +26,6 @@ require('toggleterm').setup {
   shell = vim.o.shell, -- change the default shell
 }
 
-require('lualine').setup {
-    options = { theme = 'nightfox' }
-}
-
 require('nvim-treesitter.configs').setup {
     ensure_installed = 'maintained',
     highlight = {

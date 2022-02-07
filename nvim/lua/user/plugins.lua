@@ -67,7 +67,6 @@ return packer.startup(function(use)
     use 'bluz71/vim-nightfly-guicolors'
     use 'bluz71/vim-moonfly-colors'
     use 'fenetikm/falcon'
-    use 'marko-cerovac/material.nvim'
     use 'EdenEast/nightfox.nvim'
     use 'kvrohit/substrata.nvim'
     use "rebelot/kanagawa.nvim"
@@ -75,6 +74,7 @@ return packer.startup(function(use)
 
     use {
         'nvim-lualine/lualine.nvim',
+        config = function () require'user.config.statusline' end,
         requires = {'kyazdani42/nvim-web-devicons', opt = true}
     }
 

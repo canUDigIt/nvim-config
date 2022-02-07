@@ -59,15 +59,19 @@ cmp.setup {
       end, { "i", "s" }),
   },
   formatting = {
-    format = require'lspkind'.cmp_format({with_text = true, menu = ({
-      nvim_lsp = "[LSP]",
-      nvim_lua = "[Lua]",
-      luasnip = "[LuaSnip]",
-      buffer = "[Buffer]",
-      path = "[Path]",
-      calc = "[Calc]",
-      emoji = "[Emoji]",
-    })}),
+    format = require'lspkind'.cmp_format({
+      mode = "symbol_text",
+      maxwidth = 50,
+      menu = ({
+        nvim_lsp = "[LSP]",
+        nvim_lua = "[Lua]",
+        luasnip = "[LuaSnip]",
+        buffer = "[Buffer]",
+        path = "[Path]",
+        calc = "[Calc]",
+        emoji = "[Emoji]",
+      })
+    }),
   },
   sources = {
     { name = 'nvim_lsp' },
