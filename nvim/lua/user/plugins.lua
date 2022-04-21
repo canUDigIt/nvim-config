@@ -130,7 +130,7 @@ return packer.startup(function(use)
         requires = 'kyazdani42/nvim-web-devicons',
         config = function() require'nvim-tree'.setup{} end
     }
-    use {"akinsho/nvim-toggleterm.lua"}
+    use {"akinsho/toggleterm.nvim"}
 
     if PACKER_BOOTSTRAP then
       require("packer").sync()
