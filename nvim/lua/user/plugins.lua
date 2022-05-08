@@ -102,7 +102,12 @@ return packer.startup(function(use)
             require'hop'.setup { keys = 'etovxqpdygfblzhckisuran' }
         end
     }
-    use 'folke/which-key.nvim'
+    use {
+      'folke/which-key.nvim',
+      config = function ()
+        require("which-key").setup{}
+      end
+    }
     use {
         "folke/twilight.nvim",
         config = function()
