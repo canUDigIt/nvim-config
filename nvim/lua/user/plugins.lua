@@ -61,7 +61,7 @@ return packer.startup(function(use)
         'nvim-telescope/telescope.nvim',
         requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}
     }
-	use {'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+    use 'natecraddock/telescope-zf-native.nvim'
 
     -- Colorschemes
     use 'bluz71/vim-nightfly-guicolors'

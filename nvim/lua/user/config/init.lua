@@ -79,18 +79,12 @@ require('nvim-treesitter.configs').setup {
 
 require('telescope').setup {
     defaults = {
-	layout_config = {
-		vertical = { width = 0.5 }
-	},
+        layout_config = {
+          vertical = { width = 0.5 }
+        },
         file_ignore_patterns = {'debug', 'release','build', 'node_modules'}
     },
     extensions = {
-		fzf = {
-			fuzzy = true,
-			override_generic_sorter = true,
-			override_file_sorter = true,
-			case_mode = "smart_case",
-		}
     }
 }
-require('telescope').load_extension('fzf')
+require('telescope').load_extension('zf-native')
