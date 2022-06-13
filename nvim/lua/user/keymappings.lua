@@ -30,19 +30,16 @@ wk.register({
         r = {'<cmd>Telescope lsp_references theme=dropdown<cr>', 'References'},
         i = {'<cmd>Telescope lsp_implementations theme=dropdown<cr>', 'Implementations'},
         c = {
-            a = {'<cmd>Telescope lsp_code_actions theme=dropdown<cr>', 'Code actions'},
-        },
-        b = {
-            d = {'<cmd>Telescope lsp_document_diagnostics theme=dropdown<cr>', 'Document diagnostics'},
+            a = {vim.lsp.buf.code_action, 'Code actions'},
         },
         w = {
-            d = {'<cmd>Telescope lsp_workspace_diagnostics theme=dropdown<cr>', 'Workspace diagnostics'},
+            d = {'<cmd>Telescope diagnostics theme=dropdown<cr>', 'Workspace diagnostics'},
         }
     },
 }, { prefix = '<leader>'})
 
 wk.register({
-    l = { c = { a = {'<cmd>Telescope lsp_range_code_actions theme=dropdown<cr>', 'Code actions'}}},
+    l = { c = { a = {vim.lsp.buf.code_action, 'Code actions'}}},
 }, { prefix = '<leader>', mode = 'v'})
 
 wk.register({

@@ -71,12 +71,17 @@ return packer.startup(function(use)
     use 'kvrohit/substrata.nvim'
     use "rebelot/kanagawa.nvim"
     use "sainnhe/everforest"
+    use{
+      "catppuccin/nvim",
+      as = "catppuccin"
+    }
 
     use {
         'nvim-lualine/lualine.nvim',
         config = function () require'user.config.statusline' end,
         requires = {'kyazdani42/nvim-web-devicons', opt = true}
     }
+    use "lukas-reineke/indent-blankline.nvim"
 
     -- Version Control
     use { 'tpope/vim-fugitive' }
