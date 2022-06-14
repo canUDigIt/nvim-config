@@ -133,6 +133,8 @@ return packer.startup(function(use)
     }
     use 'gennaro-tedesco/nvim-peekup'
     use 'p00f/nvim-ts-rainbow'
+    use 'Shatur/neovim-cmake'
+    use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
 
     -- Navigational plugins
     use {
