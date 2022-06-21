@@ -84,9 +84,17 @@ return packer.startup(function(use)
     use "lukas-reineke/indent-blankline.nvim"
 
     -- Version Control
-    use { 'tpope/vim-fugitive' }
     use { 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' }
     use { 'lewis6991/gitsigns.nvim', requires = 'nvim-lua/plenary.nvim' }
+    use {
+        'TimUntersberger/neogit',
+        config = function ()
+            require('neogit').setup {
+                integrations = { diffview = true },
+            }
+        end,
+        requires = 'nvim-lua/plenary.nvim'
+    }
 
     -- Functionality
     use {
