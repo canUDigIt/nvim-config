@@ -42,6 +42,7 @@ return packer.startup(function(use)
     use 'neovim/nvim-lspconfig'
     use 'williamboman/nvim-lsp-installer'
     use 'onsails/lspkind-nvim'
+    use 'j-hui/fidget.nvim'
 
     use 'hrsh7th/nvim-cmp'
     use 'hrsh7th/cmp-nvim-lsp'
@@ -69,12 +70,7 @@ return packer.startup(function(use)
     use 'fenetikm/falcon'
     use 'EdenEast/nightfox.nvim'
     use 'kvrohit/substrata.nvim'
-    use "rebelot/kanagawa.nvim"
-    use "sainnhe/everforest"
-    use{
-      "catppuccin/nvim",
-      as = "catppuccin"
-    }
+    use 'ellisonleao/gruvbox.nvim'
 
     use {
         'nvim-lualine/lualine.nvim',

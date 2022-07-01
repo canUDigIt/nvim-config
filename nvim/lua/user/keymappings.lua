@@ -4,7 +4,7 @@ vim.g.maplocalleader = ' '
 local wk = require('which-key')
 
 wk.register({
-    e = {'<cmd>NvimTreeToggle<cr>', 'explorer'},
+    e = {'<cmd>NvimTreeToggle<cr>', 'File Explorer'},
     f = {
         name = 'File',
             f = {'<cmd>Telescope find_files theme=dropdown<cr>', 'Find files'},
@@ -13,7 +13,8 @@ wk.register({
             h = {'<cmd>Telescope help_tags theme=dropdown<cr>', 'Help'},
     },
     g = {
-        s = { '<cmd>Git<cr>', 'Fugitive'}
+        name = 'Source Control',
+        s = { '<cmd>Neogit<cr>', 'Neogit'}
     },
     h = {
         name = 'Hop',
@@ -23,6 +24,7 @@ wk.register({
     },
     K = {vim.lsp.buf.hover, 'LSP Hover'},
     l = {
+        name = 'LSP',
         h = {vim.lsp.buf.signature_help, 'Signature help'},
         R = {vim.lsp.buf.rename, 'Rename'},
         d = {'<cmd>Telescope lsp_definitions theme=dropdown<cr>', 'Definitions'},
