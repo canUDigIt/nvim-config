@@ -33,7 +33,7 @@ vim.opt.sidescrolloff = 8
 vim.opt.termguicolors = true
 vim.opt.guifont = "Iosevka:h13"
 
-vim.opt.shortmess:append "c"
+vim.opt.shortmess:append("c")
 vim.opt.list = true
 vim.opt.listchars:append("space:⋅")
 vim.opt.listchars:append("eol:↴")

@@ -71,6 +71,7 @@ return packer.startup(function(use)
   use 'EdenEast/nightfox.nvim'
   use 'kvrohit/substrata.nvim'
   use 'ellisonleao/gruvbox.nvim'
+  use 'eemed/sitruuna.vim'
 
   use {
     'nvim-lualine/lualine.nvim',
@@ -141,7 +142,6 @@ return packer.startup(function(use)
   use { "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } }
   use {
     "nvim-neorg/neorg",
-    after = { "nvim-treesitter", "telescope.nvim" }, -- You may want to specify Telescope here as well
     config = function()
       require('neorg').setup {
         load = {
@@ -163,7 +163,7 @@ return packer.startup(function(use)
             workspace = "gtd",
           },
           ["core.presenter"] = {
-            zen_mode ="zen-mode",
+            zen_mode = "zen-mode",
           },
           ["core.norg.qol.toc"] = {},
         }
@@ -171,6 +171,7 @@ return packer.startup(function(use)
     end,
     requires = "nvim-lua/plenary.nvim"
   }
+  use 'ziglang/zig.vim'
 
   -- Navigational plugins
   use {
