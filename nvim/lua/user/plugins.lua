@@ -76,7 +76,6 @@ return packer.startup(function(use)
   use {
     'nvim-lualine/lualine.nvim',
     config = function() require 'user.config.statusline' end,
-    requires = { 'kyazdani42/nvim-web-devicons', opt = true }
   }
   use "lukas-reineke/indent-blankline.nvim"
 
@@ -174,11 +173,6 @@ return packer.startup(function(use)
   use 'ziglang/zig.vim'
 
   -- Navigational plugins
-  use {
-    'kyazdani42/nvim-tree.lua',
-    requires = 'kyazdani42/nvim-web-devicons',
-    config = function() require 'nvim-tree'.setup {} end
-  }
   use { "akinsho/toggleterm.nvim" }
 
   if PACKER_BOOTSTRAP then

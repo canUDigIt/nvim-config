@@ -3,14 +3,22 @@ vim.g.maplocalleader = ' '
 
 local wk = require('which-key')
 
+local Terminal  = require('toggleterm.terminal').Terminal
+local vifm = Terminal:new({ cmd = "vifm", hidden = true })
+
+function vifm_toggle()
+  vifm:toggle()
+end
+
 wk.register({
-    e = {'<cmd>NvimTreeToggle<cr>', 'File Explorer'},
+    e = {vifm_toggle, 'File Explorer'},
     f = {
         name = 'File',
             f = {'<cmd>Telescope find_files theme=dropdown<cr>', 'Find files'},
             g = {'<cmd>Telescope live_grep theme=dropdown<cr>', 'Live grep'},
             b = {'<cmd>Telescope buffers theme=dropdown<cr>', 'Buffers'},
             h = {'<cmd>Telescope help_tags theme=dropdown<cr>', 'Help'},
+            c = {'<cmd>Telescope colorscheme theme=dropdown<cr>', 'Colors'},
     },
     g = {
         name = 'Source Control',
