@@ -40,7 +40,8 @@ return packer.startup(function(use)
 
   -- Lsp
   use 'neovim/nvim-lspconfig'
-  use 'williamboman/nvim-lsp-installer'
+  use 'williamboman/mason.nvim'
+  use 'williamboman/mason-lspconfig.nvim'
   use 'onsails/lspkind-nvim'
   use 'j-hui/fidget.nvim'
 
@@ -72,6 +73,10 @@ return packer.startup(function(use)
   use 'kvrohit/substrata.nvim'
   use 'ellisonleao/gruvbox.nvim'
   use 'eemed/sitruuna.vim'
+  use({
+    'rose-pine/neovim',
+    as = 'rose-pine',
+  })
 
   use {
     'nvim-lualine/lualine.nvim',
@@ -156,13 +161,19 @@ return packer.startup(function(use)
           },
           ["core.norg.concealer"] = {},
           ["core.norg.completion"] = {
-            engine = "nvim-cmp"
+            config = {
+              engine = "nvim-cmp"
+            }
           },
           ["core.gtd.base"] = {
-            workspace = "gtd",
+            config = {
+              workspace = "gtd",
+            }
           },
           ["core.presenter"] = {
-            zen_mode = "zen-mode",
+            config = {
+              zen_mode = "zen-mode",
+            }
           },
           ["core.norg.qol.toc"] = {},
         }
