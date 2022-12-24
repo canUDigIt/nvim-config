@@ -146,6 +146,7 @@ return packer.startup(function(use)
   use { "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } }
   use {
     "nvim-neorg/neorg",
+    run = ":Neorg sync-parsers",
     config = function()
       require('neorg').setup {
         load = {
@@ -155,7 +156,6 @@ return packer.startup(function(use)
               workspaces = {
                 work = "~/notes/work",
                 home = "~/notes/home",
-                gtd = "~/notes/gtd",
               }
             }
           },
@@ -163,11 +163,6 @@ return packer.startup(function(use)
           ["core.norg.completion"] = {
             config = {
               engine = "nvim-cmp"
-            }
-          },
-          ["core.gtd.base"] = {
-            config = {
-              workspace = "gtd",
             }
           },
           ["core.presenter"] = {
@@ -179,7 +174,7 @@ return packer.startup(function(use)
         }
       }
     end,
-    requires = "nvim-lua/plenary.nvim"
+    requires ={{"nvim-lua/plenary.nvim"}, {"nvim-neorg/neorg-telescope"}}
   }
   use 'ziglang/zig.vim'
 
