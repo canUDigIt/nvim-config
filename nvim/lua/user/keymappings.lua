@@ -3,15 +3,8 @@ vim.g.maplocalleader = ' '
 
 local wk = require('which-key')
 
-local Terminal  = require('toggleterm.terminal').Terminal
-local vifm = Terminal:new({ cmd = "vifm", hidden = true })
-
-function vifm_toggle()
-  vifm:toggle()
-end
-
 wk.register({
-    e = {vifm_toggle, 'File Explorer'},
+    e = {'<cmd>RnvimrToggle<cr>', 'File Explorer'},
     f = {
         name = 'File',
             f = {'<cmd>Telescope find_files theme=dropdown<cr>', 'Find files'},

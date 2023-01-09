@@ -180,6 +180,7 @@ return packer.startup(function(use)
 
   -- Navigational plugins
   use { "akinsho/toggleterm.nvim" }
+  use { "kevinhwang91/rnvimr" }
 
   if PACKER_BOOTSTRAP then
     require("packer").sync()
