@@ -73,6 +73,7 @@ return packer.startup(function(use)
   use 'kvrohit/substrata.nvim'
   use 'ellisonleao/gruvbox.nvim'
   use 'eemed/sitruuna.vim'
+  use 'folke/tokyonight.nvim'
   use({
     'rose-pine/neovim',
     as = 'rose-pine',
