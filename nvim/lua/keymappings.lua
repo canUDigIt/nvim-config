@@ -1,6 +1,3 @@
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
-
 local wk = require('which-key')
 
 local function set_breakpoint_on_condition ()

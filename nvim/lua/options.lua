@@ -37,3 +37,6 @@ vim.opt.shortmess:append("c")
 vim.opt.list = true
 vim.opt.listchars:append("space:⋅")
 vim.opt.listchars:append("eol:↴")
+
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '

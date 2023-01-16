@@ -13,9 +13,9 @@ if not status_ok then
   return
 end
 
-require 'user.lsp.lsp-installer'
+require 'lsp.lsp-installer'
 
-local handlers = require('user.lsp.handlers')
+local handlers = require('lsp.handlers')
 handlers.setup()
 
 local opts = {
@@ -23,12 +23,12 @@ local opts = {
   capabilities = handlers.capabilities,
 }
 
-lspconfig['clangd'].setup(vim.tbl_deep_extend('force', require('user.lsp.settings.clang'), opts))
+lspconfig['clangd'].setup(vim.tbl_deep_extend('force', require('lsp.settings.clang'), opts))
 lspconfig['cmake'].setup(opts)
 lspconfig['cssls'].setup(opts)
 lspconfig['emmet_ls'].setup(opts)
 lspconfig['html'].setup(opts)
 lspconfig['jsonls'].setup(opts)
 lspconfig['pyright'].setup(opts)
-lspconfig['sumneko_lua'].setup(vim.tbl_deep_extend('force', require('user.lsp.settings.sumneko_lua'), opts))
+lspconfig['sumneko_lua'].setup(vim.tbl_deep_extend('force', require('lsp.settings.sumneko_lua'), opts))
 lspconfig['zls'].setup(opts)

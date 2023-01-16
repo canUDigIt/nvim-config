@@ -10,7 +10,7 @@ require('toggleterm').setup {
 }
 
 require('nvim-treesitter.configs').setup {
-  ensure_installed = 'all',
+  ensure_installed = { "lua", "c", "cmake", "cpp", "css", "html", "json", "python", "zig" },
   highlight = {
     enable = true,
     additional_vim_regex_highlighting = false
