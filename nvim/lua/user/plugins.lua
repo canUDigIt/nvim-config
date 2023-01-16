@@ -145,6 +145,7 @@ return packer.startup(function(use)
   use 'p00f/nvim-ts-rainbow'
   use 'Shatur/neovim-cmake'
   use { "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } }
+  use 'mfussenegger/nvim-dap-python'
   use {
     "nvim-neorg/neorg",
     run = ":Neorg sync-parsers",
