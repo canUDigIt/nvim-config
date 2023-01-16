@@ -86,13 +86,35 @@ local dapui = require('dapui')
 
 dapui.setup()
 dap.listeners.after.event_initialized['dapui_config'] = function()
-  dapui.open()
+  dapui.open{}
 end
 dap.listeners.after.event_terminated['dapui_config'] = function()
-  dapui.close()
+  dapui.close{}
 end
 dap.listeners.after.event_exited['dapui_config'] = function()
-  dapui.close()
+  dapui.close{}
 end
+
+dap.adapters.lldb = {
+  type = 'executable',
+  command = '/usr/bin/lldb-vscode',
+  name = 'lldb'
+}
+
+dap.configurations.cpp = {
+  {
+    name = 'Launch',
+    type = 'lldb',
+    request = 'launch',
+    program = function()
+      return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+    end,
+    cwd = '${workspaceFolder}',
+    stopOnEntry = false,
+    args = {},
+  },
+}
+dap.configurations.c = dap.configurations.cpp
+dap.configurations.rust = dap.configurations.cpp
 
 require('dap-python').setup('~/.virtualenvs/debugpy/bin/python')
