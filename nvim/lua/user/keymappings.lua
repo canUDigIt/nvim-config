@@ -34,11 +34,11 @@ wk.register({
             c = {'<cmd>Telescope colorscheme theme=dropdown<cr>', 'Colors'},
     },
     g = {
-        name = 'Source Control',
+        name = '+vcs',
         s = { '<cmd>Neogit<cr>', 'Neogit'}
     },
     h = {
-        name = 'Hop',
+        name = '+hop',
         w = {require'hop'.hint_words, 'words'},
         l = {require'hop'.hint_lines, 'lines'},
         s = {require'hop'.hint_patterns, 'patterns'},
@@ -46,6 +46,7 @@ wk.register({
 }, { prefix = '<leader>'})
 
 wk.register({
+    name = '+hop',
     w = {require'hop'.hint_words, 'words'},
     l = {require'hop'.hint_lines, 'lines'},
     s = {require'hop'.hint_patterns, 'patterns'},

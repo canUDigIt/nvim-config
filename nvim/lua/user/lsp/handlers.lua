@@ -34,34 +34,42 @@ M.setup = function()
     border = 'rounded',
   })
 
-  local opts = { silent = true }
-  vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
-  vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
-  vim.keymap.set("n", "<space>d", vim.diagnostic.open_float, opts)
-  vim.keymap.set("n", "<space>q", vim.diagnostic.setloclist, opts)
+  local function keymap_set(mode, key, action, description)
+    local opts = { silent = true, desc = description }
+    vim.keymap.set(mode, key, action, opts)
+  end
+
+  keymap_set("n", "[d", vim.diagnostic.goto_prev, "goto prev diagnostic")
+  keymap_set("n", "]d", vim.diagnostic.goto_next, "goto next diagnostic")
+  keymap_set("n", "<space>od", vim.diagnostic.open_float, "open float diagnostic")
+  keymap_set("n", "<space>q", vim.diagnostic.setloclist, "set loclist")
 end
 
 M.on_attach = function(client, bufnr)
   vim.b.omnifunc = vim.lsp.omnifunc
 
   -- Mappings.
-  local bufopts = { buffer = bufnr, silent = true }
-  vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
-  vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
-  vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
-  vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
-  vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, bufopts)
-  vim.keymap.set("n", "gr", vim.lsp.buf.references, bufopts)
-  vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
-  vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
-  vim.keymap.set('n', '<space>wl', function()
+  local function keymap_set(mode, key, action, description)
+    local opts = { buffer = bufnr, silent = true, desc = description }
+    vim.keymap.set(mode, key, action, opts)
+  end
+
+  keymap_set("n", "gD", vim.lsp.buf.declaration, "declaration")
+  keymap_set("n", "gd", vim.lsp.buf.definition, "definition")
+  keymap_set("n", "K", vim.lsp.buf.hover, "hover")
+  keymap_set("n", "gi", vim.lsp.buf.implementation, "implementation")
+  keymap_set("n", "<C-k>", vim.lsp.buf.signature_help, "signature_help")
+  keymap_set("n", "gr", vim.lsp.buf.references, "references")
+  keymap_set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, "add workspace folder")
+  keymap_set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, "remove workspace folder")
+  keymap_set('n', '<space>wl', function()
     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-  end, bufopts)
-  vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
-  vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
-  vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
+  end, "list workspace folders")
+  keymap_set('n', '<space>D', vim.lsp.buf.type_definition, "type definition")
+  keymap_set('n', '<space>rn', vim.lsp.buf.rename, "rename")
+  keymap_set('n', '<space>ca', vim.lsp.buf.code_action, "code action")
   if client.server_capabilities.document_formatting then
-    vim.keymap.set({'n', 'v'}, '=', vim.lsp.with(vim.lsp.buf.format, { async = true }), bufopts)
+    keymap_set({'n', 'v'}, '=', vim.lsp.with(vim.lsp.buf.format, { async = true }), "format")
   end
 end
 
