@@ -1,9 +1,6 @@
 require('nvim-autopairs').setup {}
 require('nvim-ts-autotag').setup {}
 
-require('diffview').setup {}
-require('gitsigns').setup {}
-
 require('toggleterm').setup {
   open_mapping = [[<c-t>]],
   direction = 'float',
@@ -71,12 +68,6 @@ require('telescope').setup {
   }
 }
 require('telescope').load_extension('zf-native')
-
-require('indent_blankline').setup {
-  space_char_blankline = " ",
-  show_current_context = true,
-  show_current_context_start = true,
-}
 
 require('fidget').setup {}
 

@@ -36,19 +36,15 @@ return {
     'nvim-lualine/lualine.nvim',
     config = function() require 'config.statusline' end,
   },
-  'lukas-reineke/indent-blankline.nvim',
 
   -- Version Control
-  {'sindrets/diffview.nvim', dependencies = 'nvim-lua/plenary.nvim'},
-  {'lewis6991/gitsigns.nvim', dependencies = 'nvim-lua/plenary.nvim'},
+  'tpope/vim-fugitive',
   {
-    'TimUntersberger/neogit',
-    config = function()
-      require('neogit').setup {
-        integrations = { diffview = true },
-      }
-    end,
+    'tanvirtin/vgit.nvim',
     dependencies = 'nvim-lua/plenary.nvim',
+    config = function ()
+      require('vgit').setup()
+    end
   },
 
   -- Functionality
@@ -71,12 +67,6 @@ return {
     end,
   },
   {
-    'folke/which-key.nvim',
-    config = function()
-      require("which-key").setup {}
-    end
-  },
-  {
     "folke/twilight.nvim",
     config = function()
       require("twilight").setup {}
@@ -88,16 +78,12 @@ return {
       require("zen-mode").setup {}
     end
   },
-  {
-    'norcalli/nvim-colorizer.lua',
-    config = function()
-      require('colorizer').setup()
-    end
-  },
   'gennaro-tedesco/nvim-peekup',
-  'p00f/nvim-ts-rainbow',
   'Shatur/neovim-cmake',
-  {'rcarriga/nvim-dap-ui', dependencies = 'mfussenegger/nvim-dap'},
+  {
+    'rcarriga/nvim-dap-ui',
+    dependencies = 'mfussenegger/nvim-dap'
+  },
   'mfussenegger/nvim-dap-python',
   'ziglang/zig.vim',
 
