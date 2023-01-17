@@ -39,13 +39,6 @@ return {
 
   -- Version Control
   'tpope/vim-fugitive',
-  {
-    'tanvirtin/vgit.nvim',
-    dependencies = 'nvim-lua/plenary.nvim',
-    config = function ()
-      require('vgit').setup()
-    end
-  },
 
   -- Functionality
   {
@@ -89,5 +82,4 @@ return {
 
   -- Navigational plugins
   "akinsho/toggleterm.nvim",
-  "kevinhwang91/rnvimr",
 }
