@@ -31,6 +31,7 @@ return {
     'rose-pine/neovim',
     name = 'rose-pine',
   },
+  'savq/melange-nvim',
 
   {
     'nvim-lualine/lualine.nvim',
