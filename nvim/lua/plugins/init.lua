@@ -73,7 +73,6 @@ return {
     end
   },
   'gennaro-tedesco/nvim-peekup',
-  'Shatur/neovim-cmake',
   {
     'rcarriga/nvim-dap-ui',
     dependencies = 'mfussenegger/nvim-dap'
