@@ -20,9 +20,11 @@ vim.keymap.set('n', '<leader>e', '<cmd>RnvimrToggle<cr>', {desc =  'file explore
 
 vim.keymap.set('n', '<leader>sf', '<cmd>Telescope find_files theme=dropdown<cr>', {desc = 'search files'})
 vim.keymap.set('n', '<leader>sg', '<cmd>Telescope live_grep theme=dropdown<cr>', {desc = 'live grep'})
-vim.keymap.set('n', '<leader>sb', '<cmd>Telescope buffers theme=dropdown<cr>', {desc = 'search buffers'})
+vim.keymap.set('n', '<leader>ss', '<cmd>Telescope grep_string theme=dropdown<cr>', {desc = 'grep string'})
+vim.keymap.set('n', '<leader>sb', '<cmd>Telescope current_buffer_fuzzy_find theme=dropdown<cr>', {desc = 'search current buffer'})
 vim.keymap.set('n', '<leader>sh', '<cmd>Telescope help_tags theme=dropdown<cr>', {desc = 'search help'})
 vim.keymap.set('n', '<leader>sc', '<cmd>Telescope colorscheme theme=dropdown<cr>', {desc = 'search colorscheme'})
+vim.keymap.set('n', '<leader>lb', '<cmd>Telescope buffers theme=dropdown<cr>', {desc = 'list buffers'})
 
 vim.keymap.set('n', '<leader>gs',  '<cmd>Git<cr>', {desc = 'git status'})
 
