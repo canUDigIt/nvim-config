@@ -86,23 +86,26 @@ dap.listeners.after.event_exited['dapui_config'] = function()
   dapui.close{}
 end
 
-dap.adapters.lldb = {
-  type = 'executable',
-  command = '/usr/bin/lldb-vscode',
-  name = 'lldb'
+local port = 13000
+dap.adapters.codelldb = {
+  type = 'server',
+  port = '${port}',
+  executable = {
+    command = vim.fn.stdpath('data') .. '/mason/bin/codelldb',
+    args = {'--port', '${port}'}
+  }
 }
 
 dap.configurations.cpp = {
   {
     name = 'Launch',
-    type = 'lldb',
+    type = 'codelldb',
     request = 'launch',
     program = function()
       return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
     end,
     cwd = '${workspaceFolder}',
     stopOnEntry = false,
-    args = {},
   },
 }
 dap.configurations.c = dap.configurations.cpp
