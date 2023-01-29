@@ -16,8 +16,6 @@ vim.keymap.set('n', '<leader>dlp', set_breakpoint_message, {desc = 'breakpoint m
 vim.keymap.set('n', '<leader>dr', require'dap'.repl.open, {desc = 'reple open'})
 vim.keymap.set('n', '<leader>dR', require'dap'.run_last, {desc = 'run last'})
 
-vim.keymap.set('n', '<leader>e', '<cmd>RnvimrToggle<cr>', {desc =  'file explorer'})
-
 vim.keymap.set('n', '<leader>sf', '<cmd>Telescope find_files theme=dropdown<cr>', {desc = 'search files'})
 vim.keymap.set('n', '<leader>sg', '<cmd>Telescope live_grep theme=dropdown<cr>', {desc = 'live grep'})
 vim.keymap.set('n', '<leader>ss', '<cmd>Telescope grep_string theme=dropdown<cr>', {desc = 'grep string'})
@@ -36,4 +34,25 @@ vim.keymap.set('v', 'hw', require'hop'.hint_words, {desc = 'hop words'})
 vim.keymap.set('v', 'hl', require'hop'.hint_lines, {desc = 'hop lines'})
 vim.keymap.set('v', 'hs', require'hop'.hint_patterns, {desc = 'hop patterns'})
 
--- vim.keymap.set('n', '<c-l>', '<cmd>noh<cr>', {desc = 'no highlight'})
+vim.keymap.set('n', '<c-l>', '<cmd>noh<cr>', {desc = 'no highlight'})
+
+-- some keymaps for luasnip
+local luasnip = require('luasnip')
+vim.keymap.set({ 'i', 's' }, '<C-k>', function()
+  if luasnip.expand_or_locally_jumpable() then
+    luasnip.expand_or_jump()
+  end
+end, { silent = true })
+
+vim.keymap.set({ 'i', 's' }, '<C-j>', function()
+  if luasnip.locally_jumpable(-1) then
+    luasnip.jump(-1)
+  end
+end, { silent = true })
+
+vim.keymap.set('i', '<C-l>', function()
+  if luasnip.choice_active() then
+    luasnip.change_choice(1)
+  end
+end)
+
