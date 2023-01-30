@@ -2,7 +2,7 @@ require('nvim-autopairs').setup {}
 require('nvim-ts-autotag').setup {}
 
 require('nvim-treesitter.configs').setup {
-  ensure_installed = { "lua", "c", "cmake", "cpp", "css", "html", "json", "python", "zig" },
+  ensure_installed = { "c", "cpp", "cmake", "help", "lua", "python", "rust", "typescript", "vim", "zig" },
   highlight = {
     enable = true,
     additional_vim_regex_highlighting = false
