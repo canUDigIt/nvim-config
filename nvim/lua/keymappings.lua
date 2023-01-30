@@ -16,13 +16,21 @@ vim.keymap.set('n', '<leader>dlp', set_breakpoint_message, {desc = 'breakpoint m
 vim.keymap.set('n', '<leader>dr', require'dap'.repl.open, {desc = 'reple open'})
 vim.keymap.set('n', '<leader>dR', require'dap'.run_last, {desc = 'run last'})
 
-vim.keymap.set('n', '<leader>sf', '<cmd>Telescope find_files theme=dropdown<cr>', {desc = 'search files'})
-vim.keymap.set('n', '<leader>sg', '<cmd>Telescope live_grep theme=dropdown<cr>', {desc = 'live grep'})
-vim.keymap.set('n', '<leader>ss', '<cmd>Telescope grep_string theme=dropdown<cr>', {desc = 'grep string'})
-vim.keymap.set('n', '<leader>sb', '<cmd>Telescope current_buffer_fuzzy_find theme=dropdown<cr>', {desc = 'search current buffer'})
-vim.keymap.set('n', '<leader>sh', '<cmd>Telescope help_tags theme=dropdown<cr>', {desc = 'search help'})
-vim.keymap.set('n', '<leader>sc', '<cmd>Telescope colorscheme theme=dropdown<cr>', {desc = 'search colorscheme'})
-vim.keymap.set('n', '<leader>lb', '<cmd>Telescope buffers theme=dropdown<cr>', {desc = 'list buffers'})
+vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
+vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
+vim.keymap.set('n', '<leader>/', function()
+  -- You can pass additional configuration to telescope to change theme, layout, etc.
+  require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
+    winblend = 10,
+    previewer = false,
+  })
+end, { desc = '[/] Fuzzily search in current buffer]' })
+
+vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
+vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
+vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
+vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
+vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 
 vim.keymap.set('n', '<leader>gs',  '<cmd>Git<cr>', {desc = 'git status'})
 

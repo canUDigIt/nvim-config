@@ -1,34 +1,43 @@
-local status_ok, mason_lspconfig = pcall(require, 'mason-lspconfig')
-if not status_ok then
-  print('Mason Lsp config plugin not available!')
-  return
-end
+local servers = {
+  clangd = {
+    init_options = { clangdFileStatus = true },
+  },
+  pyright = {},
+  sumneko_lua = {
+    Lua = {
+      workspace = { checkThirdParty = false, },
+      -- Do not send telemetry data containing a randomized but unique identifier
+      telemetry = { enable = false, },
+    },
+  },
+}
+
+require('neodev').setup()
+
+require('mason').setup{
+  ui = {
+    icons = {
+      package_installed = "✓",
+      package_pending = "➜",
+      package_uninstalled = "✗"
+    }
+  }
+}
+
+local mason_lspconfig = require('mason-lspconfig')
 mason_lspconfig.setup({
-    ensure_installed = { "sumneko_lua", "clangd", "cmake", "cssls", "emmet_ls", "html", "jsonls", "pyright", "zls" }
+    ensure_installed = vim.tbl_keys(servers),
 })
-
-status_ok, lspconfig = pcall(require, 'lspconfig')
-if not status_ok then
-  print('Lsp config plugin not available!')
-  return
-end
-
-require 'lsp.lsp-installer'
 
 local handlers = require('lsp.handlers')
 handlers.setup()
 
-local opts = {
-  on_attach = handlers.on_attach,
-  capabilities = handlers.capabilities,
+mason_lspconfig.setup_handlers{
+  function (server_name)
+    require('lspconfig')[server_name].setup{
+      capabilities = handlers.capabilities,
+      on_attach = handlers.on_attach,
+      settings = servers[server_name],
+    }
+  end
 }
-
-lspconfig['clangd'].setup(vim.tbl_deep_extend('force', require('lsp.settings.clang'), opts))
-lspconfig['cmake'].setup(opts)
-lspconfig['cssls'].setup(opts)
-lspconfig['emmet_ls'].setup(opts)
-lspconfig['html'].setup(opts)
-lspconfig['jsonls'].setup(opts)
-lspconfig['pyright'].setup(opts)
-lspconfig['sumneko_lua'].setup(vim.tbl_deep_extend('force', require('lsp.settings.sumneko_lua'), opts))
-lspconfig['zls'].setup(opts)

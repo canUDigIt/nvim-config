@@ -34,42 +34,47 @@ M.setup = function()
     border = 'rounded',
   })
 
-  local function keymap_set(mode, key, action, description)
-    local opts = { silent = true, desc = description }
-    vim.keymap.set(mode, key, action, opts)
-  end
-
-  keymap_set("n", "[d", vim.diagnostic.goto_prev, "goto prev diagnostic")
-  keymap_set("n", "]d", vim.diagnostic.goto_next, "goto next diagnostic")
-  keymap_set("n", "<space>od", vim.diagnostic.open_float, "open float diagnostic")
-  keymap_set("n", "<space>q", vim.diagnostic.setloclist, "set loclist")
+  vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
+  vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
+  vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
+  vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
 end
 
 M.on_attach = function(client, bufnr)
   vim.b.omnifunc = vim.lsp.omnifunc
 
   -- Mappings.
-  local function keymap_set(mode, key, action, description)
-    local opts = { buffer = bufnr, silent = true, desc = description }
-    vim.keymap.set(mode, key, action, opts)
+  local nmap = function(keys, func, desc)
+    if desc then
+      desc = 'LSP: ' .. desc
+    end
+
+    vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
   end
 
-  keymap_set("n", "gD", vim.lsp.buf.declaration, "declaration")
-  keymap_set("n", "gd", vim.lsp.buf.definition, "definition")
-  keymap_set("n", "K", vim.lsp.buf.hover, "hover")
-  keymap_set("n", "gi", vim.lsp.buf.implementation, "implementation")
-  keymap_set("n", "<C-k>", vim.lsp.buf.signature_help, "signature_help")
-  keymap_set("n", "gr", vim.lsp.buf.references, "references")
-  keymap_set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, "add workspace folder")
-  keymap_set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, "remove workspace folder")
-  keymap_set('n', '<space>wl', function()
+  nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
+  nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
+
+  nmap('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
+  nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
+  nmap('gI', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
+  nmap('<leader>D', vim.lsp.buf.type_definition, 'Type [D]efinition')
+  nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
+  nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
+
+  -- See `:help K` for why this keymap
+  nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
+  nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
+
+  -- Lesser used LSP functionality
+  nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
+  nmap('<leader>wa', vim.lsp.buf.add_workspace_folder, '[W]orkspace [A]dd Folder')
+  nmap('<leader>wr', vim.lsp.buf.remove_workspace_folder, '[W]orkspace [R]emove Folder')
+  nmap('<leader>wl', function()
     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-  end, "list workspace folders")
-  keymap_set('n', '<space>D', vim.lsp.buf.type_definition, "type definition")
-  keymap_set('n', '<space>rn', vim.lsp.buf.rename, "rename")
-  keymap_set('n', '<space>ca', vim.lsp.buf.code_action, "code action")
+  end, '[W]orkspace [L]ist Folders')
   if client.server_capabilities.document_formatting then
-    keymap_set({'n', 'v'}, '=', vim.lsp.with(vim.lsp.buf.format, { async = true }), "format")
+    nmap('=', vim.lsp.with(vim.lsp.buf.format, { async = true }), 'Format current buffer with LSP')
   end
 end
 
@@ -95,11 +100,7 @@ capabilities.textDocument.codeAction = {
   };
 }
 
-local status_ok, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
-if not status_ok then
-  return
-end
-
+local cmp_nvim_lsp = require('cmp_nvim_lsp')
 capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
 
 M.capabilities = capabilities

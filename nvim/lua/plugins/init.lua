@@ -5,6 +5,9 @@ return {
   'williamboman/mason-lspconfig.nvim',
   'onsails/lspkind-nvim',
   'j-hui/fidget.nvim',
+  'folke/neodev.nvim',
+
+  -- Telescope
   {
     'nvim-treesitter/nvim-treesitter',
     dependencies = 'nvim-treesitter/nvim-treesitter-textobjects',
@@ -33,6 +36,7 @@ return {
   },
   'savq/melange-nvim',
 
+  -- Visual
   {
     'nvim-lualine/lualine.nvim',
     config = function() require 'config.statusline' end,
@@ -40,51 +44,7 @@ return {
 
   -- Version Control
   'tpope/vim-fugitive',
-  {
-    'lewis6991/gitsigns.nvim',
-    config = function ()
-      require('gitsigns').setup{
-        on_attach = function (bufnr)
-          local gs = package.loaded.gitsigns
-
-          local function map(mode, l, r, opts)
-            opts = opts or {}
-            opts.buffer = bufnr
-            vim.keymap.set(mode, l, r, opts)
-          end
-
-          -- Navigation
-          map('n', ']c', function()
-            if vim.wo.diff then return ']c' end
-            vim.schedule(function() gs.next_hunk() end)
-            return '<Ignore>'
-          end, {expr=true})
-
-          map('n', '[c', function()
-            if vim.wo.diff then return '[c' end
-            vim.schedule(function() gs.prev_hunk() end)
-            return '<Ignore>'
-          end, {expr=true})
-
-          -- Actions
-          map({'n', 'v'}, '<leader>hs', ':Gitsigns stage_hunk<CR>')
-          map({'n', 'v'}, '<leader>hr', ':Gitsigns reset_hunk<CR>')
-          map('n', '<leader>hS', gs.stage_buffer)
-          map('n', '<leader>hu', gs.undo_stage_hunk)
-          map('n', '<leader>hR', gs.reset_buffer)
-          map('n', '<leader>hp', gs.preview_hunk)
-          map('n', '<leader>hb', function() gs.blame_line{full=true} end)
-          map('n', '<leader>tb', gs.toggle_current_line_blame)
-          map('n', '<leader>hd', gs.diffthis)
-          map('n', '<leader>hD', function() gs.diffthis('~') end)
-          map('n', '<leader>td', gs.toggle_deleted)
-
-          -- Text object
-          map({'o', 'x'}, 'ih', ':<C-U>Gitsigns select_hunk<CR>')
-        end
-      }
-    end,
-  },
+  'tpope/vim-rhubarb',
 
   -- Functionality
   {
@@ -105,18 +65,6 @@ return {
       require 'hop'.setup { keys = 'etovxqpdygfblzhckisuran' }
     end,
   },
-  {
-    "folke/twilight.nvim",
-    config = function()
-      require("twilight").setup {}
-    end
-  },
-  {
-    "folke/zen-mode.nvim",
-    config = function()
-      require("zen-mode").setup {}
-    end
-  },
   'gennaro-tedesco/nvim-peekup',
   {
     'rcarriga/nvim-dap-ui',
@@ -124,7 +72,4 @@ return {
   },
   'mfussenegger/nvim-dap-python',
   'ziglang/zig.vim',
-
-  -- Navigational plugins
-  "akinsho/toggleterm.nvim",
 }

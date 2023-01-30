@@ -3,12 +3,6 @@ return {
     event = 'InsertEnter',
     dependencies = {
       'hrsh7th/cmp-nvim-lsp',
-      'hrsh7th/cmp-buffer',
-      'hrsh7th/cmp-path',
-      'hrsh7th/cmp-nvim-lua',
-      'hrsh7th/cmp-calc',
-      'hrsh7th/cmp-emoji',
-
       'saadparwaiz1/cmp_luasnip',
       'L3MON4D3/LuaSnip',
     },
@@ -37,23 +31,13 @@ return {
             maxwidth = 50,
             menu = ({
               nvim_lsp = "[LSP]",
-              nvim_lua = "[Lua]",
               luasnip = "[LuaSnip]",
-              buffer = "[Buffer]",
-              path = "[Path]",
-              calc = "[Calc]",
-              emoji = "[Emoji]",
             })
           }),
         },
         sources = {
           { name = 'nvim_lsp' },
-          { name = 'nvim_lua' },
           { name = 'luasnip' },
-          { name = 'buffer' },
-          { name = 'path' },
-          { name = 'calc' },
-          { name = 'emoji' },
         },
       }
 

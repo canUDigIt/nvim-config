@@ -1,11 +1,6 @@
 require('nvim-autopairs').setup {}
 require('nvim-ts-autotag').setup {}
 
-require('toggleterm').setup {
-  open_mapping = [[<c-t>]],
-  direction = 'float',
-}
-
 require('nvim-treesitter.configs').setup {
   ensure_installed = { "lua", "c", "cmake", "cpp", "css", "html", "json", "python", "zig" },
   highlight = {
