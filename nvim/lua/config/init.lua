@@ -81,29 +81,11 @@ dap.listeners.after.event_exited['dapui_config'] = function()
   dapui.close{}
 end
 
-local port = 13000
-dap.adapters.codelldb = {
-  type = 'server',
-  port = '${port}',
-  executable = {
-    command = vim.fn.stdpath('data') .. '/mason/bin/codelldb',
-    args = {'--port', '${port}'}
-  }
+dap.adapters.cppdbg = {
+  id = 'cppdbg',
+  type = 'executable',
+  command = vim.fn.stdpath("data") .. "/mason/bin/OpenDebugAD7",
 }
-
-dap.configurations.cpp = {
-  {
-    name = 'Launch',
-    type = 'codelldb',
-    request = 'launch',
-    program = function()
-      return vim.fn.input({'Path to executable: ', vim.fn.getcwd() .. '/', 'file'})
-    end,
-    cwd = '${workspaceFolder}',
-    stopOnEntry = false,
-  },
-}
-dap.configurations.c = dap.configurations.cpp
-dap.configurations.rust = dap.configurations.cpp
+require('dap.ext.vscode').load_launchjs(nil, { cppdbg = {'c', 'cpp', 'rust'} })
 
 require('dap-python').setup('~/.virtualenvs/debugpy/bin/python')
