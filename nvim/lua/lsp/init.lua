@@ -3,7 +3,7 @@ local servers = {
     init_options = { clangdFileStatus = true },
   },
   pyright = {},
-  sumneko_lua = {
+  lua_ls = {
     Lua = {
       workspace = { checkThirdParty = false, },
       -- Do not send telemetry data containing a randomized but unique identifier
