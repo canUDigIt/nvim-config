@@ -1,9 +1,9 @@
 local function set_breakpoint_on_condition ()
-  require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))
+  require'dap'.set_breakpoint(vim.fn.input({'Breakpoint condition: '}))
 end
 
 local function set_breakpoint_message ()
-  require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))
+  require'dap'.set_breakpoint(nil, nil, vim.fn.input({'Log point message: '}))
 end
 
 vim.keymap.set('n', '<leader>dc', require'dap'.continue, {desc = 'continue'})
@@ -32,7 +32,7 @@ vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { de
 vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 
-vim.keymap.set('n', '<leader>gs',  '<cmd>Git<cr>', {desc = 'git status'})
+vim.keymap.set('n', '<leader>gs',  '<cmd>Neogit<cr>', {desc = 'git status'})
 
 vim.keymap.set('n', '<leader>hw', require'hop'.hint_words, {desc = 'hop words'})
 vim.keymap.set('n', '<leader>hl', require'hop'.hint_lines, {desc = 'hop lines'})

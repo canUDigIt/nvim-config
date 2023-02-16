@@ -24,11 +24,8 @@ return {
   -- Colorschemes
   'bluz71/vim-nightfly-guicolors',
   'bluz71/vim-moonfly-colors',
-  'fenetikm/falcon',
   'EdenEast/nightfox.nvim',
-  'kvrohit/substrata.nvim',
   'ellisonleao/gruvbox.nvim',
-  'eemed/sitruuna.vim',
   'folke/tokyonight.nvim',
   {
     'rose-pine/neovim',
@@ -43,8 +40,11 @@ return {
   },
 
   -- Version Control
-  'tpope/vim-fugitive',
-  'tpope/vim-rhubarb',
+  {
+    'TimUntersberger/neogit',
+    config = function () require('neogit').setup() end
+  },
+  'sindrets/diffview.nvim',
 
   -- Functionality
   {
@@ -55,8 +55,10 @@ return {
   },
   'windwp/nvim-autopairs',
   'windwp/nvim-ts-autotag',
-  'tpope/vim-surround',
-  'tpope/vim-unimpaired',
+  {
+    'kylechui/nvim-surround',
+    config = function () require('nvim-surround').setup() end
+  },
   {
     'phaazon/hop.nvim',
     name = 'hop',
@@ -72,4 +74,9 @@ return {
   },
   'mfussenegger/nvim-dap-python',
   'ziglang/zig.vim',
+
+  {
+    'stevearc/oil.nvim',
+    config = function () require('oil').setup() end
+  },
 }
