@@ -1,5 +1,9 @@
-require('nvim-autopairs').setup {}
-require('nvim-ts-autotag').setup {}
+require('mini.ai').setup {}
+require('mini.align').setup {}
+require('mini.comment').setup {}
+require('mini.pairs').setup {}
+require('mini.starter').setup {}
+require('mini.surround').setup {}
 
 require('nvim-treesitter.configs').setup {
   ensure_installed = { "c", "cpp", "cmake", "help", "lua", "python", "rust", "typescript", "vim", "zig" },
@@ -63,8 +67,6 @@ require('telescope').setup {
   }
 }
 require('telescope').load_extension('zf-native')
-
-require('fidget').setup {}
 
 -- debugging
 local dap = require('dap')

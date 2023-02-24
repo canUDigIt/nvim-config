@@ -4,7 +4,7 @@ return {
   'williamboman/mason.nvim',
   'williamboman/mason-lspconfig.nvim',
   'onsails/lspkind-nvim',
-  'j-hui/fidget.nvim',
+  {'j-hui/fidget.nvim', config = true},
   'folke/neodev.nvim',
 
   -- Telescope
@@ -22,16 +22,12 @@ return {
   'natecraddock/telescope-zf-native.nvim',
 
   -- Colorschemes
-  'bluz71/vim-nightfly-guicolors',
-  'bluz71/vim-moonfly-colors',
   'EdenEast/nightfox.nvim',
-  'ellisonleao/gruvbox.nvim',
   'folke/tokyonight.nvim',
   {
     'rose-pine/neovim',
     name = 'rose-pine',
   },
-  'savq/melange-nvim',
 
   -- Visual
   {
@@ -40,32 +36,15 @@ return {
   },
 
   -- Version Control
-  {
-    'TimUntersberger/neogit',
-    config = function () require('neogit').setup() end
-  },
-  'sindrets/diffview.nvim',
+  'tpope/vim-fugitive',
 
   -- Functionality
-  {
-    'numToStr/Comment.nvim',
-    config = function()
-      require('Comment').setup()
-    end,
-  },
-  'windwp/nvim-autopairs',
-  'windwp/nvim-ts-autotag',
-  {
-    'kylechui/nvim-surround',
-    config = function () require('nvim-surround').setup() end
-  },
+  {'akinsho/toggleterm.nvim', version = "*", config = true},
+  { 'echasnovski/mini.nvim', version = false },
   {
     'phaazon/hop.nvim',
     name = 'hop',
-    config = function()
-      -- you can configure Hop the way you like here; see :h hop-config
-      require 'hop'.setup { keys = 'etovxqpdygfblzhckisuran' }
-    end,
+    opts = { keys = 'etovxqpdygfblzhckisuran' },
   },
   'gennaro-tedesco/nvim-peekup',
   {
@@ -74,9 +53,4 @@ return {
   },
   'mfussenegger/nvim-dap-python',
   'ziglang/zig.vim',
-
-  {
-    'stevearc/oil.nvim',
-    config = function () require('oil').setup() end
-  },
 }
