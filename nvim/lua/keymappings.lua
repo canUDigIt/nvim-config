@@ -32,7 +32,19 @@ vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { de
 vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 
-vim.keymap.set('n', '<leader>gs',  '<cmd>Git<cr>', {desc = 'git status'})
+vim.keymap.set('n', '<leader>gs', '<cmd>Git<cr>', {desc = 'git status'})
+vim.keymap.set('n', '<leader>gl', function ()
+  local lazygit = require('toggleterm.terminal').Terminal:new({
+    cmd = "lazygit",
+    dir = "git_dir",
+    direction = "float",
+    float_opts = {
+      border = "double",
+    },
+    hidden = true,
+  })
+  lazygit:toggle()
+end, {desc = 'lazygit'})
 
 vim.keymap.set('n', '<leader>hw', require'hop'.hint_words, {desc = 'hop words'})
 vim.keymap.set('n', '<leader>hl', require'hop'.hint_lines, {desc = 'hop lines'})
