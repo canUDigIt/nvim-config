@@ -39,6 +39,13 @@ return {
   'tpope/vim-fugitive',
 
   -- Functionality
+  {
+    'stevearc/oil.nvim',
+    config = true,
+    dependencies = {
+      'nvim-tree/nvim-web-devicons',
+    }
+  },
   {'akinsho/toggleterm.nvim', version = "*", config = true},
   { 'echasnovski/mini.nvim', version = false },
   {
