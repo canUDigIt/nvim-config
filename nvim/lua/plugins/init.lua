@@ -46,7 +46,11 @@ return {
       'nvim-tree/nvim-web-devicons',
     }
   },
-  {'akinsho/toggleterm.nvim', version = "*", config = true},
+  {
+    'akinsho/toggleterm.nvim',
+    version = "*",
+    opts = { open_mapping = '<space>;' },
+  },
   { 'echasnovski/mini.nvim', version = false },
   {
     'phaazon/hop.nvim',
