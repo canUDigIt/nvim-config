@@ -26,6 +26,7 @@ vim.keymap.set('n', '<leader>/', function()
   })
 end, { desc = '[/] Fuzzily search in current buffer]' })
 
+vim.keymap.set('n', '<leader>fb', require('telescope').extensions.file_browser.file_browser, { desc = '[F]ile [B]rowser' })
 vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
 vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
 vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
@@ -55,6 +56,10 @@ vim.keymap.set('v', 'hl', require'hop'.hint_lines, {desc = 'hop lines'})
 vim.keymap.set('v', 'hs', require'hop'.hint_patterns, {desc = 'hop patterns'})
 
 vim.keymap.set('n', '<c-l>', '<cmd>noh<cr>', {desc = 'no highlight'})
+
+vim.keymap.set({ 'n', 'x' }, '<leader>sr', function ()
+  require('ssr').open()
+end)
 
 -- some keymaps for luasnip
 local luasnip = require('luasnip')

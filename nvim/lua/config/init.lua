@@ -68,6 +68,7 @@ require('telescope').setup {
   }
 }
 require('telescope').load_extension('zf-native')
+require('telescope').load_extension('lazy')
 
 -- debugging
 local dap = require('dap')

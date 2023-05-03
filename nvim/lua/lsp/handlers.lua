@@ -42,6 +42,7 @@ end
 
 M.on_attach = function(client, bufnr)
   vim.b.omnifunc = vim.lsp.omnifunc
+  require("nvim-navbuddy").attach(client, bufnr)
 
   -- Mappings.
   local nmap = function(keys, func, desc)

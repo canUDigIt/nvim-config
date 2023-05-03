@@ -2,7 +2,7 @@ local servers = {
   clangd = {
     init_options = { clangdFileStatus = true },
   },
-  pyright = {},
+  pylsp = {},
   lua_ls = {
     Lua = {
       workspace = { checkThirdParty = false, },
