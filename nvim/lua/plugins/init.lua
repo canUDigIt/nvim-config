@@ -19,7 +19,12 @@ return {
       'nvim-lua/popup.nvim',
       'nvim-lua/plenary.nvim',
       'tsakirist/telescope-lazy.nvim',
-    }
+    },
+    opts = {
+      defaults = {
+        file_ignore_patterns = { 'debug/', 'release/', 'build/', 'node_modules/' }
+      }
+    },
   },
   'natecraddock/telescope-zf-native.nvim',
   {

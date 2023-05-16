@@ -7,7 +7,7 @@ require('mini.starter').setup {}
 require('mini.surround').setup {}
 
 require('nvim-treesitter.configs').setup {
-  ensure_installed = { "c", "cpp", "cmake", "help", "lua", "python", "rust", "typescript", "vim", "zig" },
+  ensure_installed = { "c", "cpp", "cmake", "lua", "python", "rust", "typescript", "vim", "zig" },
   highlight = {
     enable = true,
     additional_vim_regex_highlighting = false
@@ -57,16 +57,6 @@ require('nvim-treesitter.configs').setup {
   },
 }
 
-require('telescope').setup {
-  defaults = {
-    layout_config = {
-      vertical = { width = 0.5 }
-    },
-    file_ignore_patterns = { 'debug', 'release', 'build', 'node_modules' }
-  },
-  extensions = {
-  }
-}
 require('telescope').load_extension('zf-native')
 require('telescope').load_extension('lazy')
 
