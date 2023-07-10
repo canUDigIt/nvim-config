@@ -61,14 +61,6 @@ vim.keymap.set('n', '<leader>gl', function ()
   lazygit:toggle()
 end, {desc = 'lazygit'})
 
-vim.keymap.set('n', '<leader>hw', require'hop'.hint_words, {desc = 'hop words'})
-vim.keymap.set('n', '<leader>hl', require'hop'.hint_lines, {desc = 'hop lines'})
-vim.keymap.set('n', '<leader>hs', require'hop'.hint_patterns, {desc = 'hop patterns'})
-
-vim.keymap.set('v', 'hw', require'hop'.hint_words, {desc = 'hop words'})
-vim.keymap.set('v', 'hl', require'hop'.hint_lines, {desc = 'hop lines'})
-vim.keymap.set('v', 'hs', require'hop'.hint_patterns, {desc = 'hop patterns'})
-
 vim.keymap.set('n', '<c-l>', '<cmd>noh<cr>', {desc = 'no highlight'})
 
 vim.keymap.set({ 'n', 'x' }, '<leader>sr', function ()

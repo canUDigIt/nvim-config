@@ -69,6 +69,16 @@ return {
     }
   },
   {
+    "kylechui/nvim-surround",
+    version = "*", -- Use for stability; omit to use `main` branch for the latest features
+    event = "VeryLazy",
+    config = function()
+        require("nvim-surround").setup({
+            -- Configuration here, or leave empty to use defaults
+        })
+    end
+  },
+  {
     "SmiteshP/nvim-navbuddy",
     dependencies = {
       "SmiteshP/nvim-navic",
@@ -82,11 +92,6 @@ return {
     opts = { open_mapping = '<c-t>' },
   },
   { 'echasnovski/mini.nvim', version = false },
-  {
-    'phaazon/hop.nvim',
-    name = 'hop',
-    opts = { keys = 'etovxqpdygfblzhckisuran' },
-  },
   'gennaro-tedesco/nvim-peekup',
   {
     'rcarriga/nvim-dap-ui',
