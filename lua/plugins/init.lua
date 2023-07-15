@@ -121,6 +121,7 @@ return {
     'rcarriga/nvim-dap-ui',
     dependencies = 'mfussenegger/nvim-dap'
   },
+  'ldelossa/nvim-dap-projects',
   'mfussenegger/nvim-dap-python',
   'ziglang/zig.vim',
 }
