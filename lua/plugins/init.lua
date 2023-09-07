@@ -95,4 +95,6 @@ return {
   'ldelossa/nvim-dap-projects',
   'mfussenegger/nvim-dap-python',
   'ziglang/zig.vim',
+  'Civitasv/cmake-tools.nvim',
+  'p00f/clangd_extensions.nvim'
 }
