@@ -86,6 +86,12 @@ return {
     version = "*",
     opts = { open_mapping = '<c-t>' },
   },
+  {
+    'stevearc/oil.nvim',
+    opts = {},
+    -- Optional dependencies
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+  },
   { 'echasnovski/mini.nvim', version = false },
   'gennaro-tedesco/nvim-peekup',
   {

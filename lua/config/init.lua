@@ -4,7 +4,8 @@ require('mini.bracketed').setup {}
 require('mini.comment').setup {}
 require('mini.pairs').setup {}
 require('mini.starter').setup {}
-require('mini.files').setup {}
+
+require('oil').setup {}
 
 require('nvim-treesitter.configs').setup {
   ensure_installed = { "c", "cpp", "cmake", "lua", "python", "rust", "typescript", "vim", "zig" },
