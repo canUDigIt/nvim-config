@@ -60,6 +60,7 @@ require('nvim-treesitter.configs').setup {
 
 require('telescope').load_extension('zf-native')
 require('telescope').load_extension('lazy')
+require('telescope').load_extension('noice')
 
 -- noice
 

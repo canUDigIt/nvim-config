@@ -100,8 +100,8 @@ capabilities.textDocument.codeAction = {
   };
 }
 
-local cmp_nvim_lsp = require('cmp_nvim_lsp')
-capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
+capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+
 
 M.capabilities = capabilities
 
