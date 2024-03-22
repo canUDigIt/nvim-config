@@ -64,6 +64,7 @@ return {
       'mfussenegger/nvim-dap',
       'ldelossa/nvim-dap-projects',
       'mfussenegger/nvim-dap-python',
+      'nvim-neotest/nvim-nio',
     }
   },
 }

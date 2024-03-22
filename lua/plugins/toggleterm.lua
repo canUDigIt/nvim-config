@@ -2,7 +2,8 @@ return {
   {
     'akinsho/toggleterm.nvim',
     version = "*",
-    config = function ()
+    config = function (_, opts)
+      require('toggleterm').setup(opts);
       vim.keymap.set('n', '<leader>gl', function ()
         local lazygit = require('toggleterm.terminal').Terminal:new({
           cmd = "lazygit",
@@ -27,6 +28,6 @@ return {
       -- if you only want these mappings for toggle term use term://*toggleterm#* instead
       vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
     end,
-    opts = { open_mapping = '<c-t>' },
+    opts = { open_mapping = [[<c-\>]] },
   },
 }
