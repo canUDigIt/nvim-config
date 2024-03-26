@@ -4,25 +4,13 @@ return {
     version = "*",
     config = function (_, opts)
       require('toggleterm').setup(opts);
-      vim.keymap.set('n', '<leader>gl', function ()
-        local lazygit = require('toggleterm.terminal').Terminal:new({
-          cmd = "lazygit",
-          dir = "git_dir",
-          direction = "float",
-          float_opts = {
-            border = "double",
-          },
-          hidden = true,
-        })
-        lazygit:toggle()
-      end, {desc = 'lazygit'})
 
       function _G.set_terminal_keymaps()
-        local opts = {buffer = 0}
-        vim.keymap.set('t', '<C-h>', [[<Cmd>wincmd h<CR>]], opts)
-        vim.keymap.set('t', '<C-j>', [[<Cmd>wincmd j<CR>]], opts)
-        vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]], opts)
-        vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]], opts)
+        local map_opts = {buffer = 0}
+        vim.keymap.set('t', '<C-h>', [[<Cmd>wincmd h<CR>]], map_opts)
+        vim.keymap.set('t', '<C-j>', [[<Cmd>wincmd j<CR>]], map_opts)
+        vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]], map_opts)
+        vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]], map_opts)
       end
 
       -- if you only want these mappings for toggle term use term://*toggleterm#* instead
