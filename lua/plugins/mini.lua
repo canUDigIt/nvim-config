@@ -15,11 +15,6 @@ return {
     version = false
   },
   {
-    'echasnovski/mini.comment',
-    config = true,
-    version = false
-  },
-  {
     'echasnovski/mini.pairs',
     config = true,
     version = false
