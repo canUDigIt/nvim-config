@@ -45,10 +45,10 @@ vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.s
   border = 'rounded',
 })
 
-vim.keymap.set('n', '<space>e', vim.diagnostic.open_float)
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
-vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist)
+vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, { desc = 'Open Diagnostics' })
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Previous Diagnostic' })
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Next Diagnostic' })
+vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, { desc = 'Diagnostics in Location List' })
 
 -- Use LspAttach autocommand to only map the following keys
 -- after the language server attaches to the current buffer
@@ -61,23 +61,28 @@ vim.api.nvim_create_autocmd('LspAttach', {
     -- Buffer local mappings.
     -- See `:help vim.lsp.*` for documentation on any of the below functions
     local opts = { buffer = ev.buf }
-    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
-    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
-    vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
-    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
-    vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
-    vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, opts)
-    vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, opts)
+    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, vim.tbl_extend('keep', opts, { desc = '[LSP] Declaration' }))
+    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, vim.tbl_extend('keep', opts, { desc = '[LSP] Definition' }))
+    vim.keymap.set('n', 'K', vim.lsp.buf.hover, vim.tbl_extend('keep', opts, { desc = '[LSP] Hover' }))
+    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, vim.tbl_extend('keep', opts, { desc = '[LSP] Implementation' }))
+    vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help,
+      vim.tbl_extend('keep', opts, { desc = '[LSP] Signature Help' }))
+    vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder,
+      vim.tbl_extend('keep', opts, { desc = '[LSP] Add Workspace Folder' }))
+    vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder,
+      vim.tbl_extend('keep', opts, { desc = '[LSP] Remove Workspace Folder' }))
     vim.keymap.set('n', '<space>wl', function()
       print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-    end, opts)
-    vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, opts)
-    vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, opts)
-    vim.keymap.set({ 'n', 'v' }, '<space>ca', vim.lsp.buf.code_action, opts)
-    vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
-    vim.keymap.set('n', '<space>f', function()
+    end, vim.tbl_extend('keep', opts, { desc = '[LSP] List Workspace Folders' }))
+    vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition,
+      vim.tbl_extend('keep', opts, { desc = '[LSP] Type Definition' }))
+    vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, vim.tbl_extend('keep', opts, { desc = '[LSP] Rename' }))
+    vim.keymap.set({ 'n', 'v' }, '<space>ca', vim.lsp.buf.code_action,
+      vim.tbl_extend('keep', opts, { desc = '[LSP] Code Action' }))
+    vim.keymap.set('n', 'gr', vim.lsp.buf.references, vim.tbl_extend('keep', opts, { desc = '[LSP] References' }))
+    vim.keymap.set('n', '<space>=', function()
       vim.lsp.buf.format { async = true }
-    end, opts)
+    end, vim.tbl_extend('keep', opts, { desc = '[LSP] Format' }))
   end,
 })
 
@@ -104,10 +109,10 @@ return {
   },
   {
     'williamboman/mason-lspconfig.nvim',
-    config = function ()
-      require("mason-lspconfig").setup_handlers{
-        function (server_name)
-          require('lspconfig')[server_name].setup{
+    config = function()
+      require("mason-lspconfig").setup_handlers {
+        function(server_name)
+          require('lspconfig')[server_name].setup {
             capabilities = capabilities,
             settings = servers[server_name],
           }

@@ -5,7 +5,7 @@ return {
     config = function ()
       vim.keymap.set({ 'n', 'x' }, '<leader>sr', function ()
         require('ssr').open()
-      end)
+      end, {desc = 'Search and Replace'})
     end,
     opts = {
       border = "rounded",
