@@ -1,9 +1,10 @@
 return {
   {
     'rcarriga/nvim-dap-ui',
-    config = function()
+    config = function(_, opts)
       local dap = require('dap')
       local dapui = require('dapui')
+      dapui.setup(opts)
 
       dap.listeners.after.event_initialized['dapui_config'] = function()
         dapui.open {}
@@ -26,12 +27,20 @@ return {
           name = 'Launch',
           type = 'lldb',
           request = 'launch',
-          program = function()
-            return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
-          end,
+          program = '${command:pickFile}',
           cwd = '${workspaceFolder}',
           stopOnEntry = false,
-          args = {},
+        },
+      }
+
+      dap.configurations.zig = {
+        {
+          name = 'Launch',
+          type = 'lldb',
+          request = 'launch',
+          program = '${command:pickFile}',
+          cwd = '${workspaceFolder}',
+          stopOnEntry = false,
         },
       }
 
