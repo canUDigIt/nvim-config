@@ -4,7 +4,6 @@ return {
     config = function ()
       require('telescope').load_extension('zf-native')
       require('telescope').load_extension('lazy')
-      require('telescope').load_extension('noice')
     end,
     dependencies = {
       'nvim-lua/popup.nvim',
