@@ -4,6 +4,7 @@ local themes = require('telescope.themes')
 local wk = require('which-key')
 wk.add({
   { "<c-l>", "<cmd>noh<cr>", desc = "No Highlight" },
+  { "<leader>fo", "<cmd>ClangdSwitchSourceHeader<cr>", desc = "Clangd switch header" },
 })
 
 -- Searching keys
