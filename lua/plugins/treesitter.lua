@@ -1,19 +1,8 @@
 return {
   {
     'nvim-treesitter/nvim-treesitter',
-    config = function ()
-      require('nvim-treesitter.configs').setup {
+    opts = {
         ensure_installed = { "c", "cpp", "cmake", "lua", "python", "rust", "typescript", "vim", "zig" },
-        highlight = {
-          enable = true,
-          additional_vim_regex_highlighting = false
-        },
-        autotag = {
-          enable = true,
-        },
-        rainbow = {
-          enable = true,
-        },
         textobjects = {
           select = {
             enable    = true,
@@ -51,8 +40,7 @@ return {
             },
           },
         },
-      }
-    end,
+      },
     dependencies = 'nvim-treesitter/nvim-treesitter-textobjects',
     build = ':TSUpdate',
   },
