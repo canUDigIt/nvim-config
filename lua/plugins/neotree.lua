@@ -2,9 +2,10 @@ return {
   {
       "nvim-neo-tree/neo-tree.nvim",
       branch = "v3.x",
-      config = function ()
-        vim.keymap.set('n', '<leader>fb', '<CMD>Neotree<CR>', { desc = '[F]ile [B]rowser' })
-      end,
+      opts = {},
+      keys = {
+        { '<leader>ft', '<CMD>Neotree<CR>', { desc = '[F]ile [T]ree' } }
+      },
       dependencies = {
         "nvim-lua/plenary.nvim",
         "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended

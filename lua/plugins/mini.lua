@@ -1,27 +1,44 @@
 return {
   {
     'echasnovski/mini.ai',
-    config = true,
+    opts = {},
     version = false
   },
   {
     'echasnovski/mini.align',
-    config = true,
+    opts = {},
     version = false
   },
   {
     'echasnovski/mini.bracketed',
-    config = true,
+    opts = {},
     version = false
   },
   {
     'echasnovski/mini.pairs',
-    config = true,
+    opts = {},
     version = false
   },
   {
     'echasnovski/mini.starter',
-    config = true,
+    opts = {},
+    version = false
+  },
+  {
+    'echasnovski/mini.files',
+    opts = {
+      options = {
+        permanent_delete = false,
+      }
+    },
+    keys = {
+      { "<leader>fb", function ()
+        MiniFiles.open()
+      end, desc = "Mini Files" }
+    },
+    dependencies = {
+      { 'echasnovski/mini.icons', version = false },
+    },
     version = false
   },
 }
