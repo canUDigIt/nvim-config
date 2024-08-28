@@ -10,6 +10,7 @@ local servers = {
       telemetry = { enable = false, },
     },
   },
+  zls = {},
 }
 
 local config = {
