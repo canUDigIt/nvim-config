@@ -15,12 +15,22 @@ return {
     version = false
   },
   {
+    'echasnovski/mini.extra',
+    opts = {},
+    version = false
+  },
+  {
     'echasnovski/mini.pairs',
     opts = {},
     version = false
   },
   {
     'echasnovski/mini.starter',
+    opts = {},
+    version = false
+  },
+  {
+    'echasnovski/mini.pick',
     opts = {},
     version = false
   },
