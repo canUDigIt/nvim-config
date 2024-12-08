@@ -30,6 +30,11 @@ return {
     version = false
   },
   {
+    'echasnovski/mini.statusline',
+    opts = {},
+    version = false
+  },
+  {
     'echasnovski/mini.pick',
     opts = {},
     version = false
