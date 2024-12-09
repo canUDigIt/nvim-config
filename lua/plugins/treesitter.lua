@@ -3,6 +3,9 @@ return {
     'nvim-treesitter/nvim-treesitter',
     opts = {
         ensure_installed = { "c", "cpp", "cmake", "lua", "markdown", "markdown_inline", "odin", "python", "rust", "typescript", "vim", "zig" },
+        highlight ={
+          enable = true,
+        },
         textobjects = {
           select = {
             enable    = true,
