@@ -16,6 +16,6 @@ wk.add({
 -- Version control
 wk.add({
   { "<leader>g", group = "Git" },
-  { "<leader>gs", "<cmd>Neogit<cr>", desc = "Git Status" },
+  { "<leader>gs", "<cmd>Git<cr>", desc = "Git Status" },
   { "<leader>h", group = "Hunk" },
 })
