@@ -20,17 +20,28 @@ return {
     version = false
   },
   {
+    'echasnovski/mini.files',
+    opts = {
+      options = {
+        permanent_delete = false,
+      }
+    },
+    config = function(opts)
+      require('mini.files').setup(opts)
+      vim.keymap.set('n', '<leader>fb', MiniFiles.open, { desc = 'Open Mini file browser' })
+    end,
+    dependencies = {
+      { 'echasnovski/mini.icons', version = false },
+    },
+    version = false
+  },
+  {
+    'echasnovski/mini.operators',
+    config = true,
+    version = false
+  },
+  {
     'echasnovski/mini.pairs',
-    config = true,
-    version = false
-  },
-  {
-    'echasnovski/mini.starter',
-    config = true,
-    version = false
-  },
-  {
-    'echasnovski/mini.statusline',
     config = true,
     version = false
   },
@@ -48,19 +59,18 @@ return {
     end
   },
   {
-    'echasnovski/mini.files',
-    opts = {
-      options = {
-        permanent_delete = false,
-      }
-    },
-    config = function(opts)
-      require('mini.files').setup(opts)
-      vim.keymap.set('n', '<leader>fb', MiniFiles.open, { desc = 'Open Mini file browser' })
-    end,
-    dependencies = {
-      { 'echasnovski/mini.icons', version = false },
-    },
+    'echasnovski/mini.starter',
+    config = true,
+    version = false
+  },
+  {
+    'echasnovski/mini.statusline',
+    config = true,
+    version = false
+  },
+  {
+    'echasnovski/mini.surround',
+    config = true,
     version = false
   },
 }
