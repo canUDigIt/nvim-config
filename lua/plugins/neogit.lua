@@ -3,7 +3,7 @@ return {
   opts = {
     integrations = {
       diffview = true,
-      mini_pick = true,
+      fzf_lua = true,
     }
   },
   config = function(opts)
@@ -13,5 +13,6 @@ return {
   dependencies = {
     "nvim-lua/plenary.nvim",
     "sindrets/diffview.nvim",
+    "ibhagwan/fzf-lua",
   }
 }
