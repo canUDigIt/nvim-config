@@ -2,9 +2,8 @@ return {
   "ibhagwan/fzf-lua",
   dependencies = { "echasnovski/mini.icons" },
   version = false,
-  opts = {},
   config = function(opts)
-    require('fzf-lua').setup(opts)
+    require('fzf-lua').setup{ "default" }
     vim.keymap.set('n', '<leader>/', '<cmd>FzfLua lines<cr>', { desc = '[/] Fuzzily search in current buffer' })
     vim.keymap.set('n', '<leader><leader>', '<cmd>FzfLua buffers<cr>', { desc = '[ ] Find existing buffers' })
     vim.keymap.set('n', '<leader>sc', '<cmd>FzfLua colorschemes<cr>', { desc = '[S]earch [C]olorschemes' })
