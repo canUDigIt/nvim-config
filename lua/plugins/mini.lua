@@ -70,7 +70,10 @@ return {
   },
   {
     'echasnovski/mini.files',
-    config = true,
+    config = function()
+      require('mini.files').setup()
+      vim.keymap.set('n', '-', ':lua MiniFiles.open()<cr>', { desc = 'File Browser' } )
+    end,
     version = false
   },
   {
