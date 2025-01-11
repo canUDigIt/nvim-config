@@ -19,7 +19,7 @@ return {
       dap.adapters.lldb = {
         name = 'lldb',
         type = 'executable',
-        command = '/usr/bin/lldb-vscode',
+        command = '/usr/bin/lldb-dap',
       }
 
       dap.configurations.cpp = {
@@ -33,19 +33,10 @@ return {
         },
       }
 
-      dap.configurations.zig = {
-        {
-          name = 'Launch',
-          type = 'lldb',
-          request = 'launch',
-          program = '${command:pickFile}',
-          cwd = '${workspaceFolder}',
-          stopOnEntry = false,
-        },
-      }
-
       dap.configurations.c = dap.configurations.cpp
+      dap.configurations.odin = dap.configurations.cpp
       dap.configurations.rust = dap.configurations.cpp
+      dap.configurations.zig = dap.configurations.cpp
 
       require('dap-python').setup('~/.virtualenvs/debugpy/bin/python')
       require('nvim-dap-projects').search_project_config()
