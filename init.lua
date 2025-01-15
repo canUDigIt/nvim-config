@@ -16,3 +16,17 @@ require('lazy').setup('plugins')
 
 require('options')
 require('keymaps')
+
+vim.lsp.config('*', {
+  capabilities = {
+    textDocument = {
+      semanticTokens = {
+        multilineTokenSupport = true,
+      }
+    }
+  },
+  root_markers = { '.git' },
+})
+
+vim.lsp.enable('clangd')
+vim.lsp.enable('luals')
