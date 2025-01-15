@@ -1,6 +1,17 @@
 return {
   cmd = { 'ols' },
-  root_markers = { 'ols.json', '%.odin' },
+  root_dir = function (cb)
+    local root = vim.fs.root(0, { 'ols.json', '.git' })
+    if root == nil then
+      root = vim.fs.root(0, function(name, _)
+        return vim.endswith(name, '.odin')
+      end)
+    end
+    if root == nil then
+      root = '.'
+    end
+    cb(root)
+  end,
   filetypes = { 'odin' },
   settings = {
     enable_format = true,
