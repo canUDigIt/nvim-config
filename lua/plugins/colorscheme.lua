@@ -20,9 +20,6 @@ return {
   },
   {
     "mcchrish/zenbones.nvim",
-    config = function ()
-      vim.cmd("colorscheme zenbones")
-    end,
     dependencies = "rktjmp/lush.nvim"
   },
 }
