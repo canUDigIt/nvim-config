@@ -26,7 +26,7 @@ return {
     { "<leader>gl", function() Snacks.lazygit.log() end, desc = "Lazygit Log (cwd)" },
     { "<leader>un", function() Snacks.notifier.hide() end, desc = "Dismiss All Notifications" },
     { "<leader>n", function() Snacks.notifier.show_history() end, desc = "Show Notification History" },
-    { "<c-/>", function() Snacks.terminal() end, desc = "Toggle Terminal" },
+    { "<leader>\\", function() Snacks.terminal() end, desc = "Toggle Terminal" },
 
     { "<leader>:", function() Snacks.picker.command_history() end, desc = "Command History" },
     { "<leader><space>", function() Snacks.picker.files() end, desc = "Find Files" },
