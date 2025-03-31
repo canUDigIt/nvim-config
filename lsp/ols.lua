@@ -1,9 +1,9 @@
 return {
   cmd = { 'ols' },
-  root_dir = function (cb)
-    local root = vim.fs.root(0, { 'ols.json', '.git' })
+  root_dir = function (bufnr, cb)
+    local root = vim.fs.root(bufnr, { 'ols.json', '.git' })
     if root == nil then
-      root = vim.fs.root(0, function(name, _)
+      root = vim.fs.root(bufnr, function(name, _)
         return vim.endswith(name, '.odin')
       end)
     end
