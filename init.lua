@@ -31,5 +31,6 @@ vim.lsp.config('*', {
 vim.lsp.enable('clangd')
 vim.lsp.enable('luals')
 vim.lsp.enable('ols')
+vim.lsp.enable('pyright')
 
 vim.cmd("colorscheme zenwritten")
