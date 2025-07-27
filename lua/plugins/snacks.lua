@@ -29,12 +29,10 @@ return {
     { "<leader>\\", function() Snacks.terminal() end, desc = "Toggle Terminal" },
 
     { "<leader>:", function() Snacks.picker.command_history() end, desc = "Command History" },
-    { "<leader><space>", function() Snacks.picker.files() end, desc = "Find Files" },
 
-    { "<leader>fb", function() Snacks.picker.buffers() end, desc = "Buffers" },
-    { "<leader>fc", function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, desc = "Find Config File" },
-    { "<leader>ff", function() Snacks.picker.files() end, desc = "Find Files" },
-    { "<leader>fr", function() Snacks.picker.recent() end, desc = "Recent" },
+    { "<leader>b", function() Snacks.picker.buffers() end, desc = "Buffers" },
+    { "<leader>e", function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, desc = "Edit Config File" },
+    { "<leader>f", function() Snacks.picker.files() end, desc = "Find Files" },
 
     { "<leader>sb", function() Snacks.picker.lines() end, desc = "Buffer Lines" },
     { "<leader>sB", function() Snacks.picker.grep_buffers() end, desc = "Grep Open Buffers" },
@@ -43,8 +41,7 @@ return {
 
     { '<leader>s"', function() Snacks.picker.registers() end, desc = "Registers" },
     { "<leader>sa", function() Snacks.picker.autocmds() end, desc = "Autocmds" },
-    { "<leader>sc", function() Snacks.picker.command_history() end, desc = "Command History" },
-    { "<leader>sC", function() Snacks.picker.commands() end, desc = "Commands" },
+    { "<leader>sc", function() Snacks.picker.commands() end, desc = "Commands" },
     { "<leader>sd", function() Snacks.picker.diagnostics() end, desc = "Diagnostics" },
     { "<leader>sh", function() Snacks.picker.help() end, desc = "Help Pages" },
     { "<leader>sH", function() Snacks.picker.highlights() end, desc = "Highlights" },
