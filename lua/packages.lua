@@ -97,6 +97,7 @@ require('mini.pairs').setup()
 require('mini.starter').setup()
 require('mini.statusline').setup()
 require('mini.surround').setup()
+require('mini.trailspace').setup()
 
 require('nvim-treesitter.configs').setup {
   ensure_installed = { "c", "cpp", "cmake", "lua", "markdown", "markdown_inline", "odin", "python", "rust", "typescript", "vim", "zig" },
