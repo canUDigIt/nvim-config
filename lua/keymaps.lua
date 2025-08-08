@@ -14,6 +14,9 @@ vim.keymap.set('n', '<leader>f', function () Snacks.picker.files() end, { desc =
 vim.keymap.set('n', '<leader>b', function () Snacks.picker.buffers() end, { desc = 'Find buffers' } )
 vim.keymap.set('n', '<leader>h', function () Snacks.picker.help() end, { desc = 'Find help' } )
 
+vim.keymap.set('n', '<leader>gs', ':Neogit<cr>', { desc = 'Neogit' } )
+vim.keymap.set('n', '<leader>gl', function () Snacks.lazygit() end, { desc = 'Lazygit' } )
+
 vim.keymap.set('n', '<leader>sb', function() Snacks.picker.lines() end, { desc = 'Buffer Lines' } )
 vim.keymap.set('n', '<leader>sB', function() Snacks.picker.grep_buffers() end, { desc = 'Grep Open Buffers' } )
 vim.keymap.set('n', '<leader>sg', function() Snacks.picker.grep() end, { desc = 'Grep' } )
