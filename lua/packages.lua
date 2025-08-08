@@ -9,9 +9,19 @@ vim.pack.add({
   { src = 'https://github.com/mason-org/mason.nvim' },
   { src = 'https://github.com/greggh/claude-code.nvim' },
   { src = 'https://github.com/nvim-lua/plenary.nvim' },
+  { src = 'https://github.com/folke/snacks.nvim' },
+  { src = 'https://github.com/Saghen/blink.cmp' },
+  { src = 'https://github.com/NeogitOrg/neogit' },
 })
 
 -- Setup plugins
+require('blink.cmp').setup({
+  snippets = { preset = 'mini_snippets' },
+  sources = {
+    default = { 'lsp', 'path', 'snippets', 'buffer' },
+  },
+})
+
 require('mini.extra').setup()
 
 local gen_ai_spec = require('mini.extra').gen_ai_spec
@@ -82,10 +92,8 @@ require('mini.operators').setup({
 })
 
 require('mini.snippets').setup()
-require('mini.completion').setup()
 
 require('mini.pairs').setup()
-require('mini.pick').setup()
 require('mini.starter').setup()
 require('mini.statusline').setup()
 require('mini.surround').setup()
@@ -106,4 +114,28 @@ require('claude-code').setup({
       terminal = '<C-;>',
     },
   },
+})
+
+require('snacks').setup({
+  bigfile = { enabled = false },
+  dashboard = { enabled = false },
+  explorer = { enabled = false },
+  indent = { enabled = false },
+  input = { enabled = false },
+  lazygit = { enabled = true },
+  notifier = {
+    enabled = false,
+    timeout = 3000,
+  },
+  picker = { enabled = true },
+  quickfile = { enabled = false },
+  scope = { enabled = false },
+  scroll = { enabled = false },
+  statuscolumn = { enabled = false },
+  words = { enabled = false },
+  styles = {
+    notification = {
+      -- wo = { wrap = true } -- Wrap notifications
+    }
+  }
 })

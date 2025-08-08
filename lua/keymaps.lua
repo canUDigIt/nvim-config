@@ -10,9 +10,14 @@ vim.keymap.set({'n', 'x', 'o'}, '<leader>sj', function() require("flash").jump()
 vim.keymap.set({'n', 'x', 'o'}, '<leader>sJ', function() require("flash").treesitter() end, { desc = 'Flash treesitter' })
 
 vim.keymap.set('n', '-', ':lua MiniFiles.open()<cr>', { desc = 'File Browser' } )
-vim.keymap.set('n', '<leader>f', ':Pick files<cr>', { desc = 'Pick files' } )
-vim.keymap.set('n', '<leader>b', ':Pick buffers<cr>', { desc = 'Pick buffers' } )
-vim.keymap.set('n', '<leader>h', ':Pick help<cr>', { desc = 'Pick help' } )
+vim.keymap.set('n', '<leader>f', function () Snacks.picker.files() end, { desc = 'Find files' } )
+vim.keymap.set('n', '<leader>b', function () Snacks.picker.buffers() end, { desc = 'Find buffers' } )
+vim.keymap.set('n', '<leader>h', function () Snacks.picker.help() end, { desc = 'Find help' } )
+
+vim.keymap.set('n', '<leader>sb', function() Snacks.picker.lines() end, { desc = 'Buffer Lines' } )
+vim.keymap.set('n', '<leader>sB', function() Snacks.picker.grep_buffers() end, { desc = 'Grep Open Buffers' } )
+vim.keymap.set('n', '<leader>sg', function() Snacks.picker.grep() end, { desc = 'Grep' } )
+vim.keymap.set({'n', 'x'}, '<leader>sw', function() Snacks.picker.grep_word() end, { desc = 'Visual selection or word' })
 
 function _G.set_terminal_keymaps()
   local map_opts = {buffer = 0}
