@@ -22,11 +22,14 @@ else
   vim.keymap.set({'n', 'x', 'o'}, '<leader>sJ', function() require("flash").treesitter() end, { desc = 'Flash treesitter' })
 
   vim.keymap.set('n', '-', ':lua MiniFiles.open()<cr>', { desc = 'File Browser' } )
+  local rhs = '<Cmd>lua MiniGit.show_at_cursor()<CR>'
+  vim.keymap.set({ 'n', 'x' }, '<Leader>gs', rhs, { desc = 'Show at cursor' })
+
   vim.keymap.set('n', '<leader>f', function () Snacks.picker.files() end, { desc = 'Find files' } )
   vim.keymap.set('n', '<leader>b', function () Snacks.picker.buffers() end, { desc = 'Find buffers' } )
   vim.keymap.set('n', '<leader>h', function () Snacks.picker.help() end, { desc = 'Find help' } )
 
-  vim.keymap.set('n', '<leader>gs', ':Neogit<cr>', { desc = 'Neogit' } )
+  vim.keymap.set('n', '<leader>gS', ':Neogit<cr>', { desc = 'Neogit' } )
   vim.keymap.set('n', '<leader>gl', function () Snacks.lazygit() end, { desc = 'Lazygit' } )
 
   vim.keymap.set('n', '<leader>sb', function() Snacks.picker.lines() end, { desc = 'Buffer Lines' } )
