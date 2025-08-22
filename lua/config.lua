@@ -20,4 +20,6 @@ vim.diagnostic.config({
   virtual_text = { current_line = true },
 })
 
-vim.cmd("colorscheme zenbones")
+if not vim.g.vscode then
+  vim.cmd("colorscheme zenbones")
+end
