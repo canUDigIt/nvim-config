@@ -50,6 +50,7 @@ else
     { src = 'https://github.com/folke/snacks.nvim' },
     { src = 'https://github.com/Saghen/blink.cmp' },
     { src = 'https://github.com/NeogitOrg/neogit' },
+    { src = 'https://github.com/NickvanDyke/opencode.nvim' },
   })
 
   -- Setup plugins
