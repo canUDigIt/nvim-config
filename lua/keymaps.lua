@@ -11,6 +11,8 @@ vim.keymap.set({'n', 'v'}, '<leader>w', ':w<cr>', { desc = 'Save file' })
 vim.keymap.set({'n', 'x', 'o'}, '<leader>sj', function() require("flash").jump() end, { desc = 'Flash jump' })
 vim.keymap.set({'n', 'x', 'o'}, '<leader>sJ', function() require("flash").treesitter() end, { desc = 'Flash treesitter' })
 
+vim.keymap.set('n', '<leader>t', ':lua MiniTrailspace.trim()<cr>', { desc = 'Trim whitespace' })
+
 if not vim.g.vscode then
   vim.keymap.set('n', '-', ':lua MiniFiles.open()<cr>', { desc = 'File Browser' } )
   local rhs = '<Cmd>lua MiniGit.show_at_cursor()<CR>'
