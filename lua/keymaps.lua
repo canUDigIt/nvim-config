@@ -29,6 +29,7 @@ if not vim.g.vscode then
   vim.keymap.set('n', '<leader>sB', function() Snacks.picker.grep_buffers() end, { desc = 'Grep Open Buffers' } )
   vim.keymap.set('n', '<leader>sg', function() Snacks.picker.grep() end, { desc = 'Grep' } )
   vim.keymap.set({'n', 'x'}, '<leader>sw', function() Snacks.picker.grep_word() end, { desc = 'Visual selection or word' })
+  vim.keymap.set('n', '<c-/>', function() Snacks.terminal() end, { desc = 'Toggle Terminal' } )
 
   vim.keymap.set('n', '<leader>ot', function() require('opencode').toggle() end, { desc = 'Toggle opencode' })
   vim.keymap.set('n', '<leader>oA', function() require('opencode').ask() end, { desc = 'Ask opencode' })

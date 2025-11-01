@@ -162,7 +162,7 @@ else
     dashboard = { enabled = false },
     explorer = { enabled = false },
     indent = { enabled = false },
-    input = { enabled = false },
+    input = { enabled = true },
     lazygit = { enabled = true },
     notifier = {
       enabled = false,
@@ -173,6 +173,7 @@ else
     scope = { enabled = false },
     scroll = { enabled = false },
     statuscolumn = { enabled = false },
+    terminal = { enabled = true },
     words = { enabled = false },
     styles = {
       notification = {
