@@ -44,6 +44,7 @@ else
     { src = 'https://github.com/echasnovski/mini.nvim' },
     { src = 'https://github.com/nvim-treesitter/nvim-treesitter' },
     { src = 'https://github.com/nvim-treesitter/nvim-treesitter-textobjects' },
+    { src = 'https://github.com/neovim/nvim-lspconfig' },
     { src = 'https://github.com/mason-org/mason.nvim' },
     { src = 'https://github.com/greggh/claude-code.nvim' },
     { src = 'https://github.com/nvim-lua/plenary.nvim' },
