@@ -50,6 +50,7 @@ else
     { src = 'https://github.com/nvim-lua/plenary.nvim' },
     { src = 'https://github.com/folke/snacks.nvim' },
     { src = 'https://github.com/Saghen/blink.cmp' },
+    { src = 'https://github.com/Saghen/blink.lib' },
     { src = 'https://github.com/NeogitOrg/neogit' },
     { src = 'https://github.com/lewis6991/gitsigns.nvim'},
     { src = 'https://github.com/sindrets/diffview.nvim'},
