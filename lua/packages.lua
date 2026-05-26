@@ -2,8 +2,6 @@ if vim.g.vscode then
   vim.pack.add({
     { src = 'https://github.com/folke/flash.nvim' },
     { src = 'https://github.com/echasnovski/mini.nvim' },
-    { src = 'https://github.com/nvim-treesitter/nvim-treesitter' },
-    { src = 'https://github.com/nvim-treesitter/nvim-treesitter-textobjects' },
     { src = 'https://github.com/nvim-lua/plenary.nvim' },
   })
 
@@ -28,13 +26,6 @@ if vim.g.vscode then
 
   require('mini.pairs').setup()
   require('mini.surround').setup()
-
-  require('nvim-treesitter.configs').setup {
-    ensure_installed = { "c", "cpp", "cmake", "lua", "markdown", "markdown_inline", "odin", "python", "rust", "typescript", "vim", "zig" },
-    highlight = {
-      enable = true,
-    },
-  }
 else
   vim.pack.add({
     { src = 'https://github.com/kevinhwang91/nvim-bqf' },
@@ -42,11 +33,6 @@ else
     { src = 'https://github.com/mcchrish/zenbones.nvim' },
     { src = 'https://github.com/folke/flash.nvim' },
     { src = 'https://github.com/echasnovski/mini.nvim' },
-    { src = 'https://github.com/nvim-treesitter/nvim-treesitter' },
-    { src = 'https://github.com/nvim-treesitter/nvim-treesitter-textobjects' },
-    { src = 'https://github.com/neovim/nvim-lspconfig' },
-    { src = 'https://github.com/mason-org/mason.nvim' },
-    { src = 'https://github.com/greggh/claude-code.nvim' },
     { src = 'https://github.com/nvim-lua/plenary.nvim' },
     { src = 'https://github.com/folke/snacks.nvim' },
     { src = 'https://github.com/Saghen/blink.cmp' },
@@ -54,11 +40,13 @@ else
     { src = 'https://github.com/NeogitOrg/neogit' },
     { src = 'https://github.com/lewis6991/gitsigns.nvim'},
     { src = 'https://github.com/sindrets/diffview.nvim'},
-    { src = 'https://github.com/NickvanDyke/opencode.nvim' },
+    { src = 'https://github.com/nvim-treesitter/nvim-treesitter' },
   })
 
   -- Setup plugins
-  require('blink.cmp').setup({
+  local cmp = require('blink.cmp')
+  cmp.build():wait(60000)
+  cmp.setup({
     snippets = { preset = 'mini_snippets' },
     sources = {
       default = { 'lsp', 'path', 'snippets', 'buffer' },
@@ -208,23 +196,8 @@ else
   require('mini.surround').setup()
   require('mini.trailspace').setup()
 
-  require('nvim-treesitter.configs').setup {
-    ensure_installed = { "c", "cpp", "cmake", "lua", "markdown", "markdown_inline", "odin", "python", "rust", "typescript", "vim", "zig" },
-    highlight = {
-      enable = true,
-    },
-  }
-
-  require('mason').setup()
-
-  require('claude-code').setup({
-    keymaps = {
-      toggle = {
-        normal = '<C-;>',
-        terminal = '<C-;>',
-      },
-    },
-  })
+  require('nvim-treesitter').setup()
+  require('nvim-treesitter').install{ 'lua', 'python', 'c', 'cpp', 'odin' }
 
   require('snacks').setup({
     bigfile = { enabled = false },
