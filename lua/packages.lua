@@ -35,24 +35,15 @@ else
     { src = 'https://github.com/echasnovski/mini.nvim' },
     { src = 'https://github.com/nvim-lua/plenary.nvim' },
     { src = 'https://github.com/folke/snacks.nvim' },
-    { src = 'https://github.com/Saghen/blink.cmp' },
-    { src = 'https://github.com/Saghen/blink.lib' },
     { src = 'https://github.com/NeogitOrg/neogit' },
     { src = 'https://github.com/lewis6991/gitsigns.nvim'},
     { src = 'https://github.com/sindrets/diffview.nvim'},
+    { src = 'https://github.com/MeanderingProgrammer/render-markdown.nvim'},
     { src = 'https://github.com/nvim-treesitter/nvim-treesitter' },
+    { src = 'https://github.com/MagicDuck/grug-far.nvim'},
   })
 
   -- Setup plugins
-  local cmp = require('blink.cmp')
-  cmp.build():wait(60000)
-  cmp.setup({
-    snippets = { preset = 'mini_snippets' },
-    sources = {
-      default = { 'lsp', 'path', 'snippets', 'buffer' },
-    },
-  })
-
   require('gitsigns').setup{
     on_attach = function(bufnr)
       local gitsigns = require('gitsigns')
