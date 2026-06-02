@@ -20,7 +20,7 @@ if not vim.g.vscode then
 
   vim.keymap.set('n', '<leader>f', function () Snacks.picker.files() end, { desc = 'Find files' } )
   vim.keymap.set('n', '<leader>b', function () Snacks.picker.buffers() end, { desc = 'Find buffers' } )
-  vim.keymap.set('n', '<leader>h', function () Snacks.picker.help() end, { desc = 'Find help' } )
+  vim.keymap.set('n', '<leader>sh', function () Snacks.picker.help() end, { desc = 'Find help' } )
 
   vim.keymap.set('n', '<leader>gs', ':Neogit<cr>', { desc = 'Neogit' } )
   vim.keymap.set('n', '<leader>gl', function () Snacks.lazygit() end, { desc = 'Lazygit' } )
