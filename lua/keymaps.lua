@@ -1,33 +1,28 @@
-vim.keymap.set('n', '<c-l>', '<cmd>noh<cr>', { desc = 'No Highlight' })
+vim.keymap.set('n', '<c-l>', function() vim.cmd.noh() end, { desc = 'No Highlight' })
 
-vim.keymap.set('n', '<leader>xG', '<cmd>source %<cr>', { desc = 'Source file' })
-vim.keymap.set({'n', 'v'}, '<leader>xl', ':.lua<cr>', { desc = 'Lua execute line' })
+vim.keymap.set('n', '<leader>xg', function() vim.cmd.source{ '%' } end, { desc = 'Source file' })
+vim.keymap.set({'n', 'v'}, '<leader>xl', function() vim.cmd('.lua') end, { desc = 'Lua execute line' })
 
 vim.keymap.set('n', '<leader>u', vim.pack.update, { desc = 'Update packages' })
 
 vim.keymap.set({'n', 'v'}, '<leader>y', '"+y', { desc = 'Yank to system clipboard' })
-vim.keymap.set({'n', 'v'}, '<leader>w', ':w<cr>', { desc = 'Save file' })
+vim.keymap.set({'n', 'v'}, '<leader>w', function() vim.cmd.write() end, { desc = 'Save file' })
 
 vim.keymap.set({'n', 'x', 'o'}, '<leader>sj', function() require("flash").jump() end, { desc = 'Flash jump' })
 vim.keymap.set({'n', 'x', 'o'}, '<leader>sJ', function() require("flash").treesitter() end, { desc = 'Flash treesitter' })
 
-vim.keymap.set('n', '<leader>t', ':lua MiniTrailspace.trim()<cr>', { desc = 'Trim whitespace' })
+vim.keymap.set('n', '<leader>t', function () MiniTrailspace.trim() end, { desc = 'Trim whitespace' })
 
 if not vim.g.vscode then
-  vim.keymap.set('n', '-', ':lua MiniFiles.open()<cr>', { desc = 'File Browser' } )
-  local rhs = '<Cmd>lua MiniGit.show_at_cursor()<CR>'
-  vim.keymap.set({ 'n', 'x' }, '<Leader>gS', rhs, { desc = 'Show at cursor' })
+  vim.keymap.set('n', '-', function() MiniFiles.open() end, { desc = 'File Browser' } )
 
-  vim.keymap.set('n', '<leader>f', function () Snacks.picker.files() end, { desc = 'Find files' } )
-  vim.keymap.set('n', '<leader>b', function () Snacks.picker.buffers() end, { desc = 'Find buffers' } )
-  vim.keymap.set('n', '<leader>sh', function () Snacks.picker.help() end, { desc = 'Find help' } )
+  vim.keymap.set('n', '<leader>gg', vim.cmd.Neogit, { desc = 'Neogit' } )
 
-  vim.keymap.set('n', '<leader>gs', ':Neogit<cr>', { desc = 'Neogit' } )
-  vim.keymap.set('n', '<leader>gl', function () Snacks.lazygit() end, { desc = 'Lazygit' } )
-
-  vim.keymap.set('n', '<leader>sb', function() Snacks.picker.lines() end, { desc = 'Buffer Lines' } )
-  vim.keymap.set('n', '<leader>sB', function() Snacks.picker.grep_buffers() end, { desc = 'Grep Open Buffers' } )
-  vim.keymap.set('n', '<leader>sg', function() Snacks.picker.grep() end, { desc = 'Grep' } )
-  vim.keymap.set({'n', 'x'}, '<leader>sw', function() Snacks.picker.grep_word() end, { desc = 'Visual selection or word' })
-  vim.keymap.set('n', '<c-/>', function() Snacks.terminal() end, { desc = 'Toggle Terminal' } )
+  vim.keymap.set('n', '<leader>sf', function() MiniPick.builtin.files() end, { desc = 'Find files' } )
+  vim.keymap.set('n', '<leader>sb', function() MiniPick.builtin.buffers() end, { desc = 'Find buffers' } )
+  vim.keymap.set('n', '<leader>sh', function() MiniPick.builtin.help() end, { desc = 'Find help' } )
+  vim.keymap.set('n', '<leader>sb', function() MiniExtra.pickers.buf_lines() end, { desc = 'Buffer Lines' } )
+  vim.keymap.set('n', '<leader>sB', function() MiniPick.builtin.grep() end, { desc = 'Grep Open Buffers' } )
+  vim.keymap.set('n', '<leader>sg', function() MiniPick.builtin.grep_live() end, { desc = 'Grep' } )
+  vim.keymap.set({'n', 'x'}, '<leader>sw', function() MiniPick.builtin.grep({ pattern = vim.fn.expand('<cword>')}) end, { desc = 'Visual selection or word' })
 end

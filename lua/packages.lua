@@ -34,7 +34,6 @@ else
     { src = 'https://github.com/folke/flash.nvim' },
     { src = 'https://github.com/echasnovski/mini.nvim' },
     { src = 'https://github.com/nvim-lua/plenary.nvim' },
-    { src = 'https://github.com/folke/snacks.nvim' },
     { src = 'https://github.com/NeogitOrg/neogit' },
     { src = 'https://github.com/lewis6991/gitsigns.nvim'},
     { src = 'https://github.com/sindrets/diffview.nvim'},
@@ -102,8 +101,8 @@ else
       map('n', '<leader>hq', gitsigns.setqflist, { desc = 'Current Buffer Hunks to Quickfix List' })
 
       -- Toggles
-      map('n', '<leader>tb', gitsigns.toggle_current_line_blame, { desc = 'Current Line Blame' })
-      map('n', '<leader>tw', gitsigns.toggle_word_diff, { desc = 'Toggle Word Diff' })
+      map('n', '<leader>gb', gitsigns.toggle_current_line_blame, { desc = 'Current Line Blame' })
+      map('n', '<leader>gw', gitsigns.toggle_word_diff, { desc = 'Toggle Word Diff' })
 
       -- Text object
       map({'o', 'x'}, 'ih', gitsigns.select_hunk, { desc = 'Select Hunk' })
@@ -185,6 +184,7 @@ else
   }
 
   require('mini.pairs').setup()
+  require('mini.pick').setup()
   require('mini.starter').setup()
   require('mini.statusline').setup()
   require('mini.surround').setup()
@@ -192,29 +192,4 @@ else
 
   require('nvim-treesitter').setup()
   require('nvim-treesitter').install{ 'lua', 'python', 'c', 'cpp', 'odin' }
-
-  require('snacks').setup({
-    bigfile = { enabled = false },
-    dashboard = { enabled = false },
-    explorer = { enabled = false },
-    indent = { enabled = false },
-    input = { enabled = true },
-    lazygit = { enabled = true },
-    notifier = {
-      enabled = false,
-      timeout = 3000,
-    },
-    picker = { enabled = true },
-    quickfile = { enabled = false },
-    scope = { enabled = false },
-    scroll = { enabled = false },
-    statuscolumn = { enabled = false },
-    terminal = { enabled = true },
-    words = { enabled = false },
-    styles = {
-      notification = {
-        -- wo = { wrap = true } -- Wrap notifications
-      }
-    }
-  })
 end
