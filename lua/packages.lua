@@ -180,6 +180,9 @@ else
   })
 
   require('mini.snippets').setup()
+  require('mini.completion').setup {
+    lsp_completion = { source_func = 'omnifunc', auto_setup = false }
+  }
 
   require('mini.pairs').setup()
   require('mini.starter').setup()
