@@ -21,8 +21,8 @@ if not vim.g.vscode then
   vim.keymap.set('n', '<leader>sf', function() MiniPick.builtin.files() end, { desc = 'Find files' } )
   vim.keymap.set('n', '<leader>sb', function() MiniPick.builtin.buffers() end, { desc = 'Find buffers' } )
   vim.keymap.set('n', '<leader>sh', function() MiniPick.builtin.help() end, { desc = 'Find help' } )
-  vim.keymap.set('n', '<leader>sb', function() MiniExtra.pickers.buf_lines() end, { desc = 'Buffer Lines' } )
-  vim.keymap.set('n', '<leader>sB', function() MiniPick.builtin.grep() end, { desc = 'Grep Open Buffers' } )
+  vim.keymap.set('n', '<leader>sl', function() MiniExtra.pickers.buf_lines() end, { desc = 'Buffer Lines' } )
+  vim.keymap.set('n', '<leader>so', function() MiniPick.builtin.grep() end, { desc = 'Grep Open Buffers' } )
   vim.keymap.set('n', '<leader>sg', function() MiniPick.builtin.grep_live() end, { desc = 'Grep' } )
   vim.keymap.set({'n', 'x'}, '<leader>sw', function() MiniPick.builtin.grep({ pattern = vim.fn.expand('<cword>')}) end, { desc = 'Visual selection or word' })
 end
