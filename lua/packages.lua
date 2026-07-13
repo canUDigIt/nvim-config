@@ -1,51 +1,58 @@
-if vim.g.vscode then
-  vim.pack.add({
-    { src = 'https://github.com/folke/flash.nvim' },
-    { src = 'https://github.com/echasnovski/mini.nvim' },
-    { src = 'https://github.com/nvim-lua/plenary.nvim' },
-  })
+local vscode = vim.g.vscode ~= nil
 
-  require('mini.extra').setup()
+-- Plugins needed everywhere, including inside the VSCode extension host
+local common_plugins = {
+  { src = 'https://github.com/folke/flash.nvim' },
+  { src = 'https://github.com/echasnovski/mini.nvim' },
+  { src = 'https://github.com/nvim-lua/plenary.nvim' },
+}
 
-  local gen_ai_spec = require('mini.extra').gen_ai_spec
-  require('mini.ai').setup({
-    custom_textobjects = {
-      D = gen_ai_spec.diagnostic(),
-      I = gen_ai_spec.indent(),
-      L = gen_ai_spec.line(),
-      N = gen_ai_spec.number(),
-    },
-  })
+-- Plugins only relevant to standalone Neovim
+local editor_plugins = {
+  { src = 'https://github.com/neovim/nvim-lspconfig' },
+  { src = 'https://github.com/mason-org/mason.nvim' },
+  { src = 'https://github.com/mason-org/mason-lspconfig.nvim' },
+  { src = 'https://github.com/kevinhwang91/nvim-bqf' },
+  { src = 'https://github.com/rktjmp/lush.nvim' },
+  { src = 'https://github.com/mcchrish/zenbones.nvim' },
+  { src = 'https://github.com/NeogitOrg/neogit' },
+  { src = 'https://github.com/lewis6991/gitsigns.nvim' },
+  { src = 'https://github.com/sindrets/diffview.nvim' },
+  { src = 'https://github.com/MeanderingProgrammer/render-markdown.nvim' },
+  { src = 'https://github.com/nvim-treesitter/nvim-treesitter' },
+  { src = 'https://github.com/MagicDuck/grug-far.nvim' },
+}
 
-  require('mini.align').setup()
-  require('mini.operators').setup({
-    replace = {
-      prefix = '<leader>r',
-    },
-  })
+local plugins = vim.deepcopy(common_plugins)
+if not vscode then
+  vim.list_extend(plugins, editor_plugins)
+end
+vim.pack.add(plugins)
 
-  require('mini.pairs').setup()
-  require('mini.surround').setup()
-else
-  vim.pack.add({
-    { src = 'https://github.com/neovim/nvim-lspconfig' },
-    { src = 'https://github.com/mason-org/mason.nvim' },
-    { src = 'https://github.com/mason-org/mason-lspconfig.nvim' },
-    { src = 'https://github.com/kevinhwang91/nvim-bqf' },
-    { src = 'https://github.com/rktjmp/lush.nvim' },
-    { src = 'https://github.com/mcchrish/zenbones.nvim' },
-    { src = 'https://github.com/folke/flash.nvim' },
-    { src = 'https://github.com/echasnovski/mini.nvim' },
-    { src = 'https://github.com/nvim-lua/plenary.nvim' },
-    { src = 'https://github.com/NeogitOrg/neogit' },
-    { src = 'https://github.com/lewis6991/gitsigns.nvim'},
-    { src = 'https://github.com/sindrets/diffview.nvim'},
-    { src = 'https://github.com/MeanderingProgrammer/render-markdown.nvim'},
-    { src = 'https://github.com/nvim-treesitter/nvim-treesitter' },
-    { src = 'https://github.com/MagicDuck/grug-far.nvim'},
-  })
+-- ── Shared setup (both standalone Neovim and VSCode) ──────────────────
+require('mini.extra').setup()
 
-  -- Setup plugins
+local gen_ai_spec = require('mini.extra').gen_ai_spec
+require('mini.ai').setup({
+  custom_textobjects = {
+    D = gen_ai_spec.diagnostic(),
+    I = gen_ai_spec.indent(),
+    L = gen_ai_spec.line(),
+    N = gen_ai_spec.number(),
+  },
+})
+
+require('mini.align').setup()
+require('mini.operators').setup({
+  replace = {
+    prefix = '<leader>r',
+  },
+})
+require('mini.pairs').setup()
+require('mini.surround').setup()
+
+-- ── Standalone-Neovim-only setup (skipped under VSCode) ───────────────
+if not vscode then
   require('gitsigns').setup{
     on_attach = function(bufnr)
       local gitsigns = require('gitsigns')
@@ -112,20 +119,6 @@ else
     end
   }
 
-  require('mini.extra').setup()
-
-  local gen_ai_spec = require('mini.extra').gen_ai_spec
-  require('mini.ai').setup({
-    custom_textobjects = {
-      D = gen_ai_spec.diagnostic(),
-      I = gen_ai_spec.indent(),
-      L = gen_ai_spec.line(),
-      N = gen_ai_spec.number(),
-    },
-  })
-
-  require('mini.align').setup()
-
   local miniclue = require('mini.clue')
   miniclue.setup({
     triggers = {
@@ -175,22 +168,14 @@ else
   require('mini.icons').setup()
   require('mini.files').setup()
 
-  require('mini.operators').setup({
-    replace = {
-      prefix = '<leader>r',
-    },
-  })
-
   require('mini.snippets').setup()
   require('mini.completion').setup {
     lsp_completion = { source_func = 'omnifunc', auto_setup = false }
   }
 
-  require('mini.pairs').setup()
   require('mini.pick').setup()
   require('mini.starter').setup()
   require('mini.statusline').setup()
-  require('mini.surround').setup()
   require('mini.trailspace').setup()
 
   require('nvim-treesitter').setup()
