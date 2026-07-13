@@ -1,8 +1,16 @@
-vim.lsp.enable('ty')
-vim.lsp.enable('clangd')
-vim.lsp.enable('kotlin_lsp')
-vim.lsp.enable('lua_ls')
-vim.lsp.enable('ols')
+-- Mason installs the LSP server binaries; mason-lspconfig auto-enables
+-- installed servers via `vim.lsp.enable()`. Per-server settings live in `lsp/*.lua`.
+if not vim.g.vscode then
+  require('mason').setup()
+  require('mason-lspconfig').setup({
+    ensure_installed = { 'lua_ls', 'clangd', 'ols', 'ty' },
+    automatic_enable = true,
+  })
+
+  -- kotlin_lsp uses the official pre-alpha `intellij-server`, which Mason does
+  -- not provide, so enable it manually.
+  vim.lsp.enable('kotlin_lsp')
+end
 
 vim.diagnostic.config({
   virtual_text = { current_line = true },

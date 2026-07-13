@@ -28,6 +28,9 @@ if vim.g.vscode then
   require('mini.surround').setup()
 else
   vim.pack.add({
+    { src = 'https://github.com/neovim/nvim-lspconfig' },
+    { src = 'https://github.com/mason-org/mason.nvim' },
+    { src = 'https://github.com/mason-org/mason-lspconfig.nvim' },
     { src = 'https://github.com/kevinhwang91/nvim-bqf' },
     { src = 'https://github.com/rktjmp/lush.nvim' },
     { src = 'https://github.com/mcchrish/zenbones.nvim' },
