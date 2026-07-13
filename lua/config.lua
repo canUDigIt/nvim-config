@@ -3,13 +3,9 @@
 if not vim.g.vscode then
   require('mason').setup()
   require('mason-lspconfig').setup({
-    ensure_installed = { 'lua_ls', 'clangd', 'ols', 'ty' },
+    ensure_installed = { 'lua_ls', 'clangd', 'ols', 'ty', 'kotlin_lsp' },
     automatic_enable = true,
   })
-
-  -- kotlin_lsp uses the official pre-alpha `intellij-server`, which Mason does
-  -- not provide, so enable it manually.
-  vim.lsp.enable('kotlin_lsp')
 end
 
 vim.diagnostic.config({
