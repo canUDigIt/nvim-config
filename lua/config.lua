@@ -21,6 +21,13 @@ if not vim.g.vscode then
 
       if client and client:supports_method('textDocument/inlayHint') then
         vim.lsp.inlay_hint.enable(true, { bufnr = ev.buf })
+
+        vim.keymap.set('n', '<leader>ih', function()
+          vim.lsp.inlay_hint.enable(
+            not vim.lsp.inlay_hint.is_enabled({ bufnr = ev.buf }),
+            { bufnr = ev.buf }
+          )
+        end, { buffer = ev.buf, desc = 'Toggle inlay hints' })
       end
 
       if client and client:supports_method('textDocument/foldingRange') then
