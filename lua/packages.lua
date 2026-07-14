@@ -21,6 +21,7 @@ local editor_plugins = {
   { src = 'https://github.com/MeanderingProgrammer/render-markdown.nvim' },
   { src = 'https://github.com/nvim-treesitter/nvim-treesitter' },
   { src = 'https://github.com/MagicDuck/grug-far.nvim' },
+  { src = 'https://github.com/akinsho/toggleterm.nvim' },
 }
 
 local plugins = vim.deepcopy(common_plugins)
@@ -180,4 +181,8 @@ if not vscode then
 
   require('nvim-treesitter').setup()
   require('nvim-treesitter').install{ 'lua', 'python', 'c', 'cpp', 'odin' }
+
+  require('toggleterm').setup{
+    open_mapping = '<leader>tt',
+  }
 end
