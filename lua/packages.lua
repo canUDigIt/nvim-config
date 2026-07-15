@@ -184,5 +184,7 @@ if not vscode then
 
   require('toggleterm').setup{
     open_mapping = '<leader>tt',
+    insert_mappings = false,
+    terminal_mappings = false,
   }
 end
