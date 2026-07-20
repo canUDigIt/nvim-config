@@ -31,7 +31,7 @@ vim.opt.wrap = false
 vim.opt.scrolloff = 8
 vim.opt.sidescrolloff = 8
 vim.opt.termguicolors = true
-vim.opt.guifont = "Iosevka:h13"
+vim.opt.guifont = "Iosevka:h16"
 
 vim.opt.shortmess:append("c")
 vim.opt.list = true
@@ -44,3 +44,7 @@ vim.g.maplocalleader = ' '
 
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
+
+vim.g.neovide_cursor_trail_size = 0
+vim.g.neovide_cursor_animation_length = 0
+vim.g.neovide_cursor_short_animation_length = 0

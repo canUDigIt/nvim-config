@@ -17,6 +17,9 @@ if not vim.g.vscode then
   vim.keymap.set('n', '-', function() MiniFiles.open() end, { desc = 'File Browser' } )
 
   vim.keymap.set('n', '<leader>gg', vim.cmd.Neogit, { desc = 'Neogit' } )
+  vim.keymap.set('n', '<leader>gd', '<Cmd>DiffviewOpen<CR>', { desc = 'Diffview Working Tree' })
+  vim.keymap.set('n', '<leader>gh', '<Cmd>DiffviewFileHistory %<CR>', { desc = 'Diffview File History' })
+  vim.keymap.set('n', '<leader>gq', '<Cmd>DiffviewClose<CR>', { desc = 'Close Diffview' })
 
   vim.keymap.set('n', '<leader>sf', function() MiniPick.builtin.files() end, { desc = 'Find files' } )
   vim.keymap.set('n', '<leader>sb', function() MiniPick.builtin.buffers() end, { desc = 'Find buffers' } )
