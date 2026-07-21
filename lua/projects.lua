@@ -1,6 +1,6 @@
 local M = {}
 
-M.root_markers = {
+local root_markers = {
   '.git',
   'Makefile',
   'justfile',
@@ -30,10 +30,6 @@ local ignored_directories = {
   ['dist'] = true,
   ['vendor'] = true,
 }
-
-local function normalize(path)
-  return vim.fs.normalize(vim.fn.expand(path))
-end
 
 local function scan_directory(directory, markers, projects, errors)
   local handle, error_message = vim.uv.fs_scandir(directory)
@@ -70,14 +66,14 @@ end
 
 local function find_projects(roots)
   local markers = {}
-  for _, marker in ipairs(M.root_markers) do
+  for _, marker in ipairs(root_markers) do
     markers[marker] = true
   end
 
   local projects = {}
   local errors = {}
   for _, root in ipairs(roots) do
-    local directory = normalize(root)
+    local directory = vim.fs.normalize(vim.fn.expand(root))
     if vim.fn.isdirectory(directory) == 1 then
       scan_directory(directory, markers, projects, errors)
     else
@@ -104,10 +100,6 @@ local function select_project(roots)
       name = 'Projects',
       items = projects,
       choose = function(project)
-        if not project then
-          return
-        end
-
         vim.api.nvim_set_current_win(target_window)
         vim.cmd({ cmd = 'cd', args = { project } })
         vim.notify('Project: ' .. vim.fn.fnamemodify(project, ':~'))
