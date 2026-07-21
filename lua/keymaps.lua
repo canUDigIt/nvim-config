@@ -21,6 +21,9 @@ if not vim.g.vscode then
   vim.keymap.set('n', '<leader>gh', '<Cmd>DiffviewFileHistory %<CR>', { desc = 'Diffview File History' })
   vim.keymap.set('n', '<leader>gq', '<Cmd>DiffviewClose<CR>', { desc = 'Close Diffview' })
 
+  vim.keymap.set('n', '<leader>pp', function() require('projects').select() end, { desc = 'Select Project' })
+  vim.keymap.set('n', '<leader>pP', function() require('projects').select_from_directory() end, { desc = 'Find Projects in Directory' })
+
   vim.keymap.set('n', '<leader>sf', function() MiniPick.builtin.files() end, { desc = 'Find files' } )
   vim.keymap.set('n', '<leader>sb', function() MiniPick.builtin.buffers() end, { desc = 'Find buffers' } )
   vim.keymap.set('n', '<leader>sh', function() MiniPick.builtin.help() end, { desc = 'Find help' } )

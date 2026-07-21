@@ -54,6 +54,11 @@ require('mini.surround').setup()
 
 -- ── Standalone-Neovim-only setup (skipped under VSCode) ───────────────
 if not vscode then
+  local projects = require('projects')
+  projects.setup({
+    roots = { '~/workspaces' },
+  })
+
   require('gitsigns').setup{
     on_attach = function(bufnr)
       local gitsigns = require('gitsigns')
@@ -176,6 +181,7 @@ if not vscode then
       miniclue.gen_clues.registers(),
       miniclue.gen_clues.windows(),
       miniclue.gen_clues.z(),
+      { mode = 'n', keys = '<Leader>p', desc = '+Project' },
     },
   })
 
@@ -189,6 +195,7 @@ if not vscode then
   }
 
   require('mini.pick').setup()
+  require('mini.visits').setup()
   require('mini.starter').setup()
   require('mini.statusline').setup()
   require('mini.trailspace').setup()
