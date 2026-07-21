@@ -9,9 +9,6 @@ local common_plugins = {
 
 -- Plugins only relevant to standalone Neovim
 local editor_plugins = {
-  { src = 'https://github.com/neovim/nvim-lspconfig' },
-  { src = 'https://github.com/mason-org/mason.nvim' },
-  { src = 'https://github.com/mason-org/mason-lspconfig.nvim' },
   { src = 'https://github.com/kevinhwang91/nvim-bqf' },
   { src = 'https://github.com/rktjmp/lush.nvim' },
   { src = 'https://github.com/mcchrish/zenbones.nvim' },
@@ -190,9 +187,7 @@ if not vscode then
   require('mini.files').setup()
 
   require('mini.snippets').setup()
-  require('mini.completion').setup {
-    lsp_completion = { source_func = 'omnifunc', auto_setup = false }
-  }
+  require('mini.completion').setup {}
 
   require('mini.pick').setup()
   require('mini.visits').setup()
