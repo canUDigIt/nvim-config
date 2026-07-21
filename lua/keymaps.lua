@@ -1,4 +1,4 @@
-vim.keymap.set('n', '<c-l>', function() vim.cmd.noh() end, { desc = 'No Highlight' })
+vim.keymap.set('n', '<c-l>', vim.cmd.noh, { desc = 'No Highlight' })
 
 vim.keymap.set('n', '<leader>xg', function() vim.cmd.source{ '%' } end, { desc = 'Source file' })
 vim.keymap.set({'n', 'v'}, '<leader>xl', function() vim.cmd('.lua') end, { desc = 'Lua execute line' })
@@ -6,30 +6,32 @@ vim.keymap.set({'n', 'v'}, '<leader>xl', function() vim.cmd('.lua') end, { desc 
 vim.keymap.set('n', '<leader>u', vim.pack.update, { desc = 'Update packages' })
 
 vim.keymap.set({'n', 'v'}, '<leader>y', '"+y', { desc = 'Yank to system clipboard' })
-vim.keymap.set({'n', 'v'}, '<leader>w', function() vim.cmd.write() end, { desc = 'Save file' })
+vim.keymap.set({'n', 'v'}, '<leader>bs', vim.cmd.write, { desc = 'Save file' })
 
-vim.keymap.set({'n', 'x', 'o'}, '<leader>sj', function() require("flash").jump() end, { desc = 'Flash jump' })
-vim.keymap.set({'n', 'x', 'o'}, '<leader>sJ', function() require("flash").treesitter() end, { desc = 'Flash treesitter' })
-
-vim.keymap.set('n', '<leader>t', function () MiniTrailspace.trim() end, { desc = 'Trim whitespace' })
+local flash = require('flash')
+vim.keymap.set({'n', 'x', 'o'}, '<leader>sj', flash.jump, { desc = 'Flash jump' })
+vim.keymap.set({'n', 'x', 'o'}, '<leader>sJ', flash.treesitter, { desc = 'Flash treesitter' })
 
 if not vim.g.vscode then
-  vim.keymap.set('n', '-', function() MiniFiles.open() end, { desc = 'File Browser' } )
+  vim.keymap.set('n', '-', MiniFiles.open, { desc = 'File Browser' } )
 
   vim.keymap.set('n', '<leader>gg', vim.cmd.Neogit, { desc = 'Neogit' } )
   vim.keymap.set('n', '<leader>gd', '<Cmd>DiffviewOpen<CR>', { desc = 'Diffview Working Tree' })
   vim.keymap.set('n', '<leader>gh', '<Cmd>DiffviewFileHistory %<CR>', { desc = 'Diffview File History' })
   vim.keymap.set('n', '<leader>gq', '<Cmd>DiffviewClose<CR>', { desc = 'Close Diffview' })
 
-  vim.keymap.set('n', '<leader>pp', function() require('projects').select() end, { desc = 'Select Project' })
-  vim.keymap.set('n', '<leader>pP', function() require('projects').select_from_directory() end, { desc = 'Find Projects in Directory' })
+  local projects = require('projects')
+  vim.keymap.set('n', '<leader>pp', projects.select, { desc = 'Select Project' })
+  vim.keymap.set('n', '<leader>pP', projects.select_from_directory, { desc = 'Find Projects in Directory' })
 
-  vim.keymap.set('n', '<leader>sf', function() MiniPick.builtin.files() end, { desc = 'Find files' } )
-  vim.keymap.set('n', '<leader>sb', function() MiniPick.builtin.buffers() end, { desc = 'Find buffers' } )
-  vim.keymap.set('n', '<leader>sh', function() MiniPick.builtin.help() end, { desc = 'Find help' } )
-  vim.keymap.set('n', '<leader>sl', function() MiniExtra.pickers.buf_lines() end, { desc = 'Buffer Lines' } )
-  vim.keymap.set('n', '<leader>so', function() MiniPick.builtin.grep() end, { desc = 'Grep Open Buffers' } )
-  vim.keymap.set('n', '<leader>sg', function() MiniPick.builtin.grep_live() end, { desc = 'Grep' } )
+  vim.keymap.set('n', '<leader>bt', MiniTrailspace.trim, { desc = 'Trim whitespace' })
+
+  vim.keymap.set('n', '<leader>sf', MiniPick.builtin.files, { desc = 'Find files' } )
+  vim.keymap.set('n', '<leader>sb', MiniPick.builtin.buffers, { desc = 'Find buffers' } )
+  vim.keymap.set('n', '<leader>sh', MiniPick.builtin.help, { desc = 'Find help' } )
+  vim.keymap.set('n', '<leader>sl', MiniExtra.pickers.buf_lines, { desc = 'Buffer Lines' } )
+  vim.keymap.set('n', '<leader>so', MiniPick.builtin.grep, { desc = 'Grep Open Buffers' } )
+  vim.keymap.set('n', '<leader>sg', MiniPick.builtin.grep_live, { desc = 'Grep' } )
   vim.keymap.set({'n', 'x'}, '<leader>sw', function() MiniPick.builtin.grep({ pattern = vim.fn.expand('<cword>')}) end, { desc = 'Visual selection or word' })
 
   local function set_terminal_keymaps()
