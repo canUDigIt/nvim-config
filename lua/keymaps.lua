@@ -26,6 +26,24 @@ if not vim.g.vscode then
 
   vim.keymap.set('n', '<leader>bt', MiniTrailspace.trim, { desc = 'Trim whitespace' })
 
+  local grug_far = require('grug-far')
+  local function open_grug_far(opts)
+    opts = opts or {}
+    opts.prefills = vim.tbl_deep_extend('force', { paths = vim.fn.getcwd() }, opts.prefills or {})
+    grug_far.open(opts)
+  end
+
+  vim.keymap.set('n', '<leader>sr', open_grug_far, { desc = 'Search and Replace' })
+  vim.keymap.set('n', '<leader>sR', function()
+    open_grug_far({ prefills = { search = vim.fn.expand('<cword>') } })
+  end, { desc = 'Replace Word' })
+  vim.keymap.set('x', '<leader>sr', function()
+    grug_far.with_visual_selection({ prefills = { paths = vim.fn.getcwd() } })
+  end, { desc = 'Replace Selection' })
+  vim.keymap.set('n', '<leader>sa', function()
+    open_grug_far({ engine = 'astgrep' })
+  end, { desc = 'Structural Search and Replace' })
+
   vim.keymap.set('n', '<leader>sf', MiniPick.builtin.files, { desc = 'Find files' } )
   vim.keymap.set('n', '<leader>sb', MiniPick.builtin.buffers, { desc = 'Find buffers' } )
   vim.keymap.set('n', '<leader>sh', MiniPick.builtin.help, { desc = 'Find help' } )

@@ -136,6 +136,10 @@ if not vscode then
     },
   })
 
+  require('grug-far').setup({
+    transient = true,
+  })
+
   local miniclue = require('mini.clue')
   miniclue.setup({
     triggers = {
@@ -179,6 +183,7 @@ if not vscode then
       miniclue.gen_clues.windows(),
       miniclue.gen_clues.z(),
       { mode = 'n', keys = '<Leader>p', desc = '+Project' },
+      { mode = 'n', keys = '<Leader>s', desc = '+Search / Replace' },
     },
   })
 
