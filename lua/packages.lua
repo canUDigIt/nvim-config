@@ -12,6 +12,7 @@ local editor_plugins = {
   { src = 'https://github.com/kevinhwang91/nvim-bqf' },
   { src = 'https://github.com/rktjmp/lush.nvim' },
   { src = 'https://github.com/mcchrish/zenbones.nvim' },
+  { src = 'https://github.com/oskarnurm/koda.nvim' },
   { src = 'https://github.com/NeogitOrg/neogit' },
   { src = 'https://github.com/lewis6991/gitsigns.nvim' },
   { src = 'https://github.com/sindrets/diffview.nvim' },

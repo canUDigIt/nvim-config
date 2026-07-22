@@ -16,6 +16,10 @@
       "rev": "0f6a5d0d7a70659b11bbcd6b3673ee0fe61b6024",
       "src": "https://github.com/MagicDuck/grug-far.nvim"
     },
+    "koda.nvim": {
+      "rev": "a7da3ced59eadafbda6eb4d7f7e2a6a3d9ecf858",
+      "src": "https://github.com/oskarnurm/koda.nvim"
+    },
     "lush.nvim": {
       "rev": "9c60ec2279d62487d942ce095e49006af28eed6e",
       "src": "https://github.com/rktjmp/lush.nvim"
@@ -33,7 +37,7 @@
       "src": "https://github.com/echasnovski/mini.nvim"
     },
     "neogit": {
-      "rev": "9abecb022a581e3a333430a4490f45c784aef5c9",
+      "rev": "2043096b7ae81e8350ec8cceb3e7ab08dca1dcfe",
       "src": "https://github.com/NeogitOrg/neogit"
     },
     "nvim-bqf": {
