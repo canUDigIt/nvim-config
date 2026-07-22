@@ -1,3 +1,47 @@
 {
-
+  "TODO": {
+    "prefix": "todo",
+    "body": "TODO: ${1:description}",
+    "description": "Add a TODO note"
+  },
+  "FIXME": {
+    "prefix": "fixme",
+    "body": "FIXME: ${1:description}",
+    "description": "Add a FIXME note"
+  },
+  "NOTE": {
+    "prefix": "note",
+    "body": "NOTE: ${1:description}",
+    "description": "Add a NOTE"
+  },
+  "Current date": {
+    "prefix": "date",
+    "body": "$CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE",
+    "description": "Insert the current date (YYYY-MM-DD)"
+  },
+  "UUID": {
+    "prefix": "uuid",
+    "body": "$UUID",
+    "description": "Insert a UUID"
+  },
+  "Section separator": {
+    "prefix": "sep",
+    "body": "---------- ${1:Section} ----------",
+    "description": "Insert a visual section separator"
+  },
+  "Commit message template": {
+    "prefix": "pr",
+    "body": "${1:|NSON, NOS|}-${2:Jira number}: ${3: Changes made}",
+    "description": "Insert a commit message template"
+  },
+  "Debug label": {
+    "prefix": "log",
+    "body": "DEBUG: ${1:message}",
+    "description": "Insert a debug label"
+  },
+  "Markdown link": {
+    "prefix": "url",
+    "body": "[${1:description}](${2:url})",
+    "description": "Insert a Markdown link"
+  }
 }
