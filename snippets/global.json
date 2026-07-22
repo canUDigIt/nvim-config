@@ -30,8 +30,8 @@
     "description": "Insert a visual section separator"
   },
   "Commit message template": {
-    "prefix": "pr",
-    "body": "${1:|NSON, NOS|}-${2:Jira number}: ${3: Changes made}",
+    "prefix": "msg",
+    "body": "${1|NSON,NOS|}-${2:Jira number}: ${3: Changes made}",
     "description": "Insert a commit message template"
   },
   "Debug label": {
