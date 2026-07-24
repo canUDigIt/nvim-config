@@ -184,13 +184,19 @@ if not vscode then
       miniclue.gen_clues.registers(),
       miniclue.gen_clues.windows(),
       miniclue.gen_clues.z(),
+      { mode = 'n', keys = '<Leader>b', desc = '+Buffer' },
+      { mode = 'n', keys = '<Leader>g', desc = '+Git' },
+      { mode = 'n', keys = '<Leader>h', desc = '+Hunks' },
       { mode = 'n', keys = '<Leader>p', desc = '+Project' },
       { mode = 'n', keys = '<Leader>s', desc = '+Search / Replace' },
+      { mode = 'n', keys = '<Leader>t', desc = '+Terminal' },
+      { mode = 'n', keys = '<Leader>x', desc = '+Execute' },
     },
   })
 
   require('mini.diff').setup()
   require('mini.icons').setup()
+  require('mini.input').setup()
   require('mini.files').setup()
 
   local gen_loader = require('mini.snippets').gen_loader
