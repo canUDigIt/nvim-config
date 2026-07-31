@@ -3,7 +3,14 @@ vim.keymap.set('n', '<c-l>', vim.cmd.noh, { desc = 'No Highlight' })
 vim.keymap.set('n', '<leader>xg', function() vim.cmd.source{ '%' } end, { desc = 'Source file' })
 vim.keymap.set({'n', 'v'}, '<leader>xl', function() vim.cmd('.lua') end, { desc = 'Lua execute line' })
 
-vim.keymap.set('n', '<leader>u', vim.pack.update, { desc = 'Update packages' })
+vim.keymap.set('n', '<leader>pu', vim.pack.update, { desc = 'Update packages' })
+vim.keymap.set('n', '<leader>pd', function()
+  local inactives = vim.iter(vim.pack.get())
+  :filter(function(x) return not x.active end)
+  :map(function(x) return x.spec.name end)
+  :totable()
+  vim.pack.del(inactives)
+end, { desc = 'Delete inactive packages' })
 
 vim.keymap.set({'n', 'v'}, '<leader>y', '"+y', { desc = 'Yank to system clipboard' })
 vim.keymap.set({'n', 'v'}, '<leader>bs', vim.cmd.write, { desc = 'Save file' })
@@ -13,12 +20,9 @@ vim.keymap.set({'n', 'x', 'o'}, '<leader>sj', flash.jump, { desc = 'Flash jump' 
 vim.keymap.set({'n', 'x', 'o'}, '<leader>sJ', flash.treesitter, { desc = 'Flash treesitter' })
 
 if not vim.g.vscode then
-  vim.keymap.set('n', '-', MiniFiles.open, { desc = 'File Browser' } )
+  vim.keymap.set('n', '-', '<Cmd>Oil<CR>', { desc = 'File Browser' } )
 
-  vim.keymap.set('n', '<leader>gg', vim.cmd.Neogit, { desc = 'Neogit' } )
-  vim.keymap.set('n', '<leader>gd', '<Cmd>DiffviewOpen<CR>', { desc = 'Diffview Working Tree' })
-  vim.keymap.set('n', '<leader>gh', '<Cmd>DiffviewFileHistory %<CR>', { desc = 'Diffview File History' })
-  vim.keymap.set('n', '<leader>gq', '<Cmd>DiffviewClose<CR>', { desc = 'Close Diffview' })
+  vim.keymap.set('n', '<leader>gg', '<Cmd>Git<CR>', { desc = 'Neogit' } )
 
   local projects = require('projects')
   vim.keymap.set('n', '<leader>pp', projects.select, { desc = 'Select Project' })
@@ -62,29 +66,24 @@ if not vim.g.vscode then
   vim.keymap.set('n', '<leader>sr', MiniPick.builtin.resume, { desc = 'Resume' } )
   vim.keymap.set({'n', 'x'}, '<leader>sw', function() MiniPick.builtin.grep({ pattern = vim.fn.expand('<cword>')}) end, { desc = 'Visual selection or word' })
 
+  vim.keymap.set({'n', 'i'}, '<A-h>', [[<Cmd>wincmd h<CR>]])
+  vim.keymap.set({'n', 'i'}, '<A-j>', [[<Cmd>wincmd j<CR>]])
+  vim.keymap.set({'n', 'i'}, '<A-k>', [[<Cmd>wincmd k<CR>]])
+  vim.keymap.set({'n', 'i'}, '<A-l>', [[<Cmd>wincmd l<CR>]])
+
   local function set_terminal_keymaps()
     local opts = { buffer = 0 }
-    vim.keymap.set('t', 'jk', [[<C-\><C-n>]], opts)
-    vim.keymap.set('t', '<C-h>', [[<Cmd>wincmd h<CR>]], opts)
-    vim.keymap.set('t', '<C-j>', [[<Cmd>wincmd j<CR>]], opts)
-    vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]], opts)
-    vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]], opts)
-    vim.keymap.set('t', '<C-w>', [[<C-\><C-n><C-w>]], opts)
+    vim.keymap.set('t', '<A-h>', [[<Cmd>wincmd h<CR>]], opts)
+    vim.keymap.set('t', '<A-j>', [[<Cmd>wincmd j<CR>]], opts)
+    vim.keymap.set('t', '<A-k>', [[<Cmd>wincmd k<CR>]], opts)
+    vim.keymap.set('t', '<A-l>', [[<Cmd>wincmd l<CR>]], opts)
+    vim.keymap.set('t', '<A-w>', [[<C-\><C-n><C-w>]], opts)
   end
 
   vim.api.nvim_create_autocmd('TermOpen', {
-    pattern = 'term://*toggleterm#*',
     callback = set_terminal_keymaps,
   })
 
-  vim.keymap.set('n', '<leader>ta', '<Cmd>ToggleTermToggleAll<CR>', { desc = 'Toggle All Terminals' })
-  vim.keymap.set('n', '<leader>tf', '<Cmd>ToggleTerm direction=float<CR>', { desc = 'Toggle Float Terminal' })
-  vim.keymap.set('n', '<leader>th', '<Cmd>ToggleTerm direction=horizontal<CR>', { desc = 'Toggle Horizontal Terminal' })
-  vim.keymap.set('n', '<leader>tv', '<Cmd>ToggleTerm direction=vertical<CR>', { desc = 'Toggle Vertical Terminal' })
-  vim.keymap.set('n', '<leader>tn', '<Cmd>TermNew<CR>', { desc = 'New Terminal' })
-  vim.keymap.set('n', '<leader>tp', '<Cmd>TermSelect<CR>', { desc = 'Pick Terminal' })
-  vim.keymap.set('n', '<leader>tN', '<Cmd>ToggleTermSetName<CR>', { desc = 'Set Terminal Name' })
-  vim.keymap.set('n', '<leader>tl', '<Cmd>ToggleTermSendCurrentLine<CR>', { desc = 'Send Current Line to Terminal' })
-  vim.keymap.set('v', '<leader>tl', '<Cmd>ToggleTermSendVisualLines<CR>', { desc = 'Send Visual Lines to Terminal' })
-  vim.keymap.set('v', '<leader>ts', '<Cmd>ToggleTermSendVisualSelection<CR>', { desc = 'Send Visual Selection to Terminal' })
+  vim.keymap.set('n', '<leader>th', '<Cmd>hor te<CR>', { desc = 'Toggle Horizontal Terminal' })
+  vim.keymap.set('n', '<leader>tv', '<Cmd>vert te<CR>', { desc = 'Toggle Vertical Terminal' })
 end

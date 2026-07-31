@@ -13,13 +13,13 @@ local editor_plugins = {
   { src = 'https://github.com/rktjmp/lush.nvim' },
   { src = 'https://github.com/mcchrish/zenbones.nvim' },
   { src = 'https://github.com/oskarnurm/koda.nvim' },
-  { src = 'https://github.com/NeogitOrg/neogit' },
+  { src = 'https://github.com/tpope/vim-fugitive' },
+  { src = 'https://github.com/stevearc/oil.nvim' },
   { src = 'https://github.com/lewis6991/gitsigns.nvim' },
-  { src = 'https://github.com/sindrets/diffview.nvim' },
   { src = 'https://github.com/MeanderingProgrammer/render-markdown.nvim' },
   { src = 'https://github.com/nvim-treesitter/nvim-treesitter' },
+  { src = 'https://github.com/nvim-treesitter/nvim-treesitter-textobjects' },
   { src = 'https://github.com/MagicDuck/grug-far.nvim' },
-  { src = 'https://github.com/akinsho/toggleterm.nvim' },
 }
 
 local plugins = vim.deepcopy(common_plugins)
@@ -31,6 +31,7 @@ vim.pack.add(plugins)
 -- ── Shared setup (both standalone Neovim and VSCode) ──────────────────
 require('mini.extra').setup()
 
+local gen_spec = require('mini.ai').gen_spec
 local gen_ai_spec = require('mini.extra').gen_ai_spec
 require('mini.ai').setup({
   custom_textobjects = {
@@ -39,6 +40,7 @@ require('mini.ai').setup({
     I = gen_ai_spec.indent(),
     L = gen_ai_spec.line(),
     N = gen_ai_spec.number(),
+    F = gen_spec.treesitter({ a = '@function.outer', i = '@function.inner' }),
   },
 })
 
@@ -53,6 +55,7 @@ require('mini.surround').setup()
 
 -- ── Standalone-Neovim-only setup (skipped under VSCode) ───────────────
 if not vscode then
+  require('vim._core.ui2').enable()
   local projects = require('projects')
   projects.setup({
     roots = { '~/workspaces' },
@@ -124,23 +127,11 @@ if not vscode then
     end
   }
 
-  require('diffview').setup({
-    keymaps = {
-      view = {
-        { 'n', 'q', '<Cmd>DiffviewClose<CR>', { desc = 'Close Diffview' } },
-      },
-      file_panel = {
-        { 'n', 'q', '<Cmd>DiffviewClose<CR>', { desc = 'Close Diffview' } },
-      },
-      file_history_panel = {
-        { 'n', 'q', '<Cmd>DiffviewClose<CR>', { desc = 'Close Diffview' } },
-      },
-    },
-  })
-
   require('grug-far').setup({
     transient = true,
   })
+
+  require("oil").setup()
 
   local miniclue = require('mini.clue')
   miniclue.setup({
@@ -187,17 +178,15 @@ if not vscode then
       { mode = 'n', keys = '<Leader>b', desc = '+Buffer' },
       { mode = 'n', keys = '<Leader>g', desc = '+Git' },
       { mode = 'n', keys = '<Leader>h', desc = '+Hunks' },
-      { mode = 'n', keys = '<Leader>p', desc = '+Project' },
+      { mode = 'n', keys = '<Leader>p', desc = '+Project/Packages' },
       { mode = 'n', keys = '<Leader>s', desc = '+Search / Replace' },
       { mode = 'n', keys = '<Leader>t', desc = '+Terminal' },
       { mode = 'n', keys = '<Leader>x', desc = '+Execute' },
     },
   })
 
-  require('mini.diff').setup()
   require('mini.icons').setup()
   require('mini.input').setup()
-  require('mini.files').setup()
 
   local gen_loader = require('mini.snippets').gen_loader
   require('mini.snippets').setup({
@@ -213,16 +202,9 @@ if not vscode then
 
   require('mini.pick').setup()
   require('mini.visits').setup()
-  require('mini.starter').setup()
   require('mini.statusline').setup()
   require('mini.trailspace').setup()
 
   require('nvim-treesitter').setup()
   require('nvim-treesitter').install{ 'lua', 'python', 'c', 'cpp', 'odin' }
-
-  require('toggleterm').setup{
-    open_mapping = '<leader>tt',
-    insert_mappings = false,
-    terminal_mappings = false,
-  }
 end
