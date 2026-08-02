@@ -4,5 +4,5 @@ vim.diagnostic.config({
 })
 
 if not vim.g.vscode then
-  vim.cmd("colorscheme koda")
+  vim.cmd("colorscheme zenbones")
 end

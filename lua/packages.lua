@@ -9,17 +9,16 @@ local common_plugins = {
 
 -- Plugins only relevant to standalone Neovim
 local editor_plugins = {
-  { src = 'https://github.com/kevinhwang91/nvim-bqf' },
   { src = 'https://github.com/rktjmp/lush.nvim' },
   { src = 'https://github.com/mcchrish/zenbones.nvim' },
   { src = 'https://github.com/oskarnurm/koda.nvim' },
   { src = 'https://github.com/tpope/vim-fugitive' },
   { src = 'https://github.com/stevearc/oil.nvim' },
+  { src = 'https://github.com/stevearc/quicker.nvim' },
   { src = 'https://github.com/lewis6991/gitsigns.nvim' },
   { src = 'https://github.com/MeanderingProgrammer/render-markdown.nvim' },
   { src = 'https://github.com/nvim-treesitter/nvim-treesitter' },
   { src = 'https://github.com/nvim-treesitter/nvim-treesitter-textobjects' },
-  { src = 'https://github.com/MagicDuck/grug-far.nvim' },
 }
 
 local plugins = vim.deepcopy(common_plugins)
@@ -127,11 +126,13 @@ if not vscode then
     end
   }
 
-  require('grug-far').setup({
-    transient = true,
-  })
-
   require("oil").setup()
+  require("quicker").setup({
+    keys = {
+      { ">", "<cmd>lua require('quicker').expand()<CR>", desc = "Expand quickfix content" },
+      { "<", "<cmd>lua require('quicker').collapse()<CR>", desc = "Collapse quickfix content" },
+    },
+  })
 
   local miniclue = require('mini.clue')
   miniclue.setup({
