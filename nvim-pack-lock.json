@@ -1,5 +1,9 @@
 {
   "plugins": {
+    "comment.nvim": {
+      "rev": "e30b7f2008e52442154b66f7c519bfd2f1e32acb",
+      "src": "https://github.com/numtostr/comment.nvim"
+    },
     "flash.nvim": {
       "rev": "b6346946d10d07998efee029fb0f7a593806d0cd",
       "src": "https://github.com/folke/flash.nvim"
@@ -17,7 +21,7 @@
       "src": "https://github.com/rktjmp/lush.nvim"
     },
     "mini.nvim": {
-      "rev": "8bf5c57bc82dd590932faa41bfde9fd6d40a9433",
+      "rev": "bcb4b2688b38f5c48ada025abe130d41840e11d5",
       "src": "https://github.com/echasnovski/mini.nvim"
     },
     "nvim-treesitter": {

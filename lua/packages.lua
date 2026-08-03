@@ -15,6 +15,7 @@ local editor_plugins = {
   { src = 'https://github.com/tpope/vim-fugitive' },
   { src = 'https://github.com/stevearc/oil.nvim' },
   { src = 'https://github.com/stevearc/quicker.nvim' },
+  { src = 'https://github.com/numtostr/comment.nvim' },
   { src = 'https://github.com/lewis6991/gitsigns.nvim' },
   { src = 'https://github.com/MeanderingProgrammer/render-markdown.nvim' },
   { src = 'https://github.com/nvim-treesitter/nvim-treesitter' },
@@ -55,6 +56,9 @@ require('mini.surround').setup()
 -- ── Standalone-Neovim-only setup (skipped under VSCode) ───────────────
 if not vscode then
   require('vim._core.ui2').enable()
+
+  require('Comment').setup()
+
   local projects = require('projects')
   projects.setup({
     roots = { '~/workspaces' },
