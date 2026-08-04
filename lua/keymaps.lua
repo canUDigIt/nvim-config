@@ -68,4 +68,5 @@ if not vim.g.vscode then
 
   vim.keymap.set('n', '<leader>th', '<Cmd>hor te<CR>', { desc = 'Toggle Horizontal Terminal' })
   vim.keymap.set('n', '<leader>tv', '<Cmd>vert te<CR>', { desc = 'Toggle Vertical Terminal' })
+  vim.keymap.set('n', '<leader>tt', '<Cmd>tab te<CR>', { desc = 'Toggle Vertical Terminal' })
 end
