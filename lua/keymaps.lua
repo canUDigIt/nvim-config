@@ -22,7 +22,9 @@ vim.keymap.set({'n', 'x', 'o'}, '<leader>sJ', flash.treesitter, { desc = 'Flash 
 if not vim.g.vscode then
   vim.keymap.set('n', '-', '<Cmd>Oil<CR>', { desc = 'File Browser' } )
 
-  vim.keymap.set('n', '<leader>gg', '<Cmd>Git<CR>', { desc = 'Neogit' } )
+  vim.keymap.set('n', '<leader>gg', '<Cmd>Neogit<CR>', { desc = 'Neogit' } )
+  vim.keymap.set('n', '<leader>gdo', '<Cmd>DiffviewOpen<CR>', { desc = 'DiffviewOpen' } )
+  vim.keymap.set('n', '<leader>gdc', '<Cmd>DiffviewClose<CR>', { desc = 'DiffviewClose' } )
 
   local projects = require('projects')
   vim.keymap.set('n', '<leader>pp', projects.select, { desc = 'Select Project' })

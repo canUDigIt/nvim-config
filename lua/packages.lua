@@ -12,11 +12,12 @@ local editor_plugins = {
   { src = 'https://github.com/rktjmp/lush.nvim' },
   { src = 'https://github.com/mcchrish/zenbones.nvim' },
   { src = 'https://github.com/oskarnurm/koda.nvim' },
-  { src = 'https://github.com/tpope/vim-fugitive' },
+  { src = 'https://github.com/NeogitOrg/neogit' },
   { src = 'https://github.com/stevearc/oil.nvim' },
   { src = 'https://github.com/stevearc/quicker.nvim' },
   { src = 'https://github.com/numtostr/comment.nvim' },
   { src = 'https://github.com/lewis6991/gitsigns.nvim' },
+  { src = 'https://github.com/sindrets/diffview.nvim' },
   { src = 'https://github.com/MeanderingProgrammer/render-markdown.nvim' },
   { src = 'https://github.com/nvim-treesitter/nvim-treesitter' },
   { src = 'https://github.com/nvim-treesitter/nvim-treesitter-textobjects' },
@@ -91,44 +92,13 @@ if not vscode then
         end
       end, { desc = 'Prev Hunk' })
 
-      -- Actions
-      map('n', '<leader>hs', gitsigns.stage_hunk, { desc = 'Stage Hunk' })
-      map('n', '<leader>hr', gitsigns.reset_hunk, { desc = 'Reset Hunk' })
-
-      map('v', '<leader>hs', function()
-        gitsigns.stage_hunk({ vim.fn.line('.'), vim.fn.line('v') })
-      end, { desc = 'Stage Hunk' })
-
-      map('v', '<leader>hr', function()
-        gitsigns.reset_hunk({ vim.fn.line('.'), vim.fn.line('v') })
-      end, { desc = 'Reset Hunk' })
-
-      map('n', '<leader>hS', gitsigns.stage_buffer, { desc = 'Stage Buffer' })
-      map('n', '<leader>hR', gitsigns.reset_buffer, { desc = 'Reset Buffer' })
-      map('n', '<leader>hp', gitsigns.preview_hunk, { desc = 'Preview Hunk' })
-      map('n', '<leader>hi', gitsigns.preview_hunk_inline, { desc = 'Preview Hunk Inline' })
-
-      map('n', '<leader>hb', function()
-        gitsigns.blame_line({ full = true })
-      end, { desc = 'Blame Line' })
-
-      map('n', '<leader>hd', gitsigns.diffthis, { desc = 'Diff This Index' })
-
-      map('n', '<leader>hD', function()
-        gitsigns.diffthis('~')
-      end, { desc = 'Diff This Head' })
-
-      map('n', '<leader>hQ', function() gitsigns.setqflist('all') end, { desc = 'All Hunks to Quickfix List' })
-      map('n', '<leader>hq', gitsigns.setqflist, { desc = 'Current Buffer Hunks to Quickfix List' })
-
-      -- Toggles
-      map('n', '<leader>gb', gitsigns.toggle_current_line_blame, { desc = 'Current Line Blame' })
-      map('n', '<leader>gw', gitsigns.toggle_word_diff, { desc = 'Toggle Word Diff' })
-
       -- Text object
       map({'o', 'x'}, 'ih', gitsigns.select_hunk, { desc = 'Select Hunk' })
     end
   }
+
+  require("diffview").setup()
+  require("neogit").setup()
 
   require("oil").setup()
   require("quicker").setup({
