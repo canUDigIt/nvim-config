@@ -13,11 +13,11 @@ vim.keymap.set('n', '<leader>pd', function()
 end, { desc = 'Delete inactive packages' })
 
 vim.keymap.set({'n', 'v'}, '<leader>y', '"+y', { desc = 'Yank to system clipboard' })
-vim.keymap.set({'n', 'v'}, '<leader>bs', vim.cmd.write, { desc = 'Save file' })
+vim.keymap.set({'n', 'v'}, '<leader>bw', vim.cmd.write, { desc = 'Save buffer' })
 
 local flash = require('flash')
-vim.keymap.set({'n', 'x', 'o'}, '<leader>sj', flash.jump, { desc = 'Flash jump' })
-vim.keymap.set({'n', 'x', 'o'}, '<leader>sJ', flash.treesitter, { desc = 'Flash treesitter' })
+vim.keymap.set({'n', 'x', 'o'}, '<leader>jj', flash.jump, { desc = 'Flash jump' })
+vim.keymap.set({'n', 'x', 'o'}, '<leader>jt', flash.treesitter, { desc = 'Flash treesitter' })
 
 if not vim.g.vscode then
   vim.keymap.set('n', '-', '<Cmd>Oil<CR>', { desc = 'File Browser' } )
@@ -25,6 +25,10 @@ if not vim.g.vscode then
   vim.keymap.set('n', '<leader>gg', '<Cmd>Neogit<CR>', { desc = 'Neogit' } )
   vim.keymap.set('n', '<leader>gdo', '<Cmd>DiffviewOpen<CR>', { desc = 'DiffviewOpen' } )
   vim.keymap.set('n', '<leader>gdc', '<Cmd>DiffviewClose<CR>', { desc = 'DiffviewClose' } )
+
+  vim.keymap.set('n', '<leader>ot', '<Cmd>OverseerToggle<CR>', { desc = 'Overseer Toggle' } )
+  vim.keymap.set('n', '<leader>os', '<Cmd>OverseerShell<CR>', { desc = 'Overseer Shell' } )
+  vim.keymap.set('n', '<leader>or', '<Cmd>OverseerRun<CR>', { desc = 'Overseer Run' } )
 
   local projects = require('projects')
   vim.keymap.set('n', '<leader>pp', projects.select, { desc = 'Select Project' })

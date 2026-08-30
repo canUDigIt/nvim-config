@@ -15,6 +15,7 @@ local editor_plugins = {
   { src = 'https://github.com/NeogitOrg/neogit' },
   { src = 'https://github.com/stevearc/oil.nvim' },
   { src = 'https://github.com/stevearc/quicker.nvim' },
+  { src = 'https://github.com/stevearc/overseer.nvim' },
   { src = 'https://github.com/numtostr/comment.nvim' },
   { src = 'https://github.com/lewis6991/gitsigns.nvim' },
   { src = 'https://github.com/sindrets/diffview.nvim' },
@@ -107,6 +108,7 @@ if not vscode then
       { "<", "<cmd>lua require('quicker').collapse()<CR>", desc = "Collapse quickfix content" },
     },
   })
+  require("overseer").setup()
 
   local miniclue = require('mini.clue')
   miniclue.setup({
