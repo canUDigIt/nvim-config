@@ -182,6 +182,18 @@ if not vscode then
   require('mini.statusline').setup()
   require('mini.trailspace').setup()
 
-  require('nvim-treesitter').setup()
-  require('nvim-treesitter').install{ 'lua', 'python', 'c', 'cpp', 'odin' }
+  local types = { 'lua', 'python', 'c', 'cpp', 'odin', 'kotlin', 'java' }
+  require('nvim-treesitter').install(types)
+  vim.api.nvim_create_autocmd('FileType', {
+    pattern = types,
+    callback = function()
+      -- syntax highlighting, provided by Neovim
+      vim.treesitter.start()
+      -- folds, provided by Neovim
+      vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+      vim.wo.foldmethod = 'expr'
+      -- indentation, provided by nvim-treesitter
+      vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+    end,
+  })
 end
