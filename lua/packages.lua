@@ -2,10 +2,6 @@ local vscode = vim.g.vscode ~= nil
 
 local hooks = function (ev)
   local name, kind = ev.data.spec.name, ev.data.kind
-  if name == 'blink.cmp' and (kind == 'install' or kind == 'update') then
-    local cmp = require('blink.cmp')
-    cmp.build():pwait()
-  end
 
   if name == 'nvim-treesitter' and kind == 'update' then
     if not ev.data.active then vim.cmd.packadd('nvim-treesitter') end
@@ -40,8 +36,6 @@ local editor_plugins = {
   { src = 'https://github.com/rafamadriz/friendly-snippets' },
   { src = 'https://github.com/nvim-treesitter/nvim-treesitter' },
   { src = 'https://github.com/nvim-treesitter/nvim-treesitter-textobjects' },
-  { src = 'https://github.com/saghen/blink.lib'},
-  { src = 'https://github.com/saghen/blink.cmp' },
 }
 
 local plugins = vim.deepcopy(common_plugins)
@@ -77,8 +71,6 @@ require('mini.surround').setup()
 -- ── Standalone-Neovim-only setup (skipped under VSCode) ───────────────
 if not vscode then
   require('vim._core.ui2').enable()
-
-  require('blink.cmp').setup()
 
   require('Comment').setup()
 
@@ -206,6 +198,7 @@ if not vscode then
     }
   })
 
+  require('mini.completion').setup()
   require('mini.pick').setup()
   require('mini.visits').setup()
   require('mini.statusline').setup()
