@@ -108,7 +108,13 @@ if not vscode then
       { "<", "<cmd>lua require('quicker').collapse()<CR>", desc = "Collapse quickfix content" },
     },
   })
-  require("overseer").setup()
+  require("overseer").setup{
+    task_list = {
+      keymaps = {
+        ["r"] = { "keymap.run_action", opts = { action = "restart" }, desc = "Restart task" }
+      },
+    },
+  }
 
   local miniclue = require('mini.clue')
   miniclue.setup({
