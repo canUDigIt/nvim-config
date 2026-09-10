@@ -22,9 +22,7 @@ vim.keymap.set({'n', 'x', 'o'}, '<leader>jt', flash.treesitter, { desc = 'Flash 
 if not vim.g.vscode then
   vim.keymap.set('n', '-', '<Cmd>Oil<CR>', { desc = 'File Browser' } )
 
-  vim.keymap.set('n', '<leader>gg', '<Cmd>Neogit<CR>', { desc = 'Neogit' } )
-  vim.keymap.set('n', '<leader>gdo', '<Cmd>DiffviewOpen<CR>', { desc = 'DiffviewOpen' } )
-  vim.keymap.set('n', '<leader>gdc', '<Cmd>DiffviewClose<CR>', { desc = 'DiffviewClose' } )
+  vim.keymap.set('n', '<leader>zd', require('zdiff').open, { desc = 'Zdiff' } )
 
   vim.keymap.set('n', '<leader>ot', '<Cmd>OverseerToggle<CR>', { desc = 'Overseer Toggle' } )
   vim.keymap.set('n', '<leader>os', '<Cmd>OverseerShell<CR>', { desc = 'Overseer Shell' } )

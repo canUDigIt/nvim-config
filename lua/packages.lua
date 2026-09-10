@@ -1,5 +1,20 @@
 local vscode = vim.g.vscode ~= nil
 
+local hooks = function (ev)
+  local name, kind = ev.data.spec.name, ev.data.kind
+  if name == 'blink.cmp' and (kind == 'install' or kind == 'update') then
+    local cmp = require('blink.cmp')
+    cmp.build():pwait()
+  end
+
+  if name == 'nvim-treesitter' and kind == 'update' then
+    if not ev.data.active then vim.cmd.packadd('nvim-treesitter') end
+    vim.cmd('TSUpdate')
+  end
+end
+
+vim.api.nvim_create_autocmd('PackChanged', { callback = hooks })
+
 -- Plugins needed everywhere, including inside the VSCode extension host
 local common_plugins = {
   { src = 'https://github.com/folke/flash.nvim' },
@@ -12,16 +27,21 @@ local editor_plugins = {
   { src = 'https://github.com/rktjmp/lush.nvim' },
   { src = 'https://github.com/mcchrish/zenbones.nvim' },
   { src = 'https://github.com/oskarnurm/koda.nvim' },
-  { src = 'https://github.com/NeogitOrg/neogit' },
   { src = 'https://github.com/stevearc/oil.nvim' },
   { src = 'https://github.com/stevearc/quicker.nvim' },
   { src = 'https://github.com/stevearc/overseer.nvim' },
   { src = 'https://github.com/numtostr/comment.nvim' },
   { src = 'https://github.com/lewis6991/gitsigns.nvim' },
-  { src = 'https://github.com/sindrets/diffview.nvim' },
+  { src = 'https://github.com/martindur/zdiff.nvim' },
   { src = 'https://github.com/MeanderingProgrammer/render-markdown.nvim' },
+  { src = 'https://github.com/neovim/nvim-lspconfig' },
+  { src = 'https://github.com/mason-org/mason.nvim' },
+  { src = 'https://github.com/mason-org/mason-lspconfig.nvim' },
+  { src = 'https://github.com/rafamadriz/friendly-snippets' },
   { src = 'https://github.com/nvim-treesitter/nvim-treesitter' },
   { src = 'https://github.com/nvim-treesitter/nvim-treesitter-textobjects' },
+  { src = 'https://github.com/saghen/blink.lib'},
+  { src = 'https://github.com/saghen/blink.cmp' },
 }
 
 local plugins = vim.deepcopy(common_plugins)
@@ -52,14 +72,18 @@ require('mini.operators').setup({
     prefix = '<leader>r',
   },
 })
-require('mini.pairs').setup()
 require('mini.surround').setup()
 
 -- ── Standalone-Neovim-only setup (skipped under VSCode) ───────────────
 if not vscode then
   require('vim._core.ui2').enable()
 
+  require('blink.cmp').setup()
+
   require('Comment').setup()
+
+  require('mason').setup()
+  require('mason-lspconfig').setup()
 
   local projects = require('projects')
   projects.setup({
@@ -97,9 +121,6 @@ if not vscode then
       map({'o', 'x'}, 'ih', gitsigns.select_hunk, { desc = 'Select Hunk' })
     end
   }
-
-  require("diffview").setup()
-  require("neogit").setup()
 
   require("oil").setup()
   require("quicker").setup({
@@ -169,6 +190,8 @@ if not vscode then
   })
 
   require('mini.icons').setup()
+  MiniIcons.mock_nvim_web_devicons()
+
   require('mini.input').setup()
 
   local gen_loader = require('mini.snippets').gen_loader
