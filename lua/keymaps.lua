@@ -1,5 +1,3 @@
-vim.keymap.set('n', '<c-l>', vim.cmd.noh, { desc = 'No Highlight' })
-
 vim.keymap.set('n', '<leader>xg', function() vim.cmd.source{ '%' } end, { desc = 'Source file' })
 vim.keymap.set({'n', 'v'}, '<leader>xl', function() vim.cmd('.lua') end, { desc = 'Lua execute line' })
 
@@ -22,7 +20,9 @@ vim.keymap.set({'n', 'x', 'o'}, '<leader>jt', flash.treesitter, { desc = 'Flash 
 if not vim.g.vscode then
   vim.keymap.set('n', '-', '<Cmd>Oil<CR>', { desc = 'File Browser' } )
 
-  vim.keymap.set('n', '<leader>zd', require('zdiff').open, { desc = 'Zdiff' } )
+  vim.keymap.set('n', '<leader>do', ':DiffviewOpen ', { desc = 'DiffView Open' } )
+  vim.keymap.set('n', '<leader>dc', '<Cmd>DiffviewClose<CR>', { desc = 'DiffView Close' } )
+  vim.keymap.set({'n', 'v'}, '<leader>df', ':DiffviewFileHistory ', { desc = 'DiffView File History' } )
 
   vim.keymap.set('n', '<leader>ot', '<Cmd>OverseerToggle<CR>', { desc = 'Overseer Toggle' } )
   vim.keymap.set('n', '<leader>os', '<Cmd>OverseerShell<CR>', { desc = 'Overseer Shell' } )
